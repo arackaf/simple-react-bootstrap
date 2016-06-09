@@ -1,0 +1,21 @@
+{
+  "name": "simple-react-bootstrap-nav",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "jspm": {
+    "name": "simple-react-bootstrap-nav",
+    "main": "simple-react-bootstrap-nav.js",
+    "directories": {
+      "lib": "src"
+    },
+    "devDependencies": {
+      "plugin-babel": "npm:systemjs-plugin-babel@^0.0.12"
+    }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adam Rackis <AdamRackis@hotmail.com> (http://github.com/arackaf)",
+  "license": "ISC"
+}
