@@ -9,6 +9,11 @@
     "directories": {
       "lib": "src"
     },
+    "dependencies": {
+      "react-collapse": "npm:react-collapse@^2.2.4",
+      "react-height": "npm:react-height@^2.1.0",
+      "react-motion": "npm:react-motion@^0.4.4"
+    },
     "devDependencies": {
       "assert": "github:jspm/nodelibs-assert@^0.2.0-alpha",
       "babel-plugin-transform-react-jsx": "npm:babel-plugin-transform-react-jsx@^6.8.0",
@@ -21,14 +26,16 @@
       "https": "github:jspm/nodelibs-https@^0.2.0-alpha",
       "path": "github:jspm/nodelibs-path@^0.2.0-alpha",
       "plugin-babel": "npm:systemjs-plugin-babel@^0.0.12",
-      "process": "github:jspm/nodelibs-process@^0.2.0-alpha",
-      "react": "npm:react@^15.1.0",
       "react-dom": "npm:react-dom@^15.1.0",
       "stream": "github:jspm/nodelibs-stream@^0.2.0-alpha",
       "string_decoder": "github:jspm/nodelibs-string_decoder@^0.2.0-alpha",
       "url": "github:jspm/nodelibs-url@^0.2.0-alpha",
       "util": "github:jspm/nodelibs-util@^0.2.0-alpha",
       "zlib": "github:jspm/nodelibs-zlib@^0.2.0-alpha"
+    },
+    "peerDependencies": {
+      "process": "github:jspm/nodelibs-process@^0.2.0-alpha",
+      "react": "npm:react@^15.1.0"
     },
     "overrides": {
       "npm:browserify-zlib@0.1.4": {
@@ -69,5 +76,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Adam Rackis <AdamRackis@hotmail.com> (http://github.com/arackaf)",
-  "license": "ISC"
-}
+  "license": "ISC",
+  "dependencies": {
+    "react-collapse": "^2.2.4",
+    "react-height": "^2.1.0",
+    "react-motion": "^0.4.4"
+  }
+}

@@ -6,7 +6,9 @@ SystemJS.config({
       "meta": {
         "*.js": {
           "babelOptions": {
-            "plugins": ["babel-plugin-transform-react-jsx"]
+            "plugins": [
+              "babel-plugin-transform-react-jsx"
+            ]
           }
         }
       }
@@ -34,7 +36,10 @@ SystemJS.config({
     "plugin-babel": "npm:systemjs-plugin-babel@0.0.12",
     "process": "github:jspm/nodelibs-process@0.2.0-alpha",
     "react": "npm:react@15.1.0",
+    "react-collapse": "npm:react-collapse@2.2.4",
     "react-dom": "npm:react-dom@15.1.0",
+    "react-height": "npm:react-height@2.1.0",
+    "react-motion": "npm:react-motion@0.4.4",
     "stream": "github:jspm/nodelibs-stream@0.2.0-alpha",
     "string_decoder": "github:jspm/nodelibs-string_decoder@0.2.0-alpha",
     "url": "github:jspm/nodelibs-url@0.2.0-alpha",
@@ -42,6 +47,17 @@ SystemJS.config({
     "zlib": "github:jspm/nodelibs-zlib@0.2.0-alpha"
   },
   packages: {
+    "npm:raf@3.2.0": {
+      "map": {
+        "performance-now": "npm:performance-now@0.2.0"
+      }
+    },
+    "npm:react-motion@0.4.4": {
+      "map": {
+        "performance-now": "npm:performance-now@0.2.0",
+        "raf": "npm:raf@3.2.0"
+      }
+    },
     "npm:babel-code-frame@6.8.0": {
       "map": {
         "babel-runtime": "npm:babel-runtime@6.9.2",
