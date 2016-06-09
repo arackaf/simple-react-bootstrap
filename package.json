@@ -11,7 +11,9 @@
     },
     "devDependencies": {
       "assert": "github:jspm/nodelibs-assert@^0.2.0-alpha",
+      "babel-plugin-transform-react-jsx": "npm:babel-plugin-transform-react-jsx@^6.8.0",
       "buffer": "github:jspm/nodelibs-buffer@^0.2.0-alpha",
+      "core-js": "npm:core-js@^2.4.0",
       "domain": "github:jspm/nodelibs-domain@^0.2.0-alpha",
       "events": "github:jspm/nodelibs-events@^0.2.0-alpha",
       "fs": "github:jspm/nodelibs-fs@^0.2.0-alpha",
@@ -38,10 +40,28 @@
           "_stream_transform": "readable-stream/transform"
         }
       },
+      "npm:debug@2.2.0": {
+        "main": "browser.js",
+        "jspmNodeConversion": false,
+        "format": "cjs",
+        "map": {
+          "./browser.js": {
+            "node": "./node.js"
+          },
+          "fs": "@node/fs",
+          "net": "@node/net",
+          "tty": "@node/tty",
+          "util": "@node/util"
+        }
+      },
       "npm:inherits@2.0.1": {
         "ignore": [
           "test.js"
         ]
+      },
+      "npm:ms@0.7.1": {
+        "jspmNodeConversion": false,
+        "format": "cjs"
       }
     }
   },
@@ -50,4 +70,4 @@
   },
   "author": "Adam Rackis <AdamRackis@hotmail.com> (http://github.com/arackaf)",
   "license": "ISC"
-}
+}
