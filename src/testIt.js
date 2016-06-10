@@ -31,11 +31,17 @@ class CollTest extends React.Component {
 
 render(
     <NavBar>
-        <div>Div 1 <button>btn</button></div>
-        <NavBar.Item></NavBar.Item>
-        <div>Div 2</div>
-        <div>Div 3 <div>foo <span>s</span></div></div>
-        <NavBar.Item></NavBar.Item>
+        <NavBar.Header>
+            <NavBar.Brand>
+                <a style={{ cursor: 'pointer' }}>Header</a>
+            </NavBar.Brand>
+            <NavBar.Toggle />
+        </NavBar.Header>
+        <NavBar.Nav>
+            <NavBar.Item><a>Link 1</a></NavBar.Item>
+            <NavBar.Item className="active"><a>Link 2</a></NavBar.Item>
+            <NavBar.Item><a>Link 3</a></NavBar.Item>
+        </NavBar.Nav>
     </NavBar>, document.getElementById('home'));
 
 render(<CollTest />, document.getElementById('home2'));
