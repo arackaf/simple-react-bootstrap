@@ -30,46 +30,44 @@ const Nav = props =>
 class NavBar extends React.Component{
     constructor(){
         super();
-        this.state = { collapsed: true, heightExpanded: false };
+        this.state = { collapsed: true, heightExpanded: false, collapseHeight: null };
     }
     toggleMobileCollapse(evt){
-        let parent = evt.target.parentNode,
-            nextSibling = parent.nextSibling;
+        if (this._pendingAnimationClear){
+            clearTimeout(this._pendingAnimationClear);
+            this._pendingAnimationClear = null;
+        }
+        if (this.state.expanded || this.state.expanding){
+            this.setState({ collapsing: true, collapseHeight: null, expanding: false, expanded: false });
+            this._pendingAnimationClear = setTimeout(() => this.setState({ collapsing: false, collapseHeight: null }), 300);
+        } else {
 
-        nextSibling.classList.add('in');
-        let clientHeight = nextSibling.clientHeight;
-        let offsetHeight = nextSibling.offsetHeight;
-        let scrollHeight = nextSibling.scrollHeight;
-        //nextSibling.classList.remove('in');
+            if (!this._cachedHeight) {
+                let parent = evt.target.parentNode,
+                    nextSibling = parent.nextSibling;
 
-        //console.log('clientHeight === ', clientHeight);
-        //console.log('offsetHeight === ', offsetHeight);
-        //console.log('scrollHeight === ', scrollHeight);
+                nextSibling.classList.add('in');
+                let offsetHeight = nextSibling.offsetHeight;
+                nextSibling.classList.remove('in');
 
-        //remove collapse, add collapsing
-        this.beginAnimation(20, offsetHeight, 'open');
+                this._cachedHeight = offsetHeight;
+            }
+
+            this.setState({ collapsing: true, expanding: true });
+            setTimeout(() => this.setState({ collapseHeight: this._cachedHeight }), 2);
+
+            this._pendingAnimationClear = setTimeout(() => this.setState({ collapsing: false, expanded: true, expanding: false }), 300);
+
+            //console.log('clientHeight === ', clientHeight);
+            //console.log('offsetHeight === ', offsetHeight);
+            //console.log('scrollHeight === ', scrollHeight);
+
+            //remove collapse, add collapsing
+        }
         //this.setState({ collapsed: !this.state.collapsed });
     }
-    beginAnimation(animationSteps, animationTarget){
-        this.setState({ animationSteps, animationTarget, currentAnimationStep: 0, currentAnimationValue: 0, animating: true });
-
-        setTimeout(() => this.step(), 50);
-    }
     step(){
-        let currentAnimationStep = this.state.currentAnimationStep,
-            animationSteps = this.state.animationSteps,
-            remainingSteps = animationSteps - currentAnimationStep,
-            remainingAnimationChanges = this.state.animationTarget - this.state.currentAnimationValue,
-            stepValue = remainingAnimationChanges / remainingSteps,
-            currentAnimationValue = remainingSteps > 1 ? this.state.currentAnimationValue + stepValue : this.state.animationTarget;
 
-        this.setState({ currentAnimationValue, currentAnimationStep: this.state.currentAnimationStep + 1 });
-        console.log('currentAnimationValue: ', this.state.currentAnimationValue);
-        if (remainingSteps > 1){
-            setTimeout(() => this.step(), 50);
-        } else {
-            this.setState({ animating: false, animationSteps: null, animationTarget: null, currentAnimationStep: null, expanded: true });
-        }
     }
     render(){
         //let children = this.props.children;
@@ -87,7 +85,7 @@ class NavBar extends React.Component{
             <nav className="navbar navbar-default">
                 <div className="container-fluid">
                     { header || null }
-                    <div className={(this.state.animating ? 'collapsing' : ' collapse ') + ' navbar-collapse ' + (this.state.expanded ? ' in ' : '')} style={{ height: this.state.currentAnimationValue }}>
+                    <div className={(this.state.collapsing ? ' collapsing ' : ' collapse ') + ' navbar-collapse ' + (this.state.expanded ? ' in ' : '')} style={{ height: this.state.collapseHeight || null }}>
                         { navSubItems }
                     </div>
                 </div>
