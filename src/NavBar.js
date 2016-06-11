@@ -39,7 +39,10 @@ class NavBar extends React.Component{
         }
         if (this.state.expanded || this.state.expanding){
             this.setState({ collapsing: true, collapseHeight: null, expanding: false, expanded: false });
-            this._pendingAnimationClear = setTimeout(() => this.setState({ collapsing: false, collapseHeight: null }), 300);
+            this._pendingAnimationClear = setTimeout(() => {
+                this.setState({ collapsing: false, collapseHeight: null });
+                this._cachedHeight = null;
+            }, 300);
         } else {
 
             if (!this._cachedHeight) {
@@ -51,6 +54,7 @@ class NavBar extends React.Component{
                 nextSibling.classList.remove('in');
 
                 this._cachedHeight = offsetHeight;
+                console.log('this._cachedHeight = ', offsetHeight);
             }
 
             this.setState({ collapsing: true, expanding: true });
