@@ -46,9 +46,30 @@ class NavBar extends React.Component{
         //console.log('offsetHeight === ', offsetHeight);
         //console.log('scrollHeight === ', scrollHeight);
 
-        //remove collapse, add collapsing 
-        this.beginAnimation(20, clientHeight, 'open');
+        //remove collapse, add collapsing
+        this.beginAnimation(20, offsetHeight, 'open');
         //this.setState({ collapsed: !this.state.collapsed });
+    }
+    beginAnimation(animationSteps, animationTarget){
+        this.setState({ animationSteps, animationTarget, currentAnimationStep: 0, currentAnimationValue: 0, animating: true });
+
+        setTimeout(() => this.step(), 50);
+    }
+    step(){
+        let currentAnimationStep = this.state.currentAnimationStep,
+            animationSteps = this.state.animationSteps,
+            remainingSteps = animationSteps - currentAnimationStep,
+            remainingAnimationChanges = this.state.animationTarget - this.state.currentAnimationValue,
+            stepValue = remainingAnimationChanges / remainingSteps,
+            currentAnimationValue = remainingSteps > 1 ? this.state.currentAnimationValue + stepValue : this.state.animationTarget;
+
+        this.setState({ currentAnimationValue, currentAnimationStep: this.state.currentAnimationStep + 1 });
+        console.log('currentAnimationValue: ', this.state.currentAnimationValue);
+        if (remainingSteps > 1){
+            setTimeout(() => this.step(), 50);
+        } else {
+            this.setState({ animating: false, animationSteps: null, animationTarget: null, currentAnimationStep: null, expanded: true });
+        }
     }
     render(){
         //let children = this.props.children;
@@ -66,30 +87,12 @@ class NavBar extends React.Component{
             <nav className="navbar navbar-default">
                 <div className="container-fluid">
                     { header || null }
-                    <div className={"collapse navbar-collapse"} style={{ height: this.state.currentAnimationValue }}>
+                    <div className={(this.state.animating ? 'collapsing' : ' collapse ') + ' navbar-collapse ' + (this.state.expanded ? ' in ' : '')} style={{ height: this.state.currentAnimationValue }}>
                         { navSubItems }
                     </div>
                 </div>
             </nav>
         );
-    }
-    beginAnimation(animationSteps, animationTarget){
-        this.setState({ animationSteps, animationTarget, currentAnimationStep: 0, currentAnimationValue: 0 });
-
-        setTimeout(() => this.step(), 50);
-    }
-    step(){
-        let currentAnimationStep = this.state.currentAnimationStep,
-            animationSteps = this.state.animationSteps,
-            remainingSteps = animationSteps - currentAnimationStep,
-            remainingAnimationChanges = this.state.animationTarget - this.state.currentAnimationValue,
-            stepValue = remainingAnimationChanges / remainingSteps;
-
-        this.setState({ currentAnimationValue: this.state.currentAnimationValue + stepValue });
-        console.log('currentAnimationValue: ', this.state.currentAnimationValue);
-        if (remainingSteps > 1){
-            setTimeout(() => this.step(), 50);
-        }
     }
 }
 
