@@ -103,15 +103,22 @@ var NavBar = (function (_React$Component) {
             } else {
 
                 if (!this._cachedHeight) {
-                    var _parent = evt.target.parentNode,
-                        nextSibling = _parent.nextSibling;
+                    var currentNode = evt.target,
+                        collapseContentToToggle = undefined;
 
-                    nextSibling.classList.add('in');
-                    var offsetHeight = nextSibling.offsetHeight;
-                    nextSibling.classList.remove('in');
+                    while (currentNode = currentNode.parentNode) {
+                        console.log('TICK');
+                        if (currentNode.tagName === 'DIV') {
+                            collapseContentToToggle = currentNode.nextSibling;
+                            break;
+                        }
+                    }
+
+                    collapseContentToToggle.classList.add('in');
+                    var offsetHeight = collapseContentToToggle.offsetHeight;
+                    collapseContentToToggle.classList.remove('in');
 
                     this._cachedHeight = offsetHeight;
-                    console.log('this._cachedHeight = ', offsetHeight);
                 }
 
                 this.setState({ collapsing: true, expanding: true });
