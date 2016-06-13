@@ -1,5 +1,12 @@
-﻿const React = require('react');
-const { render } = require('react-dom');
+'use strict';
 
-alert(typeof React);
-alert(typeof render);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+alert(typeof _react2['default']);
+alert(typeof _reactDom.render);
