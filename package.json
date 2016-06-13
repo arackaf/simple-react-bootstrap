@@ -2,7 +2,7 @@
   "name": "simple-react-bootstrap-navbar",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/NavBar.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -30,6 +30,7 @@
     "gulp-watch": "4.1.1",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
+    "remove": "^0.1.5",
     "systemjs": "0.19.31",
     "systemjs-builder": "^0.15.22"
   }

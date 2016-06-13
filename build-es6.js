@@ -2,6 +2,7 @@ import Builder from 'systemjs-builder';
 import gulp from 'gulp';
 import gulpUglify from 'gulp-uglify';
 import gulpRename from 'gulp-rename';
+import remove from 'remove';
 
 
 let builder = new Builder({
@@ -14,6 +15,8 @@ builder.config({
     },
     meta: { }
 });
+
+remove.removeSync('./dist');
 
 Promise.all([
     builder.bundle('src/NavBar.js - react', 'dist/NavBar.js'),
