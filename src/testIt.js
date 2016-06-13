@@ -39,28 +39,35 @@ var _react2 = _interopRequireDefault(_react);
         _react2['default'].createElement(
             _NavBarJs2['default'].Item,
             null,
-            _react2['default'].createElement(
-                'a',
-                null,
-                'Link 1'
-            )
+            'Link 1'
         ),
         _react2['default'].createElement(
             _NavBarJs2['default'].Item,
-            { className: 'active' },
-            _react2['default'].createElement(
-                'a',
-                null,
-                'Link 2'
-            )
+            { active: true },
+            'Link 2'
         ),
         _react2['default'].createElement(
             _NavBarJs2['default'].Item,
-            null,
+            { href: 'http://www.google.com' },
+            'Link 3'
+        ),
+        _react2['default'].createElement(
+            _NavBarJs2['default'].Dropdown,
+            { text: 'Sub menu' },
             _react2['default'].createElement(
-                'a',
+                _NavBarJs2['default'].Item,
                 null,
-                'Link 3'
+                'Sub option a'
+            ),
+            _react2['default'].createElement(
+                _NavBarJs2['default'].Item,
+                null,
+                'Sub option b'
+            ),
+            _react2['default'].createElement(
+                _NavBarJs2['default'].Item,
+                null,
+                'Sub option c'
             )
         )
     )

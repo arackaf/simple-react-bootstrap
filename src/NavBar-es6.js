@@ -29,7 +29,28 @@ const NavBarHeader = props =>
     </div>;
 
 const NavBarItem = props =>
-    <li { ...props }>{props.children}</li>;
+    <li active={props.active}><a href={props.href}>{props.children}</a></li>;
+
+class NavBarDropdown extends React.Component {
+    constructor(){
+        super();
+        this.state = { open: false };
+    }
+    toggle(){
+        this.setState({ open: !this.state.open });
+    }
+    render() {
+        let props = this.props;
+        return (
+            <li className={'dropdown ' + (this.state.open ? 'open' : '')}>
+                <a className="dropdown-toggle" onClick={() => this.toggle()} { ...props }>{props.text} <span className="caret"></span></a>
+                <ul className="dropdown-menu">
+                    {props.children}
+                </ul>
+            </li>
+        );
+    }
+}
 
 const Nav = props =>
     <ul { ...props } className="nav navbar-nav">
@@ -107,6 +128,7 @@ NavBar.Item = NavBarItem;
 NavBar.Header = NavBarHeader;
 NavBar.Brand = NavBarBrand;
 NavBar.Toggle = NavBarToggle;
+NavBar.Dropdown = NavBarDropdown;
 
 function filterValidNavSubItems(item){
     return item.type !== NavBarHeader;

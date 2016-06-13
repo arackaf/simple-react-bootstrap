@@ -11,9 +11,14 @@ render(
             <NavBar.Toggle />
         </NavBar.Header>
         <NavBar.Nav>
-            <NavBar.Item><a>Link 1</a></NavBar.Item>
-            <NavBar.Item className="active"><a>Link 2</a></NavBar.Item>
-            <NavBar.Item><a>Link 3</a></NavBar.Item>
+            <NavBar.Item>Link 1</NavBar.Item>
+            <NavBar.Item active={true}>Link 2</NavBar.Item>
+            <NavBar.Item href="http://www.google.com">Link 3</NavBar.Item>
+            <NavBar.Dropdown text="Sub menu">
+                <NavBar.Item>Sub option a</NavBar.Item>
+                <NavBar.Item>Sub option b</NavBar.Item>
+                <NavBar.Item>Sub option c</NavBar.Item>
+            </NavBar.Dropdown>
         </NavBar.Nav>
     </NavBar>, document.getElementById('home'));
 

@@ -62,10 +62,59 @@ var NavBarHeader = function NavBarHeader(props) {
 var NavBarItem = function NavBarItem(props) {
     return _react2['default'].createElement(
         'li',
-        props,
-        props.children
+        { active: props.active },
+        _react2['default'].createElement(
+            'a',
+            { href: props.href },
+            props.children
+        )
     );
 };
+
+var NavBarDropdown = (function (_React$Component) {
+    _inherits(NavBarDropdown, _React$Component);
+
+    function NavBarDropdown() {
+        _classCallCheck(this, NavBarDropdown);
+
+        _get(Object.getPrototypeOf(NavBarDropdown.prototype), 'constructor', this).call(this);
+        this.state = { open: false };
+    }
+
+    _createClass(NavBarDropdown, [{
+        key: 'toggle',
+        value: function toggle() {
+            this.setState({ open: !this.state.open });
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this = this;
+
+            var props = this.props;
+            return _react2['default'].createElement(
+                'li',
+                { className: 'dropdown ' + (this.state.open ? 'open' : '') },
+                _react2['default'].createElement(
+                    'a',
+                    _extends({ className: 'dropdown-toggle', onClick: function () {
+                            return _this.toggle();
+                        } }, props),
+                    props.text,
+                    ' ',
+                    _react2['default'].createElement('span', { className: 'caret' })
+                ),
+                _react2['default'].createElement(
+                    'ul',
+                    { className: 'dropdown-menu' },
+                    props.children
+                )
+            );
+        }
+    }]);
+
+    return NavBarDropdown;
+})(_react2['default'].Component);
 
 var Nav = function Nav(props) {
     return _react2['default'].createElement(
@@ -75,8 +124,8 @@ var Nav = function Nav(props) {
     );
 };
 
-var NavBar = (function (_React$Component) {
-    _inherits(NavBar, _React$Component);
+var NavBar = (function (_React$Component2) {
+    _inherits(NavBar, _React$Component2);
 
     function NavBar() {
         _classCallCheck(this, NavBar);
@@ -88,7 +137,7 @@ var NavBar = (function (_React$Component) {
     _createClass(NavBar, [{
         key: 'toggleMobileCollapse',
         value: function toggleMobileCollapse(evt) {
-            var _this = this;
+            var _this2 = this;
 
             if (this._pendingAnimationClear) {
                 clearTimeout(this._pendingAnimationClear);
@@ -97,8 +146,8 @@ var NavBar = (function (_React$Component) {
             if (this.state.expanded || this.state.expanding) {
                 this.setState({ collapsing: true, collapseHeight: null, expanding: false, expanded: false });
                 this._pendingAnimationClear = setTimeout(function () {
-                    _this.setState({ collapsing: false, collapseHeight: null });
-                    _this._cachedHeight = null;
+                    _this2.setState({ collapsing: false, collapseHeight: null });
+                    _this2._cachedHeight = null;
                 }, 300);
             } else {
 
@@ -123,11 +172,11 @@ var NavBar = (function (_React$Component) {
 
                 this.setState({ collapsing: true, expanding: true });
                 setTimeout(function () {
-                    return _this.setState({ collapseHeight: _this._cachedHeight });
+                    return _this2.setState({ collapseHeight: _this2._cachedHeight });
                 }, 2);
 
                 this._pendingAnimationClear = setTimeout(function () {
-                    return _this.setState({ collapsing: false, expanded: true, expanding: false });
+                    return _this2.setState({ collapsing: false, expanded: true, expanding: false });
                 }, 300);
             }
         }
@@ -174,6 +223,7 @@ NavBar.Item = NavBarItem;
 NavBar.Header = NavBarHeader;
 NavBar.Brand = NavBarBrand;
 NavBar.Toggle = NavBarToggle;
+NavBar.Dropdown = NavBarDropdown;
 
 function filterValidNavSubItems(item) {
     return item.type !== NavBarHeader;
