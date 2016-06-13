@@ -22,4 +22,10 @@ render(
         </NavBar.Nav>
     </NavBar>, document.getElementById('home'));
 
+
+//bound in dom 0 handler in default.htm - to test unMount events
+window.clearNavBar = function(){
+    render(<div>Gone</div>, document.getElementById('home'));
+};
+
 export default null;

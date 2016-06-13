@@ -20,8 +20,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-document.onclick = function (evt) {};
-
 var NavBarBrand = function NavBarBrand(props) {
     return _react2['default'].cloneElement(props.children, { className: 'navbar-brand' });
 };
@@ -75,13 +73,33 @@ var NavBarDropdown = (function (_React$Component) {
     _inherits(NavBarDropdown, _React$Component);
 
     function NavBarDropdown() {
+        var _this = this;
+
         _classCallCheck(this, NavBarDropdown);
 
         _get(Object.getPrototypeOf(NavBarDropdown.prototype), 'constructor', this).call(this);
         this.state = { open: false };
+
+        this.handleOutsideClick = function (evt) {
+            var element = evt.target;
+            do {
+                if (element.classList && element.classList.contains('dropdown-toggle')) {
+                    return; //let the native handler take it.
+                }
+            } while (element = element.parentNode);
+
+            _this.setState({ open: false });
+        };
+
+        document.addEventListener('click', this.handleOutsideClick);
     }
 
     _createClass(NavBarDropdown, [{
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            document.removeEventListener('click', this.handleOutsideClick);
+        }
+    }, {
         key: 'toggle',
         value: function toggle() {
             this.setState({ open: !this.state.open });
@@ -89,7 +107,7 @@ var NavBarDropdown = (function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            var _this = this;
+            var _this2 = this;
 
             var props = this.props;
             return _react2['default'].createElement(
@@ -98,7 +116,7 @@ var NavBarDropdown = (function (_React$Component) {
                 _react2['default'].createElement(
                     'a',
                     _extends({ className: 'dropdown-toggle', onClick: function () {
-                            return _this.toggle();
+                            return _this2.toggle();
                         } }, props),
                     props.text,
                     ' ',
@@ -137,7 +155,7 @@ var NavBar = (function (_React$Component2) {
     _createClass(NavBar, [{
         key: 'toggleMobileCollapse',
         value: function toggleMobileCollapse(evt) {
-            var _this2 = this;
+            var _this3 = this;
 
             if (this._pendingAnimationClear) {
                 clearTimeout(this._pendingAnimationClear);
@@ -146,8 +164,8 @@ var NavBar = (function (_React$Component2) {
             if (this.state.expanded || this.state.expanding) {
                 this.setState({ collapsing: true, collapseHeight: null, expanding: false, expanded: false });
                 this._pendingAnimationClear = setTimeout(function () {
-                    _this2.setState({ collapsing: false, collapseHeight: null });
-                    _this2._cachedHeight = null;
+                    _this3.setState({ collapsing: false, collapseHeight: null });
+                    _this3._cachedHeight = null;
                 }, 300);
             } else {
 
@@ -172,11 +190,11 @@ var NavBar = (function (_React$Component2) {
 
                 this.setState({ collapsing: true, expanding: true });
                 setTimeout(function () {
-                    return _this2.setState({ collapseHeight: _this2._cachedHeight });
+                    return _this3.setState({ collapseHeight: _this3._cachedHeight });
                 }, 2);
 
                 this._pendingAnimationClear = setTimeout(function () {
-                    return _this2.setState({ collapsing: false, expanded: true, expanding: false });
+                    return _this3.setState({ collapsing: false, expanded: true, expanding: false });
                 }, 300);
             }
         }

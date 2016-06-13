@@ -1,8 +1,5 @@
 import React from 'react';
 
-document.onclick = function(evt){
-};
-
 const NavBarBrand = props => React.cloneElement(props.children, { className: 'navbar-brand' });
 
 const NavBarToggle = props =>
@@ -35,9 +32,25 @@ class NavBarDropdown extends React.Component {
     constructor(){
         super();
         this.state = { open: false };
+
+        this.handleOutsideClick = evt => {
+            let element = evt.target;
+            do {
+                if (element.classList && element.classList.contains('dropdown-toggle')){
+                    return; //let the native handler take it.
+                }
+            } while (element = element.parentNode);
+
+            this.setState({ open: false });
+        };
+
+        document.addEventListener('click', this.handleOutsideClick);
+    }
+    componentWillUnmount(){
+        document.removeEventListener('click', this.handleOutsideClick);
     }
     toggle(){
-        this.setState({ open: !this.state.open });
+        this.setState({open: !this.state.open});
     }
     render() {
         let props = this.props;
