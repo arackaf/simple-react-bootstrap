@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/arackaf/simple-react-bootstrap-nav.git"
+    "url": "git+https://github.com/arackaf/simple-react-bootstrap-navbar.git"
   },
   "author": "Adam Rackis <AdamRackis@hotmail.com> (http://github.com/arackaf)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/arackaf/simple-react-bootstrap-nav/issues"
+    "url": "https://github.com/arackaf/simple-react-bootstrap-navbar/issues"
   },
-  "homepage": "https://github.com/arackaf/simple-react-bootstrap-nav#readme"
+  "homepage": "https://github.com/arackaf/simple-react-bootstrap-navbar#readme"
 }
