@@ -1,6 +1,5 @@
-﻿let a = 'a',
-    b = 'b';
+﻿const React = require('react');
+const { render } = require('react-dom');
 
-let obj = { a, b };
-
-export default obj;
+alert(typeof React);
+alert(typeof render);

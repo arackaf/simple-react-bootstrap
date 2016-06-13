@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/arackaf/simple-react-bootstrap-navbar/issues"
   },
-  "homepage": "https://github.com/arackaf/simple-react-bootstrap-navbar#readme"
+  "homepage": "https://github.com/arackaf/simple-react-bootstrap-navbar#readme",
+  "devDependencies": {
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "systemjs": "^0.19.31"
+  }
 }
