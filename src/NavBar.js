@@ -22,14 +22,6 @@ var _react2 = _interopRequireDefault(_react);
 
 document.onclick = function (evt) {};
 
-var NavBarHeader = function NavBarHeader(props) {
-    return _react2['default'].createElement(
-        'div',
-        { className: 'navbar-header' },
-        props.children
-    );
-};
-
 var NavBarBrand = function NavBarBrand(props) {
     return _react2['default'].cloneElement(props.children, { className: 'navbar-brand' });
 };
@@ -46,6 +38,24 @@ var NavBarToggle = function NavBarToggle(props) {
         _react2['default'].createElement('span', { className: 'icon-bar' }),
         _react2['default'].createElement('span', { className: 'icon-bar' }),
         _react2['default'].createElement('span', { className: 'icon-bar' })
+    );
+};
+
+var cloneHeaderItem = function cloneHeaderItem(item, i) {
+    var key = 'item' + i + '}';
+    if (item.type === NavBarToggle) {
+        key = 'toggle';
+    } else if (item.type === NavBarBrand) {
+        key = 'header-toggle';
+    }
+    return _react2['default'].cloneElement(item, { key: key });
+};
+
+var NavBarHeader = function NavBarHeader(props) {
+    return _react2['default'].createElement(
+        'div',
+        { className: 'navbar-header' },
+        props.children.map(cloneHeaderItem)
     );
 };
 
@@ -124,7 +134,9 @@ var NavBar = (function (_React$Component) {
                 return c.type === NavBarToggle;
             }) : null,
                 toggleIndex = toggle ? header.props.children.indexOf(toggle) : -1,
-                navSubItems = this.props.children.filter(filterValidNavSubItems);
+                navSubItems = this.props.children.filter(filterValidNavSubItems).map(function (subItem, i) {
+                return _react2['default'].cloneElement(subItem, { key: 'item' + i });
+            });
 
             if (toggleIndex >= 0) {
                 header.props.children[toggleIndex] = _react2['default'].cloneElement(toggle, { onClick: this.toggleMobileCollapse.bind(this) });
