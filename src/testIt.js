@@ -70,6 +70,28 @@ var _react2 = _interopRequireDefault(_react);
                 'Sub option c'
             )
         )
+    ),
+    _react2['default'].createElement(
+        _NavBarJs2['default'].Form,
+        { pullLeft: true },
+        _react2['default'].createElement(
+            'div',
+            { className: 'form-group' },
+            _react2['default'].createElement(
+                'div',
+                { className: 'input-group' },
+                _react2['default'].createElement(
+                    'span',
+                    { className: 'input-group-btn' },
+                    _react2['default'].createElement(
+                        'button',
+                        { className: 'btn default' },
+                        'Search'
+                    )
+                ),
+                _react2['default'].createElement('input', { className: 'form-control', placeholder: 'Quick title search' })
+            )
+        )
     )
 ), document.getElementById('home'));
 

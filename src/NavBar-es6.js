@@ -1,5 +1,10 @@
 import React from 'react';
 
+const NavBarForm = props =>
+    <form onSubmit={evt => evt.preventDefault()} className={'navbar-form ' + (props.pullLeft ? ' pull-left ' : '') + (props.pullRight ? ' pull-right ' : '')}>
+        {props.children}
+    </form>;
+
 const NavBarBrand = props => React.cloneElement(props.children, { className: 'navbar-brand' });
 
 const NavBarToggle = props =>
@@ -142,6 +147,7 @@ NavBar.Header = NavBarHeader;
 NavBar.Brand = NavBarBrand;
 NavBar.Toggle = NavBarToggle;
 NavBar.Dropdown = NavBarDropdown;
+NavBar.Form = NavBarForm;
 
 function filterValidNavSubItems(item){
     return item.type !== NavBarHeader;

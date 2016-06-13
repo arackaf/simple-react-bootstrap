@@ -20,6 +20,16 @@ render(
                 <NavBar.Item>Sub option c</NavBar.Item>
             </NavBar.Dropdown>
         </NavBar.Nav>
+        <NavBar.Form pullLeft={true}>
+            <div className="form-group">
+                <div className="input-group">
+                    <span className="input-group-btn">
+                        <button className="btn default">Search</button>
+                    </span>
+                    <input className="form-control" placeholder="Quick title search" />
+                </div>
+            </div>
+        </NavBar.Form>
     </NavBar>, document.getElementById('home'));
 
 

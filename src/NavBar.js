@@ -20,6 +20,16 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var NavBarForm = function NavBarForm(props) {
+    return _react2['default'].createElement(
+        'form',
+        { onSubmit: function (evt) {
+                return evt.preventDefault();
+            }, className: 'navbar-form ' + (props.pullLeft ? ' pull-left ' : '') + (props.pullRight ? ' pull-right ' : '') },
+        props.children
+    );
+};
+
 var NavBarBrand = function NavBarBrand(props) {
     return _react2['default'].cloneElement(props.children, { className: 'navbar-brand' });
 };
@@ -242,6 +252,7 @@ NavBar.Header = NavBarHeader;
 NavBar.Brand = NavBarBrand;
 NavBar.Toggle = NavBarToggle;
 NavBar.Dropdown = NavBarDropdown;
+NavBar.Form = NavBarForm;
 
 function filterValidNavSubItems(item) {
     return item.type !== NavBarHeader;
