@@ -19,7 +19,7 @@ builder.config({
 try { remove.removeSync('./dist'); } catch(err) { }
 
 builder
-    .buildStatic('src/NavBar.js - react', 'dist/NavBarStaticBuild.js')
+    .buildStatic('src/NavBar.js - react', 'dist/NavBarStaticBuild.js', { globalDeps: { 'react': 'React' } })
     .then(() =>
         gulp.src(['./dist/**/*.js'], {base: './'})
             .pipe(gulpUglify())

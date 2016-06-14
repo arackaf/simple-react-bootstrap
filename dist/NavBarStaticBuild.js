@@ -284,5 +284,5 @@ $__System.registerDynamic("1", ["2"], true, function($__require, exports, module
   else if (typeof module == 'object' && module.exports && typeof require == 'function')
     module.exports = factory(require("react"));
   else
-    throw new Error("Module must be loaded as AMD or CommonJS");
+    factory(React);
 });
