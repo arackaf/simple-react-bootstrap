@@ -3,7 +3,7 @@ import gulp from 'gulp';
 import gulpUglify from 'gulp-uglify';
 import gulpRename from 'gulp-rename';
 import remove from 'remove';
-
+import cp from 'glob-copy';
 
 let builder = new Builder({
     baseURL: './'
@@ -16,22 +16,15 @@ builder.config({
     meta: { }
 });
 
-remove.removeSync('./dist');
+try { remove.removeSync('./dist'); } catch(err) { }
 
-Promise.all([
-    builder.bundle('src/NavBar.js - react', 'dist/NavBar.js'),
-    builder.buildStatic('src/NavBar.js - react', 'dist/NavBarStaticBuild.js')
-]).then(() => {
-    try {
+builder
+    .buildStatic('src/NavBar.js - react', 'dist/NavBarStaticBuild.js')
+    .then(() =>
         gulp.src(['./dist/**/*.js'], {base: './'})
             .pipe(gulpUglify())
             .pipe(gulpRename(function (path) {
                 path.basename = path.basename + '.min';
             }))
-            .pipe(gulp.dest(''));
-
-
-    } catch (err){
-        console.log(err);
-    }
-});
+            .pipe(gulp.dest(''))
+            .on('end', () => cp('./src/**/*.js', './dist')));

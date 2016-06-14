@@ -1,4 +1,4 @@
-import NavBar from './NavBar.js';
+import NavBar from '../src/NavBar.js';
 import { render } from 'react-dom';
 import React from 'react';
 

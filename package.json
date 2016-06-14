@@ -1,8 +1,8 @@
 {
   "name": "simple-react-bootstrap-navbar",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "",
-  "main": "./dist/NavBar.min.js",
+  "main": "./dist/NavBar.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/arackaf/simple-react-bootstrap-navbar#readme",
   "devDependencies": {
+    "glob-copy": "^0.1.0",
     "gulp": "3.9.1",
     "gulp-6to5": "3.0.0",
     "gulp-babel": "5.1.0",
