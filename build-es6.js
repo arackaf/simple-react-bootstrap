@@ -20,11 +20,21 @@ try { remove.removeSync('./dist'); } catch(err) { }
 
 builder
     .buildStatic('src/NavBar.js - react', 'dist/NavBarStaticBuild.js', { format: 'umd', globalName: 'NavBar', globalDeps: { 'react': 'React' } })
-    .then(() =>
-        gulp.src(['./dist/**/*.js'], {base: './'})
+    .then(copySrc)
+    .then(() => {
+        gulp.src(['./dist/**/*.js', '!./dist/**/*-es6.js'], {base: './'})
             .pipe(gulpUglify())
             .pipe(gulpRename(function (path) {
                 path.basename = path.basename + '.min';
             }))
-            .pipe(gulp.dest(''))
-            .on('end', () => cp('./src/**/*.js', './dist')));
+            .pipe(gulp.dest(''));
+    });
+
+function copySrc(){
+    return new Promise((res, rej) => {
+        cp('./src/**/*.js', './dist', err => {
+            if (err) rej(err);
+            else res();
+        });
+    });
+}

@@ -6,7 +6,7 @@ var gulp = require('gulp'),
     babel = require('gulp-babel');
 
 gulp.task('transpile-watch', function() {
-    return gulp.watch('./**/**-es6.js', function(obj){
+    return gulp.watch(['./**/**-es6.js', '!./dist/**/*.js'], function(obj){
         if (obj.type === 'changed') {
             gulp.src(obj.path, { base: './' })
                 .pipe(plumber({
