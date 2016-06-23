@@ -41,13 +41,28 @@
     <button id="btn">Show</button>
 
     <script type="text/javascript">
+        document.addEventListener('click', function(evt){
+            var element = evt.target;
+            do {
+                if (element.classList && element.classList.contains('modal')){
+                    var backdrop = document.getElementsByClassName('simple-react-modal-backdrop')[0];
+                    backdrop.parentNode.removeChild(backdrop);
+                    return; //let the native handler take it.
+                }
+            } while (element = element.parentNode);
+
+        });
+
         document.getElementById('btn').onclick = function () {
-            debugger;
             document.getElementById('modal-test').style.display = 'block';
             setTimeout(function(){ document.getElementById('modal-test').classList.add('in'); }, 10);
             var div = document.createElement('div');
-            div.classList.add('modal-backdrop', 'fade');
+
+            div.classList.add('modal-backdrop', 'simple-react-modal-backdrop', 'fade');
             document.body.appendChild(div);
+
+
+
             setTimeout(function(){ div.classList.add('in'); }, 1);
         };
     </script>
