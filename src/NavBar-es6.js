@@ -94,8 +94,10 @@ class NavBar extends React.Component{
                     }
                 }
 
+                collapseContentToToggle.style.visibility = 'hidden';
                 collapseContentToToggle.classList.add('in');
                 let offsetHeight = collapseContentToToggle.offsetHeight;
+                collapseContentToToggle.style.visibility = '';
                 collapseContentToToggle.classList.remove('in');
 
                 this._cachedHeight = offsetHeight;
