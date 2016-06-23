@@ -111,7 +111,7 @@ class NavBar extends React.Component{
         let header = this.props.children.find(c => c.type === NavBarHeader),
             toggle = header ? header.props.children.find(c => c.type === NavBarToggle) : null,
             toggleIndex = toggle ? header.props.children.indexOf(toggle) : -1,
-            navSubItems = this.props.children.filter(filterValidNavSubItems).map((subItem, i) => React.cloneElement(subItem, { key: `item${i}` }));
+            navSubItems = this.props.children.filter(filterValidNavSubItems);
 
         if (toggleIndex >= 0){
             header.props.children[toggleIndex] = React.cloneElement(toggle, { onClick: this.toggleMobileCollapse.bind(this), key: 'nav-bar-toggle' });
