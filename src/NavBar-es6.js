@@ -5,7 +5,7 @@ const NavBarForm = props =>
         {props.children}
     </form>;
 
-const NavBarBrand = props => React.cloneElement(props.children, { className: 'navbar-brand' });
+const NavBarBrand = props => React.cloneElement(props.children, { className: 'navbar-brand', key: 'nav-bar-brand' });
 
 const NavBarToggle = props =>
     <button { ...props } type="button" className="navbar-toggle collapsed">
@@ -15,19 +15,9 @@ const NavBarToggle = props =>
         <span className="icon-bar"></span>
     </button>;
 
-const cloneHeaderItem = (item, i) => {
-    let key = `item${i}}`;
-    if (item.type === NavBarToggle){
-        key = 'toggle'
-    } else if (item.type === NavBarBrand){
-        key = 'header-toggle'
-    }
-    return React.cloneElement(item, { key });
-};
-
 const NavBarHeader = props =>
     <div className="navbar-header">
-        { props.children.map(cloneHeaderItem) }
+        { props.children }
     </div>;
 
 const NavBarItem = props =>
@@ -98,7 +88,6 @@ class NavBar extends React.Component{
                     collapseContentToToggle;
 
                 while (currentNode = currentNode.parentNode){
-                    console.log('TICK');
                     if (currentNode.tagName === 'DIV'){
                         collapseContentToToggle = currentNode.nextSibling;
                         break;
@@ -125,7 +114,7 @@ class NavBar extends React.Component{
             navSubItems = this.props.children.filter(filterValidNavSubItems).map((subItem, i) => React.cloneElement(subItem, { key: `item${i}` }));
 
         if (toggleIndex >= 0){
-            header.props.children[toggleIndex] = React.cloneElement(toggle, { onClick: this.toggleMobileCollapse.bind(this) });
+            header.props.children[toggleIndex] = React.cloneElement(toggle, { onClick: this.toggleMobileCollapse.bind(this), key: 'nav-bar-toggle' });
         }
 
         return (
