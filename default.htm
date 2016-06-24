@@ -45,8 +45,17 @@
             var element = evt.target;
             do {
                 if (element.classList && element.classList.contains('modal')){
-                    var backdrop = document.getElementsByClassName('simple-react-modal-backdrop')[0];
-                    backdrop.parentNode.removeChild(backdrop);
+                    var backdrop = document.getElementsByClassName('simple-react-modal-backdrop')[0],
+                        modal = document.getElementById('modal-test');
+
+                    if (!backdrop) return;
+
+                    modal.classList.remove('in');
+                    setTimeout(function() {
+                        modal.style.display = 'none';
+                        backdrop.classList.remove('in');
+                        setTimeout(function () { backdrop.parentNode.removeChild(backdrop); }, 250);
+                    }, 150);
                     return; //let the native handler take it.
                 }
             } while (element = element.parentNode);
@@ -55,15 +64,13 @@
 
         document.getElementById('btn').onclick = function () {
             document.getElementById('modal-test').style.display = 'block';
-            setTimeout(function(){ document.getElementById('modal-test').classList.add('in'); }, 10);
             var div = document.createElement('div');
 
             div.classList.add('modal-backdrop', 'simple-react-modal-backdrop', 'fade');
             document.body.appendChild(div);
 
-
-
             setTimeout(function(){ div.classList.add('in'); }, 1);
+            setTimeout(function(){ document.getElementById('modal-test').classList.add('fade', 'in'); }, 150);
         };
     </script>
 
