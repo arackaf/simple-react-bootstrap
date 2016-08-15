@@ -25,10 +25,6 @@
                     <p>One fine body</p>
                     <p>One fine body</p>
                     <p>One fine body</p>
-                    <p>One fine body</p>
-                    <p>One fine body</p>
-                    <p>One fine body</p>
-                    <p>One fine body</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -51,12 +47,12 @@
                     if (!backdrop) return;
 
                     modal.classList.remove('in');
+                    backdrop.classList.remove('in');
                     setTimeout(function() {
                         modal.style.display = 'none';
-                        backdrop.classList.remove('in');
-                        setTimeout(function () { backdrop.parentNode.removeChild(backdrop); }, 250);
-                    }, 150);
-                    return; //let the native handler take it.
+                        backdrop.parentNode.removeChild(backdrop);
+                    }, 200);
+                    return;
                 }
             } while (element = element.parentNode);
 
@@ -70,7 +66,7 @@
             document.body.appendChild(div);
 
             setTimeout(function(){ div.classList.add('in'); }, 1);
-            setTimeout(function(){ document.getElementById('modal-test').classList.add('fade', 'in'); }, 150);
+            setTimeout(function(){ document.getElementById('modal-test').classList.add('fade', 'in'); }, 1);
         };
     </script>
 
