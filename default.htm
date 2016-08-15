@@ -37,24 +37,27 @@
     <button id="btn">Show</button>
 
     <script type="text/javascript">
+        var currentModal = null;
+
         document.addEventListener('click', function(evt){
-            var element = evt.target;
-            do {
-                if (element.classList && element.classList.contains('modal')){
-                    var backdrop = document.getElementsByClassName('simple-react-modal-backdrop')[0],
-                        modal = document.getElementById('modal-test');
+            if (!currentModal) return;
 
-                    if (!backdrop) return;
+            var element = evt.target,
+                modalContent = currentModal.getElementsByClassName('modal-content')[0];
+            
+            if (modalContent.contains(element)) return;
 
-                    modal.classList.remove('in');
-                    backdrop.classList.remove('in');
-                    setTimeout(function() {
-                        modal.style.display = 'none';
-                        backdrop.parentNode.removeChild(backdrop);
-                    }, 200);
-                    return;
-                }
-            } while (element = element.parentNode);
+            var currentModalCopy = currentModal;
+            currentModal = null;
+
+            var backdrop = document.getElementsByClassName('simple-react-modal-backdrop')[0];
+
+            currentModalCopy.classList.remove('in');
+            backdrop && backdrop.classList.remove('in');
+            setTimeout(function() {
+                currentModalCopy.style.display = 'none';
+                backdrop && backdrop.parentNode.removeChild(backdrop);
+            }, 200);
 
         });
 
@@ -67,6 +70,8 @@
 
             setTimeout(function(){ div.classList.add('in'); }, 1);
             setTimeout(function(){ document.getElementById('modal-test').classList.add('fade', 'in'); }, 1);
+
+            setTimeout(function(){ currentModal = document.getElementById('modal-test'); }, 100)
         };
     </script>
 
