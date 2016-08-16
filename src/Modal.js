@@ -26,6 +26,27 @@ var ModalBody = function ModalBody(props) {
     );
 };
 
+var currentModal = null;
+document.addEventListener('click', function (evt) {
+    if (!currentModal) return;
+
+    var element = evt.target,
+        modalRoot = currentModal.modalRef,
+        modalContent = modalRoot.getElementsByClassName('modal-content')[0];
+
+    if (modalContent.contains(element)) return;
+
+    var currentModalCopy = currentModal;
+    currentModal = null;
+
+    var backdrop = document.getElementsByClassName('simple-react-modal-backdrop')[0];
+    backdrop && backdrop.classList.remove('in');
+    currentModalCopy.props.onHide();
+    setTimeout(function () {
+        backdrop && backdrop.parentNode.removeChild(backdrop);
+    }, 200);
+});
+
 var Modal = (function (_React$Component) {
     _inherits(Modal, _React$Component);
 
@@ -47,17 +68,26 @@ var Modal = (function (_React$Component) {
                     div.classList.add('modal-backdrop', 'simple-react-modal-backdrop', 'fade');
                     document.body.appendChild(div);
                     _this.setState({ exists: true });
-
                     setTimeout(function () {
                         div.classList.add('in');
                         _this.setState({ hasInCssClass: true });
                     }, 1);
+                    setTimeout(function () {
+                        return currentModal = _this;
+                    }, 100);
                 })();
+            } else if (prevProps.show && !this.props.show) {
+                this.setState({ hasInCssClass: false });
+                setTimeout(function () {
+                    return _this.setState({ exists: false });
+                }, 200);
             }
         }
     }, {
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
             var children = this.props.children;
             if (!Array.isArray(children)) {
                 children = [children];
@@ -68,7 +98,9 @@ var Modal = (function (_React$Component) {
 
             return _react2['default'].createElement(
                 'div',
-                { className: 'modal fade ' + (this.state.hasInCssClass ? 'in' : ''), style: { display: this.state.exists ? 'block' : '' }, role: 'dialog' },
+                { ref: function (el) {
+                        return _this2.modalRef = el;
+                    }, className: 'modal fade ' + (this.state.hasInCssClass ? 'in' : ''), style: { display: this.state.exists ? 'block' : '' }, role: 'dialog' },
                 _react2['default'].createElement(
                     'div',
                     { className: 'modal-dialog' },

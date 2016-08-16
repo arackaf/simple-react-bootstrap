@@ -11,9 +11,13 @@ class ModalRunner extends React.Component{
         return (
             <div>
                 <button onClick={() => this.setState({ open: true })}>Open Real Modal</button>
-                <Modal show={ this.state.open }>
+                <Modal show={ this.state.open } onHide={() => this.setState({ open: false })}>
                     <Modal.Body>
-                        <p>Yasssssss</p>
+                        <p>Single line</p>
+                        <p>Single line</p>
+                        <p>Single line</p>
+                        <p>Single line</p>
+                        <p>Single line</p>
                     </Modal.Body>
                 </Modal>
             </div>
