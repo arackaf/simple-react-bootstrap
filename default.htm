@@ -9,12 +9,12 @@
     <script src="systemjs-config.js"></script>
 
     <script type="text/javascript">
-        //System.import('./test-runner/testIt.js');
+        System.import('./test-runner/testIt.js');
     </script>
 </head>
 <body>
 
-    <div id="modal-test" class="modal fade" tabindex="-1" role="dialog">
+    <div id="modal-test" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -64,7 +64,6 @@
         document.getElementById('btn').onclick = function () {
             document.getElementById('modal-test').style.display = 'block';
             var div = document.createElement('div');
-
             div.classList.add('modal-backdrop', 'simple-react-modal-backdrop', 'fade');
             document.body.appendChild(div);
 
