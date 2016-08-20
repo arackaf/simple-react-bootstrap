@@ -29,9 +29,10 @@ const NavBarHeader = props =>
     </div>;
 
 const NavBarItem = props => {
-    let isDisabled = !!props.disabled;
+    let { disabled, className, href, children, ...rest } = props;
+
     return (
-        <li disabled={isDisabled} className={isDisabled ? 'disabled' : ''}><a href={props.href}>{props.children}</a></li>
+        <li disabled={!!disabled} className={spreadClassNames(className, !!disabled ? 'disabled' : '')} { ...rest }><a href={props.href}>{children}</a></li>
     );
 };
 

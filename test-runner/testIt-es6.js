@@ -11,7 +11,7 @@ render(
             <NavBar.Toggle />
         </NavBar.Header>
         <NavBar.Nav>
-            <NavBar.Item>Link 1</NavBar.Item>
+            <NavBar.Item className="class-on-item">Link 1</NavBar.Item>
             <NavBar.Item disabled={true}>Link 2</NavBar.Item>
             <NavBar.Item href="http://www.google.com">Link 3</NavBar.Item>
             <NavBar.Dropdown className="pointer-cursor" style={{ color: 'red' }} text="Sub menu">
