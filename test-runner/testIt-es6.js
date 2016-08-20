@@ -22,6 +22,10 @@ class ModalRunner extends React.Component{
                         <p>Single line</p>
                         <p>Single line</p>
                     </Modal.Body>
+                    <Modal.Footer>
+                        <button type="button" className="btn btn-default" onClick={() => this.setState({ open: false })}>Close</button>
+                        <button type="button" className="btn btn-primary">Save changes</button>
+                    </Modal.Footer>
                 </Modal>
             </div>
         )

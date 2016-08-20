@@ -6,6 +6,12 @@ const ModalHeader = props => (
     </div>
 );
 
+const ModalFooter = props => (
+    <div className="modal-footer">
+        { props.children }
+    </div>
+);
+
 const ModalBody = props => (
     <div className="modal-body">
         { props.children }
@@ -22,16 +28,17 @@ document.addEventListener('click', function(evt){
 
     if (modalContent.contains(element)) return;
 
-    var currentModalCopy = currentModal;
+    currentModal.props.onHide();
     currentModal = null;
-
-    var backdrop = document.getElementsByClassName('simple-react-modal-backdrop')[0];
-    backdrop && backdrop.classList.remove('in');
-    currentModalCopy.props.onHide();
-    setTimeout(function() {
-        backdrop && backdrop.parentNode.removeChild(backdrop);
-    }, 200);
 });
+
+function removeBackdrop(){
+    let backdrop = document.getElementsByClassName('simple-react-modal-backdrop')[0];
+    if (!backdrop)return;
+
+    backdrop.classList.remove('in');
+    setTimeout(() => backdrop.parentNode.removeChild(backdrop), 200);
+}
 
 class Modal extends React.Component {
     constructor(){
@@ -52,6 +59,11 @@ class Modal extends React.Component {
         } else if (prevProps.show && !this.props.show){
             this.setState({ hasInCssClass: false });
             setTimeout(() => this.setState({ exists: false }), 200);
+            removeBackdrop();
+            if (currentModal == this){
+                currentModal = null;
+                console.log('null\'d');
+            }
         }
     }
     render() {
@@ -60,7 +72,8 @@ class Modal extends React.Component {
             children = [children];
         }
         let modalBody = children.find(c => c.type === ModalBody),
-            modalHeader = children.find(c => c.type === ModalHeader);
+            modalHeader = children.find(c => c.type === ModalHeader),
+            modalFooter = children.find(c => c.type === ModalFooter);
 
         return (
             <div ref={el => this.modalRef = el} className={'modal fade ' + (this.state.hasInCssClass ? 'in' : '')} style={{ display: this.state.exists ? 'block' : '' }} role="dialog">
@@ -68,6 +81,7 @@ class Modal extends React.Component {
                     <div className="modal-content">
                         { modalHeader || null }
                         { modalBody || null }
+                        { modalFooter || null }
                     </div>
                 </div>
             </div>
@@ -77,5 +91,6 @@ class Modal extends React.Component {
 
 Modal.Body = ModalBody;
 Modal.Header = ModalHeader;
+Modal.Footer = ModalFooter;
 
 export default Modal;
