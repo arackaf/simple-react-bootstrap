@@ -12,9 +12,14 @@ render(
         </NavBar.Header>
         <NavBar.Nav>
             <NavBar.Item>Link 1</NavBar.Item>
-            <NavBar.Item active={true}>Link 2</NavBar.Item>
+            <NavBar.Item disabled={true}>Link 2</NavBar.Item>
             <NavBar.Item href="http://www.google.com">Link 3</NavBar.Item>
             <NavBar.Dropdown className="pointer-cursor" style={{ color: 'red' }} text="Sub menu">
+                <NavBar.Item>Sub option a</NavBar.Item>
+                <NavBar.Item>Sub option b</NavBar.Item>
+                <NavBar.Item>Sub option c</NavBar.Item>
+            </NavBar.Dropdown>
+            <NavBar.Dropdown disabled={true} text="Sub menu">
                 <NavBar.Item>Sub option a</NavBar.Item>
                 <NavBar.Item>Sub option b</NavBar.Item>
                 <NavBar.Item>Sub option c</NavBar.Item>

@@ -28,8 +28,12 @@ const NavBarHeader = props =>
         { props.children }
     </div>;
 
-const NavBarItem = props =>
-    <li active={props.active}><a href={props.href}>{props.children}</a></li>;
+const NavBarItem = props => {
+    let isDisabled = !!props.disabled;
+    return (
+        <li disabled={isDisabled} className={isDisabled ? 'disabled' : ''}><a href={props.href}>{props.children}</a></li>
+    );
+};
 
 class NavBarDropdown extends React.Component {
     constructor(){
@@ -53,14 +57,16 @@ class NavBarDropdown extends React.Component {
         document.removeEventListener('click', this.handleOutsideClick);
     }
     toggle(){
+        if (this.props.disabled) return;
+
         this.setState({open: !this.state.open});
     }
     render() {
         let props = this.props,
-            { className, style, ...rest } = props;
+            { className, style, disabled, ...rest } = props;
 
         return (
-            <li className={'dropdown ' + (this.state.open ? 'open' : '')}>
+            <li className={`dropdown ${this.state.open ? 'open' : ''} ${!!disabled ? 'disabled' : ''}`} disabled={!!disabled}>
                 <a className={spreadClassNames(className, 'dropdown-toggle')} style={style || {}} onClick={() => this.toggle()} { ...rest }>{props.text} <span className="caret"></span></a>
                 <ul className="dropdown-menu">
                     {props.children}
