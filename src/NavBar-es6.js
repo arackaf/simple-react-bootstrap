@@ -2,10 +2,16 @@ import React from 'react';
 
 const spreadClassNames = (userClassName, baseCssClasses) => `${baseCssClasses || ''} ${userClassName || ''}`;
 
-const NavBarForm = props =>
-    <form onSubmit={evt => evt.preventDefault()} className={'navbar-form ' + (props.pullLeft ? ' pull-left ' : '') + (props.pullRight ? ' pull-right ' : '')}>
-        {props.children}
-    </form>;
+const NavBarForm = props => {
+    let { className, style, ...rest } = props;
+
+    return (
+        <form onSubmit={evt => evt.preventDefault()} className={spreadClassNames(className, 'navbar-form')}>
+            {props.children}
+        </form>
+    );
+};
+
 
 const NavBarBrand = props => React.cloneElement(props.children, { className: 'navbar-brand', key: 'nav-bar-brand' });
 

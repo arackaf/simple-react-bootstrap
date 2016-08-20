@@ -20,7 +20,7 @@ render(
                 <NavBar.Item>Sub option c</NavBar.Item>
             </NavBar.Dropdown>
         </NavBar.Nav>
-        <NavBar.Form pullLeft={true}>
+        <NavBar.Form className="pull-left">
             <div className="form-group">
                 <div className="input-group">
                     <span className="input-group-btn">
