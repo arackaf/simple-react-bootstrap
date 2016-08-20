@@ -53,7 +53,7 @@ var _react2 = _interopRequireDefault(_react);
         ),
         _react2['default'].createElement(
             _srcNavBarJs2['default'].Dropdown,
-            { text: 'Sub menu' },
+            { className: 'pointer-cursor', style: { color: 'red' }, text: 'Sub menu' },
             _react2['default'].createElement(
                 _srcNavBarJs2['default'].Item,
                 null,

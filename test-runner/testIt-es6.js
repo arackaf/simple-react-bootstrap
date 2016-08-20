@@ -14,7 +14,7 @@ render(
             <NavBar.Item>Link 1</NavBar.Item>
             <NavBar.Item active={true}>Link 2</NavBar.Item>
             <NavBar.Item href="http://www.google.com">Link 3</NavBar.Item>
-            <NavBar.Dropdown text="Sub menu">
+            <NavBar.Dropdown className="pointer-cursor" style={{ color: 'red' }} text="Sub menu">
                 <NavBar.Item>Sub option a</NavBar.Item>
                 <NavBar.Item>Sub option b</NavBar.Item>
                 <NavBar.Item>Sub option c</NavBar.Item>

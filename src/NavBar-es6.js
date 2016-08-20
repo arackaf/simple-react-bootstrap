@@ -1,5 +1,7 @@
 import React from 'react';
 
+const spreadClassNames = (userClassName, baseCssClasses) => `${baseCssClasses || ''} ${userClassName || ''}`;
+
 const NavBarForm = props =>
     <form onSubmit={evt => evt.preventDefault()} className={'navbar-form ' + (props.pullLeft ? ' pull-left ' : '') + (props.pullRight ? ' pull-right ' : '')}>
         {props.children}
@@ -48,10 +50,12 @@ class NavBarDropdown extends React.Component {
         this.setState({open: !this.state.open});
     }
     render() {
-        let props = this.props;
+        let props = this.props,
+            { className, style, ...rest } = props;
+
         return (
             <li className={'dropdown ' + (this.state.open ? 'open' : '')}>
-                <a className="dropdown-toggle" onClick={() => this.toggle()} { ...props }>{props.text} <span className="caret"></span></a>
+                <a className={spreadClassNames(className, 'dropdown-toggle')} style={style || {}} onClick={() => this.toggle()} { ...rest }>{props.text} <span className="caret"></span></a>
                 <ul className="dropdown-menu">
                     {props.children}
                 </ul>
