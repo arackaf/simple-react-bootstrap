@@ -12,6 +12,9 @@ class ModalRunner extends React.Component{
             <div>
                 <button onClick={() => this.setState({ open: true })}>Open Real Modal</button>
                 <Modal show={ this.state.open } onHide={() => this.setState({ open: false })}>
+                    <Modal.Header>
+                        <h3>Hello World</h3>
+                    </Modal.Header>
                     <Modal.Body>
                         <p>Single line</p>
                         <p>Single line</p>

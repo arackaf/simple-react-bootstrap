@@ -1,5 +1,11 @@
 import React from 'react';
 
+const ModalHeader = props => (
+    <div className="modal-header">
+        { props.children }
+    </div>
+);
+
 const ModalBody = props => (
     <div className="modal-body">
         { props.children }
@@ -25,7 +31,6 @@ document.addEventListener('click', function(evt){
     setTimeout(function() {
         backdrop && backdrop.parentNode.removeChild(backdrop);
     }, 200);
-
 });
 
 class Modal extends React.Component {
@@ -54,15 +59,14 @@ class Modal extends React.Component {
         if (!Array.isArray(children)){
             children = [children];
         }
-        let modalBody = children.find(c => c.type === ModalBody);
+        let modalBody = children.find(c => c.type === ModalBody),
+            modalHeader = children.find(c => c.type === ModalHeader);
 
         return (
             <div ref={el => this.modalRef = el} className={'modal fade ' + (this.state.hasInCssClass ? 'in' : '')} style={{ display: this.state.exists ? 'block' : '' }} role="dialog">
                 <div className="modal-dialog">
                     <div className="modal-content">
-                        <div className="modal-header">
-                            <h4 className="modal-title">Hellooooooo</h4>
-                        </div>
+                        { modalHeader || null }
                         { modalBody || null }
                     </div>
                 </div>
@@ -72,5 +76,6 @@ class Modal extends React.Component {
 }
 
 Modal.Body = ModalBody;
+Modal.Header = ModalHeader;
 
 export default Modal;
