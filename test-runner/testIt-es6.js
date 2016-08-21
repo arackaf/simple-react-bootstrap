@@ -5,13 +5,17 @@ import React from 'react';
 class ModalRunner extends React.Component{
     constructor(){
         super();
-        this.state = { open: false }
+        this.state = { openAnimate: false, openNoAnimate: false }
     }
     render(){
         return (
             <div>
-                <button onClick={() => this.setState({ open: true })}>Open Real Modal</button>
-                <Modal className="fade" show={ this.state.open } onHide={() => this.setState({ open: false })}>
+                <br />
+                <button onClick={() => this.setState({ openAnimate: true })}>Open Modal with animation</button>
+                <br /><br />
+                <button onClick={() => this.setState({ openNoAnimate: true })}>Open Modal - no animation</button>
+
+                <Modal className="fade" show={ this.state.openAnimate } onHide={() => this.setState({ openAnimate: false })}>
                     <Modal.Header>
                         <h3>Hello World</h3>
                     </Modal.Header>
@@ -23,7 +27,24 @@ class ModalRunner extends React.Component{
                         <p>Single line</p>
                     </Modal.Body>
                     <Modal.Footer>
-                        <button type="button" className="btn btn-default" onClick={() => this.setState({ open: false })}>Close</button>
+                        <button type="button" className="btn btn-default" onClick={() => this.setState({ openAnimate: false })}>Close</button>
+                        <button type="button" className="btn btn-primary">Save changes</button>
+                    </Modal.Footer>
+                </Modal>
+
+                <Modal show={ this.state.openNoAnimate } onHide={() => this.setState({ openNoAnimate: false })}>
+                    <Modal.Header>
+                        <h3>Hello World</h3>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>Single line</p>
+                        <p>Single line</p>
+                        <p>Single line</p>
+                        <p>Single line</p>
+                        <p>Single line</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <button type="button" className="btn btn-default" onClick={() => this.setState({ openNoAnimate: false })}>Close</button>
                         <button type="button" className="btn btn-primary">Save changes</button>
                     </Modal.Footer>
                 </Modal>
@@ -35,10 +56,5 @@ class ModalRunner extends React.Component{
 
 render(<ModalRunner />, document.getElementById('home'));
 
-
-//bound in dom 0 handler in default.htm - to test unMount events
-window.clearNavBar = function(){
-    render(<div>Gone</div>, document.getElementById('home'));
-};
 
 export default null;
