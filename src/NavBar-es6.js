@@ -42,22 +42,27 @@ class NavBarDropdown extends React.Component {
         this.state = { open: false };
 
         this.handleOutsideClick = evt => {
-            let element = evt.target;
-            do {
-                if (element.classList && element.classList.contains('dropdown-toggle')){
-                    return; //let the native handler take it.
-                }
-            } while (element = element.parentNode);
+            if (typeof this.props.open !== 'undefined') return;
 
+            let element = evt.target;
+            if (this.dropDownToggle.contains(element)){
+                return;
+            }
             this.setState({ open: false });
         };
 
         document.addEventListener('click', this.handleOutsideClick);
     }
+    componentWillUpdate(nextProps, nextState){
+        if (typeof nextProps.open != 'undefined' && !!nextProps.open != !!this.state.open){
+            this.setState({ open: !!nextProps.open });
+        }
+    }
     componentWillUnmount(){
         document.removeEventListener('click', this.handleOutsideClick);
     }
     toggle(){
+        if (typeof this.props.open !== 'undefined') return;
         if (this.props.disabled) return;
 
         this.setState({open: !this.state.open});
@@ -68,7 +73,7 @@ class NavBarDropdown extends React.Component {
 
         return (
             <li className={`dropdown ${this.state.open ? 'open' : ''} ${!!disabled ? 'disabled' : ''}`} disabled={!!disabled}>
-                <a className={spreadClassNames(className, 'dropdown-toggle')} style={style || {}} onClick={() => this.toggle()} { ...rest }>{props.text} <span className="caret"></span></a>
+                <a ref={el => this.dropDownToggle = el} className={spreadClassNames(className, 'dropdown-toggle')} style={style || {}} onClick={() => this.toggle()} { ...rest }>{props.text} <span className="caret"></span></a>
                 <ul className="dropdown-menu">
                     {props.children}
                 </ul>
