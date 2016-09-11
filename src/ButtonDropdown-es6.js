@@ -39,7 +39,10 @@ class ButtonDropdown extends Component {
             ref: el => this.toggleBtn = el
         });
 
-        let content = React.cloneElement(contentUnadjusted, { ref: el => this.contentMenu = el });
+        let content = React.cloneElement(contentUnadjusted, {
+            className: 'dropdown-menu ' + contentUnadjusted.props.className,
+            ref: el => this.contentMenu = el
+        });
 
         return (
             <div className={className + ' btn-group ' + (this.state.open ? 'open' : '')}>

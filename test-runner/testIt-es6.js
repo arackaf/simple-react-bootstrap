@@ -7,14 +7,14 @@ render(
     <div style={{ paddingLeft: 30 }}>
         <ButtonDropdown>
             <button className="btn btn-default">Out of the box</button>
-            <div className="dropdown-menu">
+            <div>
                 <h1>Hello</h1>
             </div>
         </ButtonDropdown>
         <br /><br /><br />
         <ButtonDropdown>
             <button className="btn btn-default"><h4>Some styling</h4><i className="fa fa-fw fa-tag"></i></button>
-            <div className="dropdown-menu">
+            <div>
                 <div>
                     <span>
                         <h1>Hello</h1>
@@ -26,7 +26,7 @@ render(
         <br /><br /><br />
         <ButtonDropdown ignoreContentClick={true}>
             <button className="btn btn-default">Menu doesn't cause dropdown to close</button>
-            <div className="dropdown-menu">
+            <div>
                 <div>
                     <span>
                         <h1>Hello</h1>

@@ -29,7 +29,7 @@ var _srcButtonDropdown2 = _interopRequireDefault(_srcButtonDropdown);
         ),
         _react2['default'].createElement(
             'div',
-            { className: 'dropdown-menu' },
+            null,
             _react2['default'].createElement(
                 'h1',
                 null,
@@ -55,7 +55,7 @@ var _srcButtonDropdown2 = _interopRequireDefault(_srcButtonDropdown);
         ),
         _react2['default'].createElement(
             'div',
-            { className: 'dropdown-menu' },
+            null,
             _react2['default'].createElement(
                 'div',
                 null,
@@ -89,7 +89,7 @@ var _srcButtonDropdown2 = _interopRequireDefault(_srcButtonDropdown);
         ),
         _react2['default'].createElement(
             'div',
-            { className: 'dropdown-menu' },
+            null,
             _react2['default'].createElement(
                 'div',
                 null,
