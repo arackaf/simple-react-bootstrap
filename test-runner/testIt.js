@@ -21,7 +21,8 @@ var _srcButtonDropdown2 = _interopRequireDefault(_srcButtonDropdown);
     null,
     _react2['default'].createElement(
         'button',
-        { className: 'btn btn-default dropdown-toggle' },
+        { className: 'btn btn-default' },
+        'Y ',
         _react2['default'].createElement('i', { className: 'fa fa-fw fa-tag' })
     ),
     _react2['default'].createElement(

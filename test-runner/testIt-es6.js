@@ -5,7 +5,7 @@ import ButtonDropdown from '../src/ButtonDropdown';
 
 render(
     <ButtonDropdown>
-        <button className="btn btn-default dropdown-toggle"><i className="fa fa-fw fa-tag"></i></button>
+        <button className="btn btn-default">Y <i className="fa fa-fw fa-tag"></i></button>
         <div className="dropdown-menu">
             <h1>Hello</h1>
         </div>

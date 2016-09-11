@@ -7,8 +7,15 @@ class ButtonDropdown extends Component {
         super();
         this.state = { open: false };
     }
-    toggle = () => {
-        this.setState({ open: !this.state.open });
+    toggle = () => this.setState({ open: !this.state.open });
+    documentClick = evt => {
+        if (this.toggleBtn.contains(evt.target)) return;
+        if (this.state.open){
+            this.toggle();
+        }
+    };
+    componentDidMount(){
+        document.addEventListener('click', this.documentClick);
     }
     render(){
         let { children, className = '', ...rest } = this.props;
@@ -17,12 +24,20 @@ class ButtonDropdown extends Component {
             throw 'Error - exactly two children should be passed, a toggle, and dropdown menu'
         }
 
-        let toggle = children[0],
+        let toggleUnadjusted = children[0],
             content = children[1];
+
+        let toggleClasses = 'dropdown-toggle ' + toggleUnadjusted.props.className,
+            toggleClick = toggleUnadjusted.props.onClick || this.toggle;
+        let toggle = React.cloneElement(toggleUnadjusted, {
+            className: toggleClasses,
+            onClick: toggleClick,
+            ref: el => this.toggleBtn = el
+        });
 
         return (
             <div className={className + ' btn-group ' + (this.state.open ? 'open' : '')}>
-                <button onClick={this.toggle}>X<i className="fa fa-fw fa-tag"></i></button>
+                {toggle}
                 {content}
             </div>
         )
