@@ -17,21 +17,97 @@ var _srcButtonDropdown = require('../src/ButtonDropdown');
 var _srcButtonDropdown2 = _interopRequireDefault(_srcButtonDropdown);
 
 (0, _reactDom.render)(_react2['default'].createElement(
-    _srcButtonDropdown2['default'],
-    null,
+    'div',
+    { style: { paddingLeft: 30 } },
     _react2['default'].createElement(
-        'button',
-        { className: 'btn btn-default' },
-        'Y ',
-        _react2['default'].createElement('i', { className: 'fa fa-fw fa-tag' })
-    ),
-    _react2['default'].createElement(
-        'div',
-        { className: 'dropdown-menu' },
+        _srcButtonDropdown2['default'],
+        null,
         _react2['default'].createElement(
-            'h1',
-            null,
-            'Hello'
+            'button',
+            { className: 'btn btn-default' },
+            'Out of the box'
+        ),
+        _react2['default'].createElement(
+            'div',
+            { className: 'dropdown-menu' },
+            _react2['default'].createElement(
+                'h1',
+                null,
+                'Hello'
+            )
+        )
+    ),
+    _react2['default'].createElement('br', null),
+    _react2['default'].createElement('br', null),
+    _react2['default'].createElement('br', null),
+    _react2['default'].createElement(
+        _srcButtonDropdown2['default'],
+        null,
+        _react2['default'].createElement(
+            'button',
+            { className: 'btn btn-default' },
+            _react2['default'].createElement(
+                'h4',
+                null,
+                'Some styling'
+            ),
+            _react2['default'].createElement('i', { className: 'fa fa-fw fa-tag' })
+        ),
+        _react2['default'].createElement(
+            'div',
+            { className: 'dropdown-menu' },
+            _react2['default'].createElement(
+                'div',
+                null,
+                _react2['default'].createElement(
+                    'span',
+                    null,
+                    _react2['default'].createElement(
+                        'h1',
+                        null,
+                        'Hello'
+                    )
+                )
+            ),
+            _react2['default'].createElement(
+                'h1',
+                null,
+                'World'
+            )
+        )
+    ),
+    _react2['default'].createElement('br', null),
+    _react2['default'].createElement('br', null),
+    _react2['default'].createElement('br', null),
+    _react2['default'].createElement(
+        _srcButtonDropdown2['default'],
+        { ignoreContentClick: true },
+        _react2['default'].createElement(
+            'button',
+            { className: 'btn btn-default' },
+            'Menu doesn\'t cause dropdown to close'
+        ),
+        _react2['default'].createElement(
+            'div',
+            { className: 'dropdown-menu' },
+            _react2['default'].createElement(
+                'div',
+                null,
+                _react2['default'].createElement(
+                    'span',
+                    null,
+                    _react2['default'].createElement(
+                        'h1',
+                        null,
+                        'Hello'
+                    )
+                )
+            ),
+            _react2['default'].createElement(
+                'h1',
+                null,
+                'World'
+            )
         )
     )
 ), document.getElementById('home'));

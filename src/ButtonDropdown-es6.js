@@ -11,6 +11,10 @@ class ButtonDropdown extends Component {
     documentClick = evt => {
         if (this.toggleBtn.contains(evt.target)) return;
         if (this.state.open){
+            if (this.props.ignoreContentClick){
+                if (this.contentMenu.contains(evt.target)) return;
+            }
+
             this.toggle();
         }
     };
@@ -25,7 +29,7 @@ class ButtonDropdown extends Component {
         }
 
         let toggleUnadjusted = children[0],
-            content = children[1];
+            contentUnadjusted = children[1];
 
         let toggleClasses = 'dropdown-toggle ' + toggleUnadjusted.props.className,
             toggleClick = toggleUnadjusted.props.onClick || this.toggle;
@@ -34,6 +38,8 @@ class ButtonDropdown extends Component {
             onClick: toggleClick,
             ref: el => this.toggleBtn = el
         });
+
+        let content = React.cloneElement(contentUnadjusted, { ref: el => this.contentMenu = el });
 
         return (
             <div className={className + ' btn-group ' + (this.state.open ? 'open' : '')}>
