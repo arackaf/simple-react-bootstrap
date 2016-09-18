@@ -20,18 +20,18 @@ const ModalBody = props => (
     </div>
 );
 
-let currentModal = null;
+let currentModals = [];
 document.addEventListener('click', function(evt){
-    if (!currentModal) return;
+    if (!currentModals.length) return;
+    let modalToCloseMaybe = currentModals[currentModals.length - 1];
 
     var element = evt.target,
-        modalRoot = currentModal.modalRef,
+        modalRoot = modalToCloseMaybe.modalRef,
         modalContent = modalRoot.getElementsByClassName('modal-content')[0];
 
     if (modalContent.contains(element)) return;
 
-    currentModal.props.onHide();
-    currentModal = null;
+    currentModals[currentModals.length - 1].props.onHide();
 });
 
 function removeBackdrop(){
@@ -55,26 +55,34 @@ class Modal extends React.Component {
     }
     componentDidUpdate(prevProps){
         if (!prevProps.show && this.props.show){
-            let div = document.createElement('div'),
+            let div = !currentModals.length ? document.createElement('div') : null,
                 isAnimating = /\bfade\b/.test(this.modalRef.className);
 
-            div.classList.add(...['modal-backdrop', 'simple-react-modal-backdrop', (isAnimating ? 'fade' : 'in')]);
+            if (div) {
+                div.classList.add(...['modal-backdrop', 'simple-react-modal-backdrop', (isAnimating ? 'fade' : 'in')]);
+            }
 
             if (isAnimating){
-                document.body.appendChild(div);
+                if (div) {
+                    document.body.appendChild(div);
+                }
                 this.setState({ exists: true });
                 setTimeout(() => {
-                    div.classList.add('in');
+                    if (div) {
+                        div.classList.add('in');
+                    }
                     this.setState({ hasInCssClass: true });
                 }, 1);
-                setTimeout(() => currentModal = this, 100);
+                setTimeout(() => currentModals.push(this), 100);
             } else {
-                document.body.appendChild(div);
+                if (div) {
+                    document.body.appendChild(div);
+                }
                 this.setState({ exists: true, hasInCssClass: true });
-                currentModal = this;
+                currentModals.push(this);
             }
         } else if (prevProps.show && !this.props.show){
-            let isAnimating = /\bfade\b/.test(this.modalRef.className)
+            let isAnimating = /\bfade\b/.test(this.modalRef.className);
 
             if (isAnimating){
                 this.setState({ hasInCssClass: false });
@@ -83,9 +91,11 @@ class Modal extends React.Component {
                 this.setState({ hasInCssClass: false, exists: false });
             }
 
-            removeBackdrop();
-            if (currentModal == this){
-                currentModal = null;
+            if (currentModals.length === 1) {
+                removeBackdrop();
+            }
+            if (currentModals[currentModals.length - 1] == this){
+                currentModals.pop();
             }
         }
     }

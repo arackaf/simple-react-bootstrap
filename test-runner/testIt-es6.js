@@ -25,6 +25,10 @@ class ModalRunner extends React.Component{
                         <p>Single line</p>
                         <p>Single line</p>
                         <p>Single line</p>
+
+                        <button onClick={() => this.setState({ modal2Animate: true })}>Modal 2 animate</button>
+                        <button onClick={() => this.setState({ modal2NoAnimate: true })}>Modal 2 no animate</button>
+
                     </Modal.Body>
                     <Modal.Footer>
                         <button type="button" className="btn btn-default" onClick={() => this.setState({ openAnimate: false })}>Close</button>
@@ -42,12 +46,54 @@ class ModalRunner extends React.Component{
                         <p>Single line</p>
                         <p>Single line</p>
                         <p>Single line</p>
+
+                        <button onClick={() => this.setState({ modal2Animate: true })}>Modal 2 animate</button>
+                        <button onClick={() => this.setState({ modal2NoAnimate: true })}>Modal 2 no animate</button>
+
                     </Modal.Body>
                     <Modal.Footer>
                         <button type="button" className="btn btn-default" onClick={() => this.setState({ openNoAnimate: false })}>Close</button>
                         <button type="button" className="btn btn-primary">Save changes</button>
                     </Modal.Footer>
                 </Modal>
+
+
+
+                <Modal className="fade" show={ this.state.modal2Animate } onHide={() => this.setState({ modal2Animate: false })}>
+                    <Modal.Header>
+                        <h3>Hello World</h3>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>Single line</p>
+                        <p>Single line</p>
+                        <p>Single line</p>
+                        <p>Single line</p>
+                        <p>Single line</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <button type="button" className="btn btn-default" onClick={() => this.setState({ modal2Animate: false })}>Close</button>
+                        <button type="button" className="btn btn-primary">Save changes</button>
+                    </Modal.Footer>
+                </Modal>
+
+                <Modal show={ this.state.modal2NoAnimate } onHide={() => this.setState({ modal2NoAnimate: false })}>
+                    <Modal.Header>
+                        <h3>Hello World</h3>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>Single line</p>
+                        <p>Single line</p>
+                        <p>Single line</p>
+                        <p>Single line</p>
+                        <p>Single line</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <button type="button" className="btn btn-default" onClick={() => this.setState({ modal2NoAnimate: false })}>Close</button>
+                        <button type="button" className="btn btn-primary">Save changes</button>
+                    </Modal.Footer>
+                </Modal>
+
+
             </div>
         )
     }
