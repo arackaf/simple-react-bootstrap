@@ -5,7 +5,6 @@ import React, { Component } from 'react';
 class ButtonDropdown extends Component {
 	state = { open: false };
 	documentClick = evt => {
-		if (!this.toggleBtn) return;
 		if (this.toggleBtn.contains(evt.target)) return;
 		if (this.state.open){
 			if (this.props.ignoreContentClick){
@@ -37,12 +36,12 @@ class ButtonDropdown extends Component {
         let toggle = React.cloneElement(toggleUnadjusted, {
             className: toggleClasses,
             onClick: toggleClick,
-            ref: el => { console.log('is null?', el == null); this.toggleBtn = el; }
+            ref: el => this.toggleBtn = el
         });
 
         let content = React.cloneElement(contentUnadjusted, {
             className: 'dropdown-menu ' + (contentUnadjusted.props.className || ''),
-            ref: el => { /*debugger;*/ this.contentMenu = el; }
+            ref: el => this.contentMenu = el
         });
 
         return (
