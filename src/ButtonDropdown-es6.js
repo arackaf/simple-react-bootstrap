@@ -3,24 +3,25 @@ import React, { Component } from 'react';
 
 
 class ButtonDropdown extends Component {
-    constructor(){
-        super();
-        this.state = { open: false };
-    }
-    toggle = () => this.setState({ open: !this.state.open });
-    documentClick = evt => {
-        if (this.toggleBtn.contains(evt.target)) return;
-        if (this.state.open){
-            if (this.props.ignoreContentClick){
-                if (this.contentMenu.contains(evt.target)) return;
-            }
+	state = { open: false };
+	documentClick = evt => {
+		if (!this.toggleBtn) return;
+		if (this.toggleBtn.contains(evt.target)) return;
+		if (this.state.open){
+			if (this.props.ignoreContentClick){
+				if (this.contentMenu.contains(evt.target)) return;
+			}
 
-            this.toggle();
-        }
-    };
+			this.toggle();
+		}
+	};
+    toggle = () => this.setState({ open: !this.state.open });
     componentDidMount(){
         document.addEventListener('click', this.documentClick);
     }
+	componentWillUnmount(){
+		document.removeEventListener('click', this.documentClick);
+	}
     render(){
         let { children, className = '', ...rest } = this.props;
 
@@ -30,18 +31,18 @@ class ButtonDropdown extends Component {
 
         let toggleUnadjusted = children[0],
             contentUnadjusted = children[1];
-
-        let toggleClasses = 'dropdown-toggle ' + toggleUnadjusted.props.className,
+			
+        let toggleClasses = 'dropdown-toggle ' + (toggleUnadjusted.props.className || ''),
             toggleClick = toggleUnadjusted.props.onClick || this.toggle;
         let toggle = React.cloneElement(toggleUnadjusted, {
             className: toggleClasses,
             onClick: toggleClick,
-            ref: el => this.toggleBtn = el
+            ref: el => { console.log('is null?', el == null); this.toggleBtn = el; }
         });
 
         let content = React.cloneElement(contentUnadjusted, {
-            className: 'dropdown-menu ' + contentUnadjusted.props.className,
-            ref: el => this.contentMenu = el
+            className: 'dropdown-menu ' + (contentUnadjusted.props.className || ''),
+            ref: el => { /*debugger;*/ this.contentMenu = el; }
         });
 
         return (
