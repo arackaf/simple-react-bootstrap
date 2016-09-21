@@ -20,11 +20,14 @@ const ModalFooter = props => {
     );
 };
 
-const ModalBody = props => (
-    <div className="modal-body">
-        { props.children }
-    </div>
-);
+const ModalBody = props => {
+    let { className = '', children, ...rest } = props;
+    return (
+        <div className={"modal-body " + className} {...rest}>
+            { props.children }
+        </div>
+    );
+};
 
 let currentModals = [];
 document.addEventListener('click', function(evt){
