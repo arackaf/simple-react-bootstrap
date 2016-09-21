@@ -5,11 +5,17 @@
 	<meta charset="utf-8" />
 
     <link href="bootstrap.css" type="text/css" rel="stylesheet">
+    <script src="static/jquery.js"></script>
+    <script src="static/bootstrap.min.js"></script>
     <script src="node_modules/systemjs/dist/system.js"></script>
     <script src="systemjs-config.js"></script>
 
     <script type="text/javascript">
         System.import('./test-runner/testIt.js');
+
+        window.openVanillaModal = function(){
+            $('#modal-test').modal();
+        }
     </script>
 
     <style type="text/css">
@@ -20,14 +26,20 @@
 </head>
 <body>
 
+    <button onclick="openVanillaModal()">Vanilla Modal</button>
+
     <div id="modal-test" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Modal title</h4>
+                    <p>This is a vanilla modal</p>
                 </div>
                 <div class="modal-body">
+                    <span>Some line</span>
+                    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
                     <span>Some line</span>
                 </div>
 
