@@ -16,7 +16,7 @@ class ModalRunner extends React.Component{
                 <button onClick={() => this.setState({ openNoAnimate: true })}>Open Modal - no animation</button>
 
                 <Modal className="fade" show={ this.state.openAnimate } onHide={() => this.setState({ openAnimate: false })}>
-                    <Modal.Header>
+                    <Modal.Header className="red" style={{ padding: '50' }}>
                         <h3>Hello World</h3>
                     </Modal.Header>
                     <Modal.Body>
@@ -30,7 +30,7 @@ class ModalRunner extends React.Component{
                         <button onClick={() => this.setState({ modal2NoAnimate: true })}>Modal 2 no animate</button>
 
                     </Modal.Body>
-                    <Modal.Footer>
+                    <Modal.Footer className="blue" style={{ padding: '100' }}>
                         <button type="button" className="btn btn-default" onClick={() => this.setState({ openAnimate: false })}>Close</button>
                         <button type="button" className="btn btn-primary">Save changes</button>
                     </Modal.Footer>

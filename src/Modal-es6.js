@@ -2,17 +2,23 @@ import React from 'react';
 
 const spreadClassNames = (userClassName, baseCssClasses) => `${baseCssClasses || ''} ${userClassName || ''}`;
 
-const ModalHeader = props => (
-    <div className="modal-header">
-        { props.children }
-    </div>
-);
+const ModalHeader = props => {
+    let { className = '', children, ...rest } = props;
+    return (
+        <div className={"modal-header " + className} {...rest}>
+            { props.children }
+        </div>
+    );
+};
 
-const ModalFooter = props => (
-    <div className="modal-footer">
-        { props.children }
-    </div>
-);
+const ModalFooter = props => {
+    let { className = '', children, ...rest } = props;
+    return (
+        <div className={"modal-footer " + className} {...rest}>
+            { props.children }
+        </div>
+    );
+};
 
 const ModalBody = props => (
     <div className="modal-body">
