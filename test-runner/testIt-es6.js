@@ -5,7 +5,7 @@ import React from 'react';
 class ModalRunner extends React.Component{
     constructor(){
         super();
-        this.state = { openAnimate: false, openNoAnimate: false }
+        this.state = { openAnimate: false, openNoAnimate: false, initialStart: true }
     }
     render(){
         return (
@@ -14,6 +14,8 @@ class ModalRunner extends React.Component{
                 <button onClick={() => this.setState({ openAnimate: true })}>Open Modal with animation</button>
                 <br /><br />
                 <button onClick={() => this.setState({ openNoAnimate: true })}>Open Modal - no animation</button>
+                <br /><br />
+                <button onClick={() => this.setState({ initialStart: true })}>Open initial start modal </button>
 
                 <Modal className="fade" show={ this.state.openAnimate } onHide={() => this.setState({ openAnimate: false })}>
                     <Modal.Header className="red" style={{ padding: '50px' }}>
@@ -89,6 +91,23 @@ class ModalRunner extends React.Component{
                     </Modal.Body>
                     <Modal.Footer>
                         <button type="button" className="btn btn-default" onClick={() => this.setState({ modal2NoAnimate: false })}>Close</button>
+                        <button type="button" className="btn btn-primary">Save changes</button>
+                    </Modal.Footer>
+                </Modal>
+
+                <Modal className="fade" show={ this.state.initialStart } onHide={() => this.setState({ initialStart: false })}>
+                    <Modal.Header>
+                        <h3>Hello World</h3>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>Single line</p>
+                        <p>Single line</p>
+                        <p>Single line</p>
+                        <p>Single line</p>
+                        <p>Single line</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <button type="button" className="btn btn-default" onClick={() => this.setState({ initialStart: false })}>Close</button>
                         <button type="button" className="btn btn-primary">Save changes</button>
                     </Modal.Footer>
                 </Modal>

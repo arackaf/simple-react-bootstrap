@@ -62,34 +62,14 @@ class Modal extends React.Component {
         super();
         this.state = { exists: false, hasInCssClass: false };
     }
+    componentDidMount(){
+        if (this.props.show){
+            this._showModal();
+        }
+    }
     componentDidUpdate(prevProps){
         if (!prevProps.show && this.props.show){
-            let div = !currentModals.length ? document.createElement('div') : null,
-                isAnimating = /\bfade\b/.test(this.modalRef.className);
-
-            if (div) {
-                div.classList.add(...['modal-backdrop', 'simple-react-modal-backdrop', (isAnimating ? 'fade' : 'in')]);
-            }
-
-            if (isAnimating){
-                if (div) {
-                    document.body.appendChild(div);
-                }
-                this.setState({ exists: true });
-                setTimeout(() => {
-                    if (div) {
-                        div.classList.add('in');
-                    }
-                    this.setState({ hasInCssClass: true });
-                }, 1);
-                setTimeout(() => currentModals.push(this), 100);
-            } else {
-                if (div) {
-                    document.body.appendChild(div);
-                }
-                this.setState({ exists: true, hasInCssClass: true });
-                currentModals.push(this);
-            }
+            this._showModal();
         } else if (prevProps.show && !this.props.show){
             let isAnimating = /\bfade\b/.test(this.modalRef.className);
 
@@ -106,6 +86,34 @@ class Modal extends React.Component {
             if (currentModals[currentModals.length - 1] == this){
                 currentModals.pop();
             }
+        }
+    }
+    _showModal(){
+        let div = !currentModals.length ? document.createElement('div') : null,
+            isAnimating = /\bfade\b/.test(this.modalRef.className);
+
+        if (div) {
+            div.classList.add(...['modal-backdrop', 'simple-react-modal-backdrop', (isAnimating ? 'fade' : 'in')]);
+        }
+
+        if (isAnimating){
+            if (div) {
+                document.body.appendChild(div);
+            }
+            this.setState({ exists: true });
+            setTimeout(() => {
+                if (div) {
+                    div.classList.add('in');
+                }
+                this.setState({ hasInCssClass: true });
+            }, 1);
+            setTimeout(() => currentModals.push(this), 100);
+        } else {
+            if (div) {
+                document.body.appendChild(div);
+            }
+            this.setState({ exists: true, hasInCssClass: true });
+            currentModals.push(this);
         }
     }
     render() {
