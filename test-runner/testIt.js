@@ -115,7 +115,7 @@ var _srcButtonDropdown2 = _interopRequireDefault(_srcButtonDropdown);
     _react2['default'].createElement('br', null),
     _react2['default'].createElement(
         _srcButtonDropdown2['default'],
-        { deferDropdown: true, ignoreContentClick: true },
+        { deferDropdownRendering: true, ignoreContentClick: true },
         _react2['default'].createElement(
             'button',
             { className: 'btn btn-default' },

@@ -47,7 +47,7 @@ class ButtonDropdown extends Component {
         return (
             <div className={className + ' btn-group ' + (this.state.open ? 'open' : '')}>
                 {toggle}
-                {(!this.props.deferDropdown || this.state.open) ? content : null}
+                {(!this.props.deferDropdownRendering || this.state.open) ? content : null}
             </div>
         )
     }

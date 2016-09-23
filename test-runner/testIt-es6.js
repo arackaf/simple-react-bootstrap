@@ -36,7 +36,7 @@ render(
             </div>
         </ButtonDropdown>
         <br /><br /><br />
-        <ButtonDropdown deferDropdown={true} ignoreContentClick={true}>
+        <ButtonDropdown deferDropdownRendering={true} ignoreContentClick={true}>
             <button className="btn btn-default">Dropdown on demand</button>
             <div>
                 <div>
