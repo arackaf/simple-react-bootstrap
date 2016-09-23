@@ -109,6 +109,40 @@ var _srcButtonDropdown2 = _interopRequireDefault(_srcButtonDropdown);
                 'World'
             )
         )
+    ),
+    _react2['default'].createElement('br', null),
+    _react2['default'].createElement('br', null),
+    _react2['default'].createElement('br', null),
+    _react2['default'].createElement(
+        _srcButtonDropdown2['default'],
+        { deferDropdown: true, ignoreContentClick: true },
+        _react2['default'].createElement(
+            'button',
+            { className: 'btn btn-default' },
+            'Dropdown on demand'
+        ),
+        _react2['default'].createElement(
+            'div',
+            null,
+            _react2['default'].createElement(
+                'div',
+                null,
+                _react2['default'].createElement(
+                    'span',
+                    null,
+                    _react2['default'].createElement(
+                        'h1',
+                        null,
+                        'Hello'
+                    )
+                )
+            ),
+            _react2['default'].createElement(
+                'h1',
+                null,
+                'World'
+            )
+        )
     )
 ), document.getElementById('home'));
 

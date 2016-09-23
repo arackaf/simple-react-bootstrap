@@ -35,6 +35,18 @@ render(
                 <h1>World</h1>
             </div>
         </ButtonDropdown>
+        <br /><br /><br />
+        <ButtonDropdown deferDropdown={true} ignoreContentClick={true}>
+            <button className="btn btn-default">Dropdown on demand</button>
+            <div>
+                <div>
+                    <span>
+                        <h1>Hello</h1>
+                    </span>
+                </div>
+                <h1>World</h1>
+            </div>
+        </ButtonDropdown>
 
     </div>, document.getElementById('home'));
 
