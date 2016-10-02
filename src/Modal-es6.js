@@ -107,7 +107,7 @@ class Modal extends React.Component {
                 }
                 this.setState({ hasInCssClass: true });
             }, 1);
-            setTimeout(() => currentModals.push(this), 100);
+            currentModals.push(this)
         } else {
             if (div) {
                 document.body.appendChild(div);
