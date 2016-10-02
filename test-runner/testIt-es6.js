@@ -12,6 +12,20 @@ render(
             </div>
         </ButtonDropdown>
         <br /><br /><br />
+        <ButtonDropdown style={{ width: '400px', backgroundColor: 'red' }}>
+            <button className="btn btn-default">Out of the box styling</button>
+            <div>
+                <h1>Hello</h1>
+            </div>
+        </ButtonDropdown>
+        <br /><br /><br />
+        <ButtonDropdown containerElementType="span">
+            <button className="btn btn-default">Use a span</button>
+            <div>
+                <h1>Hello</h1>
+            </div>
+        </ButtonDropdown>
+        <br /><br /><br />
         <ButtonDropdown>
             <button className="btn btn-default"><h4>Some styling</h4><i className="fa fa-fw fa-tag"></i></button>
             <div>

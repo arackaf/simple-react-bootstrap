@@ -1,6 +1,4 @@
-import React, { Component } from 'react';
-
-
+import React, { Component, createElement } from 'react';
 
 class ButtonDropdown extends Component {
 	state = { open: false };
@@ -22,7 +20,7 @@ class ButtonDropdown extends Component {
 		document.removeEventListener('click', this.documentClick);
 	}
     render(){
-        let { children, className = '', ...rest } = this.props;
+        let { children, className = '', containerElementType = 'div', ignoreContentClick, deferDropdownRendering, ...rest } = this.props;
 
         if (!Array.isArray(children) || children.length !== 2){
             throw 'Error - exactly two children should be passed, a toggle, and dropdown menu'
@@ -44,11 +42,11 @@ class ButtonDropdown extends Component {
             ref: el => this.contentMenu = el
         });
 
-        return (
-            <div className={className + ' btn-group ' + (this.state.open ? 'open' : '')}>
-                {toggle}
-                {(!this.props.deferDropdownRendering || this.state.open) ? content : null}
-            </div>
+        return createElement(
+            containerElementType,
+            { className: className + ' btn-group ' + (this.state.open ? 'open' : ''), ...rest },
+            toggle,
+            (!this.props.deferDropdownRendering || this.state.open) ? content : null
         )
     }
 }

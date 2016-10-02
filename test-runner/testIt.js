@@ -42,6 +42,48 @@ var _srcButtonDropdown2 = _interopRequireDefault(_srcButtonDropdown);
     _react2['default'].createElement('br', null),
     _react2['default'].createElement(
         _srcButtonDropdown2['default'],
+        { style: { width: '400px', backgroundColor: 'red' } },
+        _react2['default'].createElement(
+            'button',
+            { className: 'btn btn-default' },
+            'Out of the box styling'
+        ),
+        _react2['default'].createElement(
+            'div',
+            null,
+            _react2['default'].createElement(
+                'h1',
+                null,
+                'Hello'
+            )
+        )
+    ),
+    _react2['default'].createElement('br', null),
+    _react2['default'].createElement('br', null),
+    _react2['default'].createElement('br', null),
+    _react2['default'].createElement(
+        _srcButtonDropdown2['default'],
+        { containerElementType: 'span' },
+        _react2['default'].createElement(
+            'button',
+            { className: 'btn btn-default' },
+            'Use a span'
+        ),
+        _react2['default'].createElement(
+            'div',
+            null,
+            _react2['default'].createElement(
+                'h1',
+                null,
+                'Hello'
+            )
+        )
+    ),
+    _react2['default'].createElement('br', null),
+    _react2['default'].createElement('br', null),
+    _react2['default'].createElement('br', null),
+    _react2['default'].createElement(
+        _srcButtonDropdown2['default'],
         null,
         _react2['default'].createElement(
             'button',
