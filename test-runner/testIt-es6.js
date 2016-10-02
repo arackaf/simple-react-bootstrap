@@ -5,12 +5,15 @@ import React from 'react';
 class ModalRunner extends React.Component{
     constructor(){
         super();
-        this.state = { openAnimate: false, openNoAnimate: false, initialStart: true }
+        this.state = { openAnimate: false, openNoAnimate: false, initialStart: false, openUnmountable1: false, isUnmounted1: false };
     }
     render(){
         return (
             <div>
-                <br />
+                <br /><br /><br />
+
+                <button onClick={() => this.setState({ openUnmountable1: true })}>Un-mountable Modal 1</button>
+                <br /><br />
                 <button onClick={() => this.setState({ openAnimate: true })}>Open Modal with animation</button>
                 <br /><br />
                 <button onClick={() => this.setState({ openNoAnimate: true })}>Open Modal - no animation</button>
@@ -111,6 +114,25 @@ class ModalRunner extends React.Component{
                         <button type="button" className="btn btn-primary">Save changes</button>
                     </Modal.Footer>
                 </Modal>
+
+                {!this.state.isUnmounted1 ?
+                    <Modal className="fade" show={ this.state.openUnmountable1 } onHide={() => this.setState({ openUnmountable1: false })}>
+                        <Modal.Header>
+                            <h3>Hello World</h3>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <p>Single line</p>
+                            <p>Single line</p>
+                            <p>Single line</p>
+                            <p>Single line</p>
+                            <p>Single line</p>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <button type="button" className="btn btn-default" onClick={() => this.setState({ openUnmountable1: false })}>Close</button>
+                            <button type="button" className="btn btn-danger" onClick={() => this.setState({ isUnmounted1: true })}>KILL</button>
+                            <button type="button" className="btn btn-primary">Save changes</button>
+                        </Modal.Footer>
+                    </Modal> : null}
 
 
             </div>
