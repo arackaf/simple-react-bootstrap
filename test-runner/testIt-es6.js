@@ -130,6 +130,13 @@ class ModalRunner extends React.Component{
                         <Modal.Footer>
                             <button type="button" className="btn btn-default" onClick={() => this.setState({ openUnmountable1: false })}>Close</button>
                             <button type="button" className="btn btn-danger" onClick={() => this.setState({ isUnmounted1: true })}>KILL</button>
+                            <button type="button"
+                                    className="btn btn-danger"
+                                    onClick={() => {
+                                        this.setState({ openUnmountable1: false });
+                                        setTimeout(() => this.setState({ isUnmounted1: true }), 10);
+                                    }
+                                }>KILL AND BREAK</button>
                             <button type="button" className="btn btn-primary">Save changes</button>
                         </Modal.Footer>
                     </Modal> : null}

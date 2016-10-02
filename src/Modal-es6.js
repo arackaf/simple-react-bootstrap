@@ -75,7 +75,7 @@ class Modal extends React.Component {
 
             if (isAnimating){
                 this.setState({ hasInCssClass: false });
-                setTimeout(() => this.setState({ exists: false }), 200);
+                setTimeout(() => !this.dead && this.setState({ exists: false }), 200);
             } else {
                 this.setState({ hasInCssClass: false, exists: false });
             }
@@ -147,6 +147,7 @@ class Modal extends React.Component {
                 removeBackdrop();
             }
         }
+        this.dead = true;
     }
 }
 
