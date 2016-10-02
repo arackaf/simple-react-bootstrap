@@ -107,7 +107,8 @@ class Modal extends React.Component {
                 }
                 this.setState({ hasInCssClass: true });
             }, 1);
-            currentModals.push(this)
+            //provide some small delay before this modal is eligible to be closed.  We don't want a double click to open / show the modal.
+            setTimeout(() => /* highly unlikely, but just in case --> */ !this.dead && currentModals.push(this), 200);
         } else {
             if (div) {
                 document.body.appendChild(div);
