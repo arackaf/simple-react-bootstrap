@@ -61,6 +61,23 @@ render(
                 <h1>World</h1>
             </div>
         </ButtonDropdown>
+        <br /><br /><br />
+        <ButtonDropdown>
+            <i className="fa fa-tag"></i>
+            <span>Arbitrary children</span>
+            <span>Hello</span>
+            <a className="dropdown-toggle"><i className="fa fa-fw fa-caret-down"></i></a>
+            <span>{`<---- toggle's right there`}</span>
+            <div className="dropdown-menu">
+                <div>
+                    <span>
+                        <h1>Hello</h1>
+                    </span>
+                </div>
+                <h1>World</h1>
+            </div>
+        </ButtonDropdown>
+        <br /><br /><br />
 
     </div>, document.getElementById('home'));
 

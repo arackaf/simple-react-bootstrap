@@ -185,7 +185,60 @@ var _srcButtonDropdown2 = _interopRequireDefault(_srcButtonDropdown);
                 'World'
             )
         )
-    )
+    ),
+    _react2['default'].createElement('br', null),
+    _react2['default'].createElement('br', null),
+    _react2['default'].createElement('br', null),
+    _react2['default'].createElement(
+        _srcButtonDropdown2['default'],
+        null,
+        _react2['default'].createElement('i', { className: 'fa fa-tag' }),
+        _react2['default'].createElement(
+            'span',
+            null,
+            'Arbitrary children'
+        ),
+        _react2['default'].createElement(
+            'span',
+            null,
+            'Hello'
+        ),
+        _react2['default'].createElement(
+            'a',
+            { className: 'dropdown-toggle' },
+            _react2['default'].createElement('i', { className: 'fa fa-fw fa-caret-down' })
+        ),
+        _react2['default'].createElement(
+            'span',
+            null,
+            '<---- toggle\'s right there'
+        ),
+        _react2['default'].createElement(
+            'div',
+            { className: 'dropdown-menu' },
+            _react2['default'].createElement(
+                'div',
+                null,
+                _react2['default'].createElement(
+                    'span',
+                    null,
+                    _react2['default'].createElement(
+                        'h1',
+                        null,
+                        'Hello'
+                    )
+                )
+            ),
+            _react2['default'].createElement(
+                'h1',
+                null,
+                'World'
+            )
+        )
+    ),
+    _react2['default'].createElement('br', null),
+    _react2['default'].createElement('br', null),
+    _react2['default'].createElement('br', null)
 ), document.getElementById('home'));
 
 //bound in dom 0 handler in default.htm - to test unMount events

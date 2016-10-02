@@ -22,32 +22,57 @@ class ButtonDropdown extends Component {
     render(){
         let { children, className = '', containerElementType = 'div', ignoreContentClick, deferDropdownRendering, ...rest } = this.props;
 
-        if (!Array.isArray(children) || children.length !== 2){
-            throw 'Error - exactly two children should be passed, a toggle, and dropdown menu'
+        if (!Array.isArray(children)){
+            throw 'Error - at least two children should be passed: a toggle, and dropdown menu, at a minimum'
         }
 
-        let toggleUnadjusted = children[0],
+        let toggleUnadjusted,
+            contentUnadjusted,
+            toggleClasses = '',
+            contentClasses = '';
+
+        if (children.length === 2){
+            toggleUnadjusted = children[0];
             contentUnadjusted = children[1];
+
+            toggleClasses = ' dropdown-toggle ';
+            contentClasses = ' dropdown-menu  ';
+        } else {
+            toggleUnadjusted = children.find(({ props: { className = '' } = {} }) => /\bdropdown-toggle\b/.test(className));
+            contentUnadjusted = children.find(({ props: { className = '' } = {} }) => /\bdropdown-menu\b/.test(className));
+        }
 			
-        let toggleClasses = 'dropdown-toggle ' + (toggleUnadjusted.props.className || ''),
-            toggleClick = toggleUnadjusted.props.onClick || this.toggle;
+        let toggleClick = toggleUnadjusted.props.onClick || this.toggle;
         let toggle = React.cloneElement(toggleUnadjusted, {
-            className: toggleClasses,
+            className: toggleClasses + (toggleUnadjusted.props.className || ''),
             onClick: toggleClick,
             ref: el => this.toggleBtn = el
         });
 
         let content = React.cloneElement(contentUnadjusted, {
-            className: 'dropdown-menu ' + (contentUnadjusted.props.className || ''),
+            className: contentClasses + (contentUnadjusted.props.className || ''),
             ref: el => this.contentMenu = el
         });
 
-        return createElement(
-            containerElementType,
-            { className: className + ' btn-group ' + (this.state.open ? 'open' : ''), ...rest },
-            toggle,
-            (!this.props.deferDropdownRendering || this.state.open) ? content : null
-        )
+        //simple case
+        if (children.length === 2) {
+            return createElement(
+                containerElementType,
+                {className: className + ' btn-group ' + (this.state.open ? 'open' : ''), ...rest},
+                toggle,
+                (!this.props.deferDropdownRendering || this.state.open) ? content : null
+            );
+        } else {
+            let childrenToUse = [...children];
+            childrenToUse.splice(childrenToUse.indexOf(toggleUnadjusted), 1, toggle);
+            childrenToUse.splice(childrenToUse.indexOf(contentUnadjusted), 1, content);
+
+            return createElement(
+                containerElementType,
+                {className: className + ' btn-group ' + (this.state.open ? 'open' : ''), ...rest},
+                ...childrenToUse
+            );
+        }
     }
 }
 
