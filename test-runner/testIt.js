@@ -211,7 +211,57 @@ var _srcButtonDropdown2 = _interopRequireDefault(_srcButtonDropdown);
         _react2['default'].createElement(
             'span',
             null,
-            '<---- toggle\'s right there'
+            '<- toggle\'s right there'
+        ),
+        _react2['default'].createElement(
+            'div',
+            { className: 'dropdown-menu' },
+            _react2['default'].createElement(
+                'div',
+                null,
+                _react2['default'].createElement(
+                    'span',
+                    null,
+                    _react2['default'].createElement(
+                        'h1',
+                        null,
+                        'Hello'
+                    )
+                )
+            ),
+            _react2['default'].createElement(
+                'h1',
+                null,
+                'World'
+            )
+        )
+    ),
+    _react2['default'].createElement('br', null),
+    _react2['default'].createElement('br', null),
+    _react2['default'].createElement('br', null),
+    _react2['default'].createElement(
+        _srcButtonDropdown2['default'],
+        { deferDropdownRendering: true, ignoreContentClick: true },
+        _react2['default'].createElement('i', { className: 'fa fa-tag' }),
+        _react2['default'].createElement(
+            'span',
+            null,
+            'Arbitrary children + deferDropdown + ignore content click'
+        ),
+        _react2['default'].createElement(
+            'span',
+            null,
+            'Hello'
+        ),
+        _react2['default'].createElement(
+            'a',
+            { className: 'dropdown-toggle' },
+            _react2['default'].createElement('i', { className: 'fa fa-fw fa-caret-down' })
+        ),
+        _react2['default'].createElement(
+            'span',
+            null,
+            '<- toggle\'s right there'
         ),
         _react2['default'].createElement(
             'div',

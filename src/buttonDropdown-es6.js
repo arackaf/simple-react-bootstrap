@@ -65,7 +65,7 @@ class ButtonDropdown extends Component {
         } else {
             let childrenToUse = [...children];
             childrenToUse.splice(childrenToUse.indexOf(toggleUnadjusted), 1, toggle);
-            childrenToUse.splice(childrenToUse.indexOf(contentUnadjusted), 1, content);
+            childrenToUse.splice(childrenToUse.indexOf(contentUnadjusted), 1, (!this.props.deferDropdownRendering || this.state.open) ? content : null);
 
             return createElement(
                 containerElementType,
