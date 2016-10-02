@@ -139,6 +139,15 @@ class Modal extends React.Component {
             </div>
         );
     }
+    componentWillUnmount(){
+        let index = currentModals.indexOf(this);
+        if (index >= 0){
+            currentModals.splice(index, 1);
+            if (!currentModals.length){
+                removeBackdrop();
+            }
+        }
+    }
 }
 
 Modal.Body = ModalBody;
