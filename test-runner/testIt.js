@@ -39,7 +39,6 @@ var _srcButtonDropdown2 = _interopRequireDefault(_srcButtonDropdown);
     ),
     _react2['default'].createElement('br', null),
     _react2['default'].createElement('br', null),
-    _react2['default'].createElement('br', null),
     _react2['default'].createElement(
         _srcButtonDropdown2['default'],
         { style: { width: '400px', backgroundColor: 'red' } },
@@ -60,7 +59,6 @@ var _srcButtonDropdown2 = _interopRequireDefault(_srcButtonDropdown);
     ),
     _react2['default'].createElement('br', null),
     _react2['default'].createElement('br', null),
-    _react2['default'].createElement('br', null),
     _react2['default'].createElement(
         _srcButtonDropdown2['default'],
         { containerElementType: 'span' },
@@ -79,7 +77,6 @@ var _srcButtonDropdown2 = _interopRequireDefault(_srcButtonDropdown);
             )
         )
     ),
-    _react2['default'].createElement('br', null),
     _react2['default'].createElement('br', null),
     _react2['default'].createElement('br', null),
     _react2['default'].createElement(
@@ -120,7 +117,6 @@ var _srcButtonDropdown2 = _interopRequireDefault(_srcButtonDropdown);
     ),
     _react2['default'].createElement('br', null),
     _react2['default'].createElement('br', null),
-    _react2['default'].createElement('br', null),
     _react2['default'].createElement(
         _srcButtonDropdown2['default'],
         { ignoreContentClick: true },
@@ -154,7 +150,6 @@ var _srcButtonDropdown2 = _interopRequireDefault(_srcButtonDropdown);
     ),
     _react2['default'].createElement('br', null),
     _react2['default'].createElement('br', null),
-    _react2['default'].createElement('br', null),
     _react2['default'].createElement(
         _srcButtonDropdown2['default'],
         { deferDropdownRendering: true, ignoreContentClick: true },
@@ -186,7 +181,6 @@ var _srcButtonDropdown2 = _interopRequireDefault(_srcButtonDropdown);
             )
         )
     ),
-    _react2['default'].createElement('br', null),
     _react2['default'].createElement('br', null),
     _react2['default'].createElement('br', null),
     _react2['default'].createElement(
@@ -238,7 +232,6 @@ var _srcButtonDropdown2 = _interopRequireDefault(_srcButtonDropdown);
     ),
     _react2['default'].createElement('br', null),
     _react2['default'].createElement('br', null),
-    _react2['default'].createElement('br', null),
     _react2['default'].createElement(
         _srcButtonDropdown2['default'],
         { deferDropdownRendering: true, ignoreContentClick: true },
@@ -286,7 +279,6 @@ var _srcButtonDropdown2 = _interopRequireDefault(_srcButtonDropdown);
             )
         )
     ),
-    _react2['default'].createElement('br', null),
     _react2['default'].createElement('br', null),
     _react2['default'].createElement('br', null),
     _react2['default'].createElement(
@@ -338,6 +330,55 @@ var _srcButtonDropdown2 = _interopRequireDefault(_srcButtonDropdown);
         )
     ),
     _react2['default'].createElement('br', null),
+    _react2['default'].createElement('br', null),
+    _react2['default'].createElement(
+        _srcButtonDropdown2['default'],
+        null,
+        _react2['default'].createElement('i', { className: 'fa fa-tag' }),
+        _react2['default'].createElement(
+            'span',
+            null,
+            'Arbitrary children + with null - no toggle or content'
+        ),
+        _react2['default'].createElement(
+            'span',
+            null,
+            ' Hello '
+        ),
+        null,
+        null && _react2['default'].createElement(
+            'a',
+            { className: 'dropdown-toggle' },
+            _react2['default'].createElement('i', { className: 'fa fa-fw fa-caret-down' })
+        ),
+        _react2['default'].createElement(
+            'span',
+            null,
+            'no toggle'
+        ),
+        null && _react2['default'].createElement(
+            'div',
+            { className: 'dropdown-menu' },
+            _react2['default'].createElement(
+                'div',
+                null,
+                _react2['default'].createElement(
+                    'span',
+                    null,
+                    _react2['default'].createElement(
+                        'h1',
+                        null,
+                        'Hello'
+                    )
+                )
+            ),
+            _react2['default'].createElement(
+                'h1',
+                null,
+                'World'
+            )
+        )
+    ),
     _react2['default'].createElement('br', null),
     _react2['default'].createElement('br', null)
 ), document.getElementById('home'));

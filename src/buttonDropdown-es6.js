@@ -3,10 +3,10 @@ import React, { Component, createElement } from 'react';
 class ButtonDropdown extends Component {
 	state = { open: false };
 	documentClick = evt => {
-		if (this.toggleBtn.contains(evt.target)) return;
+		if (this.toggleBtn && this.toggleBtn.contains(evt.target)) return;
 		if (this.state.open){
 			if (this.props.ignoreContentClick){
-				if (this.contentMenu.contains(evt.target)) return;
+				if (this.contentMenu && this.contentMenu.contains(evt.target)) return;
 			}
 
 			this.toggle();
@@ -43,18 +43,23 @@ class ButtonDropdown extends Component {
         }
 
         let rootCssToAdd = clean ? '' : ' btn-group ';
+        let toggle;
+        if (toggleUnadjusted) {
+            let toggleClick = toggleUnadjusted.props.onClick || this.toggle;
+            toggle = React.cloneElement(toggleUnadjusted, {
+                className: toggleClasses + (toggleUnadjusted.props.className || ''),
+                onClick: toggleClick,
+                ref: el => this.toggleBtn = el
+            });
+        }
 
-        let toggleClick = toggleUnadjusted.props.onClick || this.toggle;
-        let toggle = React.cloneElement(toggleUnadjusted, {
-            className: toggleClasses + (toggleUnadjusted.props.className || ''),
-            onClick: toggleClick,
-            ref: el => this.toggleBtn = el
-        });
-
-        let content = React.cloneElement(contentUnadjusted, {
-            className: contentClasses + (contentUnadjusted.props.className || ''),
-            ref: el => this.contentMenu = el
-        });
+        let content;
+        if (contentUnadjusted) {
+            content = React.cloneElement(contentUnadjusted, {
+                className: contentClasses + (contentUnadjusted.props.className || ''),
+                ref: el => this.contentMenu = el
+            });
+        }
 
         //simple case
         if (children.length === 2) {
@@ -66,8 +71,12 @@ class ButtonDropdown extends Component {
             );
         } else {
             let childrenToUse = [...children];
-            childrenToUse.splice(childrenToUse.indexOf(toggleUnadjusted), 1, toggle);
-            childrenToUse.splice(childrenToUse.indexOf(contentUnadjusted), 1, (!this.props.deferDropdownRendering || this.state.open) ? content : null);
+            if (toggleUnadjusted){
+                childrenToUse.splice(childrenToUse.indexOf(toggleUnadjusted), 1, toggle);
+            }
+            if (contentUnadjusted) {
+                childrenToUse.splice(childrenToUse.indexOf(contentUnadjusted), 1, (!this.props.deferDropdownRendering || this.state.open) ? content : null);
+            }
 
             return createElement(
                 containerElementType,
