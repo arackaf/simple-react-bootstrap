@@ -38,8 +38,8 @@ class ButtonDropdown extends Component {
             toggleClasses = ' dropdown-toggle ';
             contentClasses = ' dropdown-menu  ';
         } else {
-            toggleUnadjusted = children.find(({ props: { className = '' } = {} }) => /\bdropdown-toggle\b/.test(className));
-            contentUnadjusted = children.find(({ props: { className = '' } = {} }) => /\bdropdown-menu\b/.test(className));
+            toggleUnadjusted = children.find(child => child && child.props && /\bdropdown-toggle\b/.test(child.props.className));
+            contentUnadjusted = children.find(child => child && child.props && /\bdropdown-menu\b/.test(child.props.className));
         }
 
         let rootCssToAdd = clean ? '' : ' btn-group ';
