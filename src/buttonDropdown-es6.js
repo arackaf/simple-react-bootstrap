@@ -20,7 +20,7 @@ class ButtonDropdown extends Component {
 		document.removeEventListener('click', this.documentClick);
 	}
     render(){
-        let { children, className = '', containerElementType = 'div', ignoreContentClick, deferDropdownRendering, ...rest } = this.props;
+        let { children, className = '', containerElementType = 'div', ignoreContentClick, deferDropdownRendering, clean, ...rest } = this.props;
 
         if (!Array.isArray(children)){
             throw 'Error - at least two children should be passed: a toggle, and dropdown menu, at a minimum'
@@ -41,7 +41,9 @@ class ButtonDropdown extends Component {
             toggleUnadjusted = children.find(({ props: { className = '' } = {} }) => /\bdropdown-toggle\b/.test(className));
             contentUnadjusted = children.find(({ props: { className = '' } = {} }) => /\bdropdown-menu\b/.test(className));
         }
-			
+
+        let rootCssToAdd = clean ? '' : ' btn-group ';
+
         let toggleClick = toggleUnadjusted.props.onClick || this.toggle;
         let toggle = React.cloneElement(toggleUnadjusted, {
             className: toggleClasses + (toggleUnadjusted.props.className || ''),
@@ -58,7 +60,7 @@ class ButtonDropdown extends Component {
         if (children.length === 2) {
             return createElement(
                 containerElementType,
-                {className: className + ' btn-group ' + (this.state.open ? 'open' : ''), ...rest},
+                {className: className + rootCssToAdd + (this.state.open ? 'open' : ''), ...rest},
                 toggle,
                 (!this.props.deferDropdownRendering || this.state.open) ? content : null
             );
@@ -69,7 +71,7 @@ class ButtonDropdown extends Component {
 
             return createElement(
                 containerElementType,
-                {className: className + ' btn-group ' + (this.state.open ? 'open' : ''), ...rest},
+                {className: className + rootCssToAdd + (this.state.open ? 'open' : ''), ...rest},
                 ...childrenToUse
             );
         }
