@@ -52,6 +52,7 @@ class ButtonDropdown extends Component {
         let rootCssToAdd = clean ? '' : ' btn-group ';
         let toggle;
         if (toggleUnadjusted) {
+            //when the toggle button is clicked, click THIS method, in addition to any onClick method supplied by the user. Do not call regular toggle method in controlled mode
             let rootToggleClick = this.props.onToggle || (typeof this.props.open === 'undefined' ? this.toggle : ()=>{});
             let toggleClick = toggleUnadjusted.props.onClick ? evt => { toggleUnadjusted.props.onClick(); rootToggleClick(evt); } : rootToggleClick;
             toggle = React.cloneElement(toggleUnadjusted, {
