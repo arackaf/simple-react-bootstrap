@@ -61,13 +61,13 @@ var _srcButtonDropdown2 = _interopRequireDefault(_srcButtonDropdown);
     _react2['default'].createElement('br', null),
     _react2['default'].createElement(
         _srcButtonDropdown2['default'],
-        { onClick: function () {
-                return console.log('HELLO WORLD');
-            } },
+        null,
         _react2['default'].createElement(
             'button',
-            { className: 'btn btn-default' },
-            'click handler respected'
+            { onClick: function () {
+                    return console.log('HELLO WORLD on toggle item');
+                }, className: 'btn btn-default' },
+            'click handler on toggle button respected'
         ),
         _react2['default'].createElement(
             'div',

@@ -19,13 +19,14 @@ render(
             </div>
         </ButtonDropdown>
         <br /><br />
-        <ButtonDropdown onClick={() => console.log('HELLO WORLD')}>
-            <button className="btn btn-default">click handler respected</button>
+        <ButtonDropdown>
+            <button onClick={() => console.log('HELLO WORLD on toggle item')} className="btn btn-default">click handler on toggle button respected</button>
             <div>
                 <h1>Hello</h1>
             </div>
         </ButtonDropdown>
         <br /><br />
+
         <ButtonDropdown containerElementType="span">
             <button className="btn btn-default">Use a span</button>
             <div>

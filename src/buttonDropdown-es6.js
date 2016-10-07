@@ -45,7 +45,7 @@ class ButtonDropdown extends Component {
         let rootCssToAdd = clean ? '' : ' btn-group ';
         let toggle;
         if (toggleUnadjusted) {
-            let toggleClick = toggleUnadjusted.props.onClick || this.toggle;
+            let toggleClick = toggleUnadjusted.props.onClick ? () => { toggleUnadjusted.props.onClick(); this.toggle(); } : this.toggle;
             toggle = React.cloneElement(toggleUnadjusted, {
                 className: toggleClasses + (toggleUnadjusted.props.className || ''),
                 onClick: toggleClick,
