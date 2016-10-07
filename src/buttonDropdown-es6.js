@@ -4,12 +4,19 @@ class ButtonDropdown extends Component {
 	state = { open: false };
 	documentClick = evt => {
 		if (this.toggleBtn && this.toggleBtn.contains(evt.target)) return;
-		if (this.state.open){
+
+        let isOpen = typeof this.props.open !== 'undefined' ? this.props.open : this.state.open;
+
+		if (isOpen){
 			if (this.props.ignoreContentClick){
 				if (this.contentMenu && this.contentMenu.contains(evt.target)) return;
 			}
 
-			this.toggle();
+            if (this.props.onToggle){
+                this.props.onToggle(evt);
+            } else {
+                this.toggle();
+            }
 		}
 	};
     toggle = () => this.setState({ open: !this.state.open });
@@ -20,7 +27,7 @@ class ButtonDropdown extends Component {
 		document.removeEventListener('click', this.documentClick);
 	}
     render(){
-        let { children, className = '', containerElementType = 'div', ignoreContentClick, deferDropdownRendering, clean, ...rest } = this.props;
+        let { children, className = '', containerElementType = 'div', ignoreContentClick, deferDropdownRendering, onToggle, clean, ...rest } = this.props;
 
         if (!Array.isArray(children)){
             throw 'Error - at least two children should be passed: a toggle, and dropdown menu, at a minimum'
@@ -45,7 +52,8 @@ class ButtonDropdown extends Component {
         let rootCssToAdd = clean ? '' : ' btn-group ';
         let toggle;
         if (toggleUnadjusted) {
-            let toggleClick = toggleUnadjusted.props.onClick ? () => { toggleUnadjusted.props.onClick(); this.toggle(); } : this.toggle;
+            let rootToggleClick = this.props.onToggle || (typeof this.props.open === 'undefined' ? this.toggle : ()=>{});
+            let toggleClick = toggleUnadjusted.props.onClick ? evt => { toggleUnadjusted.props.onClick(); rootToggleClick(evt); } : rootToggleClick;
             toggle = React.cloneElement(toggleUnadjusted, {
                 className: toggleClasses + (toggleUnadjusted.props.className || ''),
                 onClick: toggleClick,
@@ -61,13 +69,15 @@ class ButtonDropdown extends Component {
             });
         }
 
+        let isOpen = typeof this.props.open !== 'undefined' ? this.props.open : this.state.open;
+
         //simple case
         if (children.length === 2) {
             return createElement(
                 containerElementType,
-                {className: className + rootCssToAdd + (this.state.open ? 'open' : ''), ...rest},
+                {className: className + rootCssToAdd + (isOpen ? 'open' : ''), ...rest},
                 toggle,
-                (!this.props.deferDropdownRendering || this.state.open) ? content : null
+                (!this.props.deferDropdownRendering || isOpen) ? content : null
             );
         } else {
             let childrenToUse = [...children];
@@ -75,12 +85,12 @@ class ButtonDropdown extends Component {
                 childrenToUse.splice(childrenToUse.indexOf(toggleUnadjusted), 1, toggle);
             }
             if (contentUnadjusted) {
-                childrenToUse.splice(childrenToUse.indexOf(contentUnadjusted), 1, (!this.props.deferDropdownRendering || this.state.open) ? content : null);
+                childrenToUse.splice(childrenToUse.indexOf(contentUnadjusted), 1, (!this.props.deferDropdownRendering || isOpen) ? content : null);
             }
 
             return createElement(
                 containerElementType,
-                {className: className + rootCssToAdd + (this.state.open ? 'open' : ''), ...rest},
+                {className: className + rootCssToAdd + (isOpen ? 'open' : ''), ...rest},
                 ...childrenToUse
             );
         }
