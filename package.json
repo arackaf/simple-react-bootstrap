@@ -2,15 +2,13 @@
   "name": "simple-react-bootstrap-button-dropdown",
   "version": "0.1.0-beta1",
   "description": "",
-  "main": "./dist/ButtonDropdown.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "main": "./src/buttonDropdown.js",
+  "scripts": { },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/arackaf/simple-react-bootstrap-button-dropdown.git"
   },
-  "author": "Adam Rackis <AdamRackis@hotmail.com> (http://github.com/arackaf)",
+  "author": "Adam Rackis (http://github.com/arackaf)",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/arackaf/simple-react-bootstrap-button-dropdown/issues"
