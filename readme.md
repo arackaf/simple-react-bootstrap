@@ -31,6 +31,29 @@ The most simple use case passes two children to ButtonDropdown: the first will b
 
 Any properties you add to the root container, including styles, will be passed through; any css classes will be merged in with `btn-group`. Any click event added to the toggle button will be invoked prior to the default behavior of toggling the button (if you want to take over this toggling yourself, see below).
 
+## Fully *fully* customizable
+
+If you need a more robust dropdown button than can be represented with a toggleButton and a dropdown div, then pass whatever arbitrary chilren you want; just be sure to manually add the `dropdown-toggle` and `dropdown-menu` classes where needed, so the component will know what's what.
+
+```javascript
+<ButtonDropdown>
+    <i className="fa fa-tag"></i>
+    <span>Arbitrary children + with null</span>
+    <span>Hello</span>
+    {null}
+    <a className="dropdown-toggle"><i className="fa fa-fw fa-caret-down"></i></a>
+    <span>{`<- toggle's right there`}</span>
+    <div className="dropdown-menu">
+        <div>
+            <span>
+                <h1>Hello</h1>
+            </span>
+        </div>
+        <h1>World</h1>
+    </div>
+</ButtonDropdown>
+```
+
 ## Misc options
 
 ##### Clean
