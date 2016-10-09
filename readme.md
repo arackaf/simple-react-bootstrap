@@ -18,14 +18,14 @@ will render
 
 ```html
 <div class="btn-group">
-    <button class=" dropdown-toggle btn btn-default">Out of the box</button>
-    <div class=" dropdown-menu  ">
+    <button class="dropdown-toggle btn btn-default">Out of the box</button>
+    <div class="dropdown-menu">
         <h1>Hello</h1>
     </div>
 </div>
 ```
 
-The most simple use case passes two children to ButtonDropdown: the first will be rendered as given, but with a `dropdown-toggle` class added; the second will be rendered as given but with a css class dropdown-menu added.  Lastly, by default, the whole container will be rendered in a div with `btn-group`.  When the `dropdown-toggle` element is clicked, the parent will have an `open` class added, which causes the dropdown content to show, per Bootstrap's css rules.  Any click anywhere causes it to hide again.
+The most simple use case passes two children to ButtonDropdown: the first will be rendered as given, but with a `dropdown-toggle` class added; the second will be rendered as given, but with a css class `dropdown-menu` added.  By default, both will be rendered in a div with css class `btn-group` added.  When the `dropdown-toggle` element is clicked, the parent will have an `open` class added, which causes the dropdown content to show, per Bootstrap's css rules.  Any click anywhere causes it to hide again.
 
 ## Fully customizable
 
@@ -39,7 +39,7 @@ Causes the `btn-group` class to not be added to the root container
 
 ##### containerElementType
 
-Pass an element type to render instead of a div.  For example, pass `span` to render a span, etc.
+Pass an element type to render for the root container, instead of a div.  For example, pass `span` to render a span, etc.
 
 ##### deferDropdownRendering
 
@@ -51,7 +51,7 @@ By default any clicks in the dropdown menu will close the menu.  This is usually
 
 ## Controlled mode
 
-If you'd like to manually control the dropdown state, you can pass a value for `open` to the root container.  You can then provide an `onToggle` callback that'll be called in all the places where the open toggling would normally be done, when in un-controlled mode (ie, no `open` passed in).
+If you'd like to manually control the dropdown state, you can pass a value for `open` to the root container.  You can then provide an `onToggle` callback that'll be called in all the places where the open/closed toggling would normally be done, when in un-controlled mode (ie, no `open` passed in).
 
 All the normal options are still respected.  For example, this would essentially re-create the default dropdown behavior, while ignoring any clicks in the dropdown menu.
 
