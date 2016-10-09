@@ -2,3 +2,4 @@
 node_modules/
 test-runner/testIt.js
 src/Modal.js
+src/modal2.js

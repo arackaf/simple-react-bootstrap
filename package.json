@@ -1,15 +1,15 @@
 {
   "name": "simple-react-bootstrap-modal",
-  "version": "0.0.3",
+  "version": "0.1.0-beta1",
   "description": "",
-  "main": "./dist/Modal.js",
+  "main": "./src/Modal.js",
   "scripts": {
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/arackaf/simple-react-bootstrap-modal.git"
   },
-  "author": "Adam Rackis <AdamRackis@hotmail.com> (http://github.com/arackaf)",
+  "author": "Adam Rackis(http://github.com/arackaf)",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/arackaf/simple-react-bootstrap-modal/issues"
