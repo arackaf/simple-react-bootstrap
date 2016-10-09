@@ -5,7 +5,7 @@ Dirt simple Bootstrap dropdown button component for React
 
 ## Basic dropdown-button
 
-```javascript
+```html
 <ButtonDropdown>
     <button className="btn btn-default">Out of the box</button>
     <div>
@@ -35,7 +35,7 @@ Any properties you add to the root container, including styles, will be passed t
 
 If you need a more robust dropdown button than can be represented with a toggleButton and a dropdown div, then pass whatever arbitrary chilren you want; just be sure to manually add the `dropdown-toggle` and `dropdown-menu` classes where needed, so the component will know what's what.
 
-```javascript
+```html
 <ButtonDropdown>
     <i className="fa fa-tag"></i>
     <span>Arbitrary children + with null</span>
@@ -78,7 +78,7 @@ If you'd like to manually control the dropdown state, you can pass a value for `
 
 All the normal options are still respected.  For example, this would essentially re-create the default dropdown behavior, while ignoring any clicks in the dropdown menu.
 
-```javascript
+```html
 <ButtonDropdown 
     ignoreContentClick={true} 
     onToggle={() => this.setState({ controlled1Open: !this.state.controlled1Open })} 
@@ -94,7 +94,7 @@ All the normal options are still respected.  For example, this would essentially
 
 A more flexible (if contrived) example follows.  This causes the dropdown to only open if the toggle button is clicked, and once open, will only close if the close button in the dropdown menu is clicked.
 
-```javascript
+```html
 <ButtonDropdown open={this.state.controlled3Open}>
     <button onClick={() => this.setState({ controlled3Open: true })} 
             className="btn btn-default">Toggle button to open, red button to close. ONLY
