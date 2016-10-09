@@ -33,3 +33,23 @@ Any properties you add to the root container, including styles, will be passed t
 
 ## Misc options
 
+##### Clean
+
+Causes the `btn-group` class to not be added to the root container
+
+##### containerElementType
+
+Pass an element type to render instead of a div.  IE, pass `span` to render a span, etc.
+
+##### deferDropdownRendering
+
+Pass `true` to defer rendering of the dropdown menu until it's actually open. Use this if you're rendering a lot of dropdownButtons, which all have some sort of expensive component in the dropdown.
+
+##### ignoreContentClick
+
+By default any clicks in the dropdown menu will close the menu.  This is usually desired, for example, a dropdown showing links should close after one of them is clicked.  If you choose to use the dropdown for something else, and want clicks in the dropdown to *not* cause the dropdown to close, pass `true` for this option.
+
+
+
+
+
