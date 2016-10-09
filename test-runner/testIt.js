@@ -77,15 +77,15 @@ var TestCases = (function (_Component) {
                         _react2['default'].createElement('br', null),
                         _react2['default'].createElement(
                             _srcButtonDropdown2['default'],
-                            { style: { width: '400px', backgroundColor: 'red' } },
+                            { 'data-foo': '1', className: 'blue', style: { width: '400px', backgroundColor: 'red' } },
                             _react2['default'].createElement(
                                 'button',
-                                { className: 'btn btn-default' },
-                                'Out of the box styling'
+                                { 'data-blah': '2', className: 'btn btn-default' },
+                                'Out of the box styling + blue css + data-'
                             ),
                             _react2['default'].createElement(
                                 'div',
-                                null,
+                                { 'data-lala': '3' },
                                 _react2['default'].createElement(
                                     'h1',
                                     null,
@@ -142,11 +142,11 @@ var TestCases = (function (_Component) {
                             null,
                             _react2['default'].createElement(
                                 'button',
-                                { className: 'btn btn-default' },
+                                { className: 'btn btn-default red' },
                                 _react2['default'].createElement(
                                     'h4',
                                     null,
-                                    'Some styling'
+                                    'Some styling + css class'
                                 ),
                                 _react2['default'].createElement('i', { className: 'fa fa-fw fa-tag' })
                             ),

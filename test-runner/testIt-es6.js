@@ -18,9 +18,9 @@ class TestCases extends Component {
                             </div>
                         </ButtonDropdown>
                         <br /><br />
-                        <ButtonDropdown style={{ width: '400px', backgroundColor: 'red' }}>
-                            <button className="btn btn-default">Out of the box styling</button>
-                            <div>
+                        <ButtonDropdown data-foo="1" className="blue" style={{ width: '400px', backgroundColor: 'red' }}>
+                            <button data-blah="2" className="btn btn-default">Out of the box styling + blue css + data-</button>
+                            <div data-lala="3">
                                 <h1>Hello</h1>
                             </div>
                         </ButtonDropdown>
@@ -41,7 +41,7 @@ class TestCases extends Component {
                         </ButtonDropdown>
                         <br /><br />
                         <ButtonDropdown>
-                            <button className="btn btn-default"><h4>Some styling</h4><i className="fa fa-fw fa-tag"></i></button>
+                            <button className="btn btn-default red"><h4>Some styling + css class</h4><i className="fa fa-fw fa-tag"></i></button>
                             <div>
                                 <div>
                                     <span>
