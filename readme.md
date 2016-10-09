@@ -39,7 +39,7 @@ Causes the `btn-group` class to not be added to the root container
 
 ##### containerElementType
 
-Pass an element type to render instead of a div.  IE, pass `span` to render a span, etc.
+Pass an element type to render instead of a div.  For example, pass `span` to render a span, etc.
 
 ##### deferDropdownRendering
 
@@ -49,7 +49,38 @@ Pass `true` to defer rendering of the dropdown menu until it's actually open. Us
 
 By default any clicks in the dropdown menu will close the menu.  This is usually desired, for example, a dropdown showing links should close after one of them is clicked.  If you choose to use the dropdown for something else, and want clicks in the dropdown to *not* cause the dropdown to close, pass `true` for this option.
 
+## Controlled mode
 
+If you'd like to manually control the dropdown state, you can pass a value for `open` to the root container.  You can then provide an `onToggle` callback that'll be called in all the places where the open toggling would normally be done, when in un-controlled mode (ie, no `open` passed in).
 
+All the normal options are still respected.  For example, this would essentially re-create the default dropdown behavior, while ignoring any clicks in the dropdown menu.
 
+```javascript
+<ButtonDropdown 
+    ignoreContentClick={true} 
+    onToggle={() => this.setState({ controlled1Open: !this.state.controlled1Open })} 
+    open={this.state.controlled1Open}>
+    <button className="btn btn-default">Ignore content click still respected</button>
+    <div>
+        <button className="btn btn-primary">Nothing</button>
+        <button onClick={() => this.setState({ controlled1Open: false })} 
+                className="btn btn-danger">Close</button>
+    </div>
+</ButtonDropdown>
+```
 
+A more flexible (if contrived) example follows.  This causes the dropdown to only open if the toggle button is clicked, and once open, will only close if the close button in the dropdown menu is clicked.
+
+```javascript
+<ButtonDropdown open={this.state.controlled3Open}>
+    <button onClick={() => this.setState({ controlled3Open: true })} 
+            className="btn btn-default">Toggle button to open, red button to close. ONLY
+    </button>
+    <div>
+        <button className="btn btn-primary">Nothing</button>
+        <button onClick={() => this.setState({ controlled3Open: false })} 
+                className="btn btn-danger">Close
+        </button>
+    </div>
+</ButtonDropdown>
+```
