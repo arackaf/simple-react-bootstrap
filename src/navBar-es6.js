@@ -101,6 +101,9 @@ class NavBar extends React.Component{
             this._pendingAnimationClear = setTimeout(() => this.setState({ collapsing: false, expanded: true, expanding: false }), 300);
         }
     }
+    componentWillUnmount(){
+        clearTimeout(this._pendingAnimationClear);
+    }
     render(){
         let header = this.props.children.find(c => c.type === NavBarHeader),
             toggle = header ? header.props.children.find(c => c.type === NavBarToggle) : null,

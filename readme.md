@@ -12,7 +12,7 @@ If you're just using a script loader, like SystemJS, you'll first need to config
 
 # Usage
 
-```javascript
+```html
 import NavBar from 'simple-react-bootstrap-navbar';
 import { render } from 'react-dom';
 import React from 'react';
