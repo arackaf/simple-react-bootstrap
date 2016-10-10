@@ -1,4 +1,5 @@
 import React from 'react';
+import ButtonDropdown from 'simple-react-bootstrap-button-dropdown';
 
 const spreadClassNames = (userClassName, baseCssClasses) => `${baseCssClasses || ''} ${userClassName || ''}`;
 
@@ -11,7 +12,6 @@ const NavBarForm = props => {
         </form>
     );
 };
-
 
 const NavBarBrand = props => React.cloneElement(props.children, { className: 'navbar-brand', key: 'nav-bar-brand' });
 
@@ -37,47 +37,17 @@ const NavBarItem = props => {
 };
 
 class NavBarDropdown extends React.Component {
-    constructor(){
-        super();
-        this.state = { open: false };
-
-        this.handleOutsideClick = evt => {
-            if (typeof this.props.open !== 'undefined') return;
-
-            let element = evt.target;
-            if (this.dropDownToggle.contains(element)){
-                return;
-            }
-            this.setState({ open: false });
-        };
-
-        document.addEventListener('click', this.handleOutsideClick);
-    }
-    componentWillUpdate(nextProps, nextState){
-        if (typeof nextProps.open != 'undefined' && !!nextProps.open != !!this.state.open){
-            this.setState({ open: !!nextProps.open });
-        }
-    }
-    componentWillUnmount(){
-        document.removeEventListener('click', this.handleOutsideClick);
-    }
-    toggle(){
-        if (typeof this.props.open !== 'undefined') return;
-        if (this.props.disabled) return;
-
-        this.setState({open: !this.state.open});
-    }
     render() {
         let props = this.props,
-            { className, style, disabled, ...rest } = props;
+            { toggleClassName, style, disabled, ...rest } = props;
 
         return (
-            <li className={`dropdown ${this.state.open ? 'open' : ''} ${!!disabled ? 'disabled' : ''}`} disabled={!!disabled}>
-                <a ref={el => this.dropDownToggle = el} className={spreadClassNames(className, 'dropdown-toggle')} style={style || {}} onClick={() => this.toggle()} { ...rest }>{props.text} <span className="caret"></span></a>
+            <ButtonDropdown containerElementType="li" clean={true} className={`dropdown ${!!disabled ? 'disabled' : ''}`} disabled={!!disabled}>
+                <a className={spreadClassNames(toggleClassName, 'dropdown-toggle')} style={style || {}} { ...rest }>{props.text} <span className="caret"></span></a>
                 <ul className="dropdown-menu">
                     {props.children}
                 </ul>
-            </li>
+            </ButtonDropdown>
         );
     }
 }

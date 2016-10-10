@@ -32,6 +32,7 @@
     "react": ">=0.14.0",
     "react-dom": ">=0.14.0",
     "remove": "^0.1.5",
+    "simple-react-bootstrap-button-dropdown": "0.1.0-beta7",
     "systemjs": "0.19.31",
     "systemjs-builder": "^0.15.22"
   }
