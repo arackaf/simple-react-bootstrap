@@ -7,7 +7,7 @@ If you're using a tool to manage your npm installs, like WebPack or jspm, then j
 
 `import Modal from 'simple-react-bootstrap-button-dropdown'`
 
-If you're just using a script loader, like SystemJS, you'll first need to configure the path to `src/modal.js`, as in 
+If you're just using a script loader, like SystemJS, you'll first need to configure the path to `src/buttonDropdown.js`, as in 
 
 `"simple-react-bootstrap-button-dropdown": "node_modules/simple-react-bootstrap-button-dropdown/src/buttonDropdown.js",`
 
