@@ -5,13 +5,15 @@ import React from 'react';
 class ModalRunner extends React.Component{
     constructor(){
         super();
-        this.state = { openAnimate: false, openNoAnimate: false, initialStart: false, openUnmountable1: false, isUnmounted1: false };
+        this.state = { openAnimate: false, openNoAnimate: false, initialStart: false, openUnmountable1: false, isUnmounted1: false, basicModal: false };
     }
     render(){
         return (
             <div>
                 <br /><br /><br />
 
+                <button onClick={() => this.setState({ basicModal: true })}>Open Basic Modal 1</button>
+                <br /><br />
                 <button onClick={() => this.setState({ openUnmountable1: true })}>Un-mountable Modal 1</button>
                 <br /><br />
                 <button onClick={() => this.setState({ openAnimate: true })}>Open Modal with animation</button>
@@ -19,6 +21,20 @@ class ModalRunner extends React.Component{
                 <button onClick={() => this.setState({ openNoAnimate: true })}>Open Modal - no animation</button>
                 <br /><br />
                 <button onClick={() => this.setState({ initialStart: true })}>Open initial start modal </button>
+
+                <Modal className="fade" show={ this.state.basicModal } onHide={() => this.setState({ basicModal: false })}>
+                    <Modal.Header>
+                        <h3>Hello World</h3>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>Modal body</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <button type="button" className="btn btn-default" onClick={() => this.setState({ basicModal: false })}>Close</button>
+                        <button type="button" className="btn btn-primary">Save changes</button>
+                    </Modal.Footer>
+                </Modal>
+
 
                 <Modal className="fade" show={ this.state.openAnimate } onHide={() => this.setState({ openAnimate: false })}>
                     <Modal.Header className="red" style={{ padding: '50px' }}>

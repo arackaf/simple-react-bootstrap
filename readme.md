@@ -6,16 +6,31 @@ If you're using a tool to manage your npm installs, like WebPack or jspm, then j
 
 `import Modal from 'simple-react-bootstrap-modal'`
 
-If you're just using a script loader, like SystemJS, you'll first need to configure the path to `dist/Modal.js`, as in 
+If you're just using a script loader, like SystemJS, you'll first need to configure the path to `src/modal.js`, as in 
 
 `"simple-react-bootstrap-modal": "node_modules/simple-react-bootstrap-modal/dist/Modal.js",`
 
-There's also a minified version, if you don't already have some sort of bundling and minifying process. 
+# Background
 
-Static build file that can be loaded with a `script` tag, with a `Modal` global variable added, can be found at `node_modules/simple-react-bootstrap-Modal/dist/ModalStaticBuild.min.js`
+This is not a drop-in replacement for react-bootstrap.  The APIs are very similar, but react-bootstrap is far more robust (and large).
+
+This component actually renders the modal in place, and adds the relevant css classes, and backdrops as needed to simulate normal Bootstrap behavior.  The result is a much smaller utility, but at the 
 
 # Usage
 
-```javascript
-//coming
+```html
+<Modal className="fade" show={ this.state.basicModal } onHide={() => this.setState({ basicModal: false })}>
+    <Modal.Header>
+        <h3>Hello World</h3>
+    </Modal.Header>
+    <Modal.Body>
+        <p>Modal body</p>
+    </Modal.Body>
+    <Modal.Footer>
+        <button type="button" className="btn btn-default" onClick={() => this.setState({ basicModal: false })}>Close</button>
+        <button type="button" className="btn btn-primary">Save changes</button>
+    </Modal.Footer>
+</Modal>
 ```
+
+Add the bootstrap css class `fade` to trigger the normal animation.

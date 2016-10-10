@@ -2,7 +2,7 @@
   "name": "simple-react-bootstrap-modal",
   "version": "0.1.0-beta1",
   "description": "",
-  "main": "./src/Modal.js",
+  "main": "./src/modal.js",
   "scripts": {
   },
   "repository": {
