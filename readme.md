@@ -5,7 +5,7 @@ Dirt simple Bootstrap dropdown button component for React
 
 If you're using a tool to manage your npm installs, like WebPack or jspm, then just import it with 
 
-`import Modal from 'simple-react-bootstrap-button-dropdown'`
+`import ButtonDropdown from 'simple-react-bootstrap-button-dropdown'`
 
 If you're just using a script loader, like SystemJS, you'll first need to configure the path to `src/buttonDropdown.js`, as in 
 
