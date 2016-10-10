@@ -52,7 +52,7 @@ If you need a more robust dropdown button than can be represented with a toggleB
     <span>Hello</span>
     {null}
     <a className="dropdown-toggle"><i className="fa fa-fw fa-caret-down"></i></a>
-    <span>{'<- toggle is right there'}</span>
+    <span><---- toggle is right there</span>
     <div className="dropdown-menu">
         <div>
             <span>
