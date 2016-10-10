@@ -6,13 +6,9 @@ If you're using a tool to manage your npm installs, like WebPack or jspm, then j
 
 `import NavBar from 'simple-react-bootstrap-navbar'`
 
-If you're just using a script loader, like SystemJS, you'll first need to configure the path to `dist/NavBar.js`, as in 
+If you're just using a script loader, like SystemJS, you'll first need to configure the path to `src/NavBar.js`, as in 
 
 `"simple-react-bootstrap-navbar": "node_modules/simple-react-bootstrap-navbar/dist/NavBar.js",`
-
-There's also a minified version, if you don't already have some sort of bundling and minifying process. 
-
-Static build file that can be loaded with a `script` tag, with a `NavBar` global variable added, can be found at `node_modules/simple-react-bootstrap-navbar/dist/NavBarStaticBuild.min.js`
 
 # Usage
 
