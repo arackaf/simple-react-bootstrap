@@ -32,7 +32,7 @@ var TestCases = (function (_Component) {
 
         _get(Object.getPrototypeOf(TestCases.prototype), 'constructor', this).apply(this, arguments);
 
-        this.state = { controlled1Open: false, controlled2Open: false, controlled3Open: false };
+        this.state = { controlled1Open: false, controlled2Open: false, controlled3Open: false, controlled4Open: false };
     }
 
     _createClass(TestCases, [{
@@ -70,6 +70,31 @@ var TestCases = (function (_Component) {
                                     'h1',
                                     null,
                                     'Hello'
+                                )
+                            )
+                        ),
+                        _react2['default'].createElement('br', null),
+                        _react2['default'].createElement('br', null),
+                        _react2['default'].createElement(
+                            'div',
+                            { className: 'btn-group' },
+                            ' ',
+                            _react2['default'].createElement(
+                                _srcButtonDropdown2['default'],
+                                { clean: true },
+                                _react2['default'].createElement(
+                                    'button',
+                                    { className: 'btn btn-default' },
+                                    'Out of the box + clean'
+                                ),
+                                _react2['default'].createElement(
+                                    'div',
+                                    null,
+                                    _react2['default'].createElement(
+                                        'h1',
+                                        null,
+                                        'Hello'
+                                    )
                                 )
                             )
                         ),
@@ -555,6 +580,41 @@ var TestCases = (function (_Component) {
                         _react2['default'].createElement('br', null),
                         _react2['default'].createElement('br', null),
                         _react2['default'].createElement(
+                            'div',
+                            { className: 'btn-group' },
+                            ' ',
+                            _react2['default'].createElement(
+                                _srcButtonDropdown2['default'],
+                                { clean: true, open: this.state.controlled4Open, className: 'foo' },
+                                _react2['default'].createElement(
+                                    'button',
+                                    { onClick: function () {
+                                            return _this.setState({ controlled4Open: true });
+                                        }, className: 'btn btn-default' },
+                                    'Toggle button to open, red button to close ONLY + clean + custom css class'
+                                ),
+                                _react2['default'].createElement(
+                                    'div',
+                                    null,
+                                    _react2['default'].createElement(
+                                        'button',
+                                        { className: 'btn btn-primary' },
+                                        'Nothing'
+                                    ),
+                                    _react2['default'].createElement(
+                                        'button',
+                                        { onClick: function () {
+                                                return _this.setState({ controlled4Open: false });
+                                            }, className: 'btn btn-danger' },
+                                        'Close'
+                                    )
+                                )
+                            )
+                        ),
+                        _react2['default'].createElement('br', null),
+                        _react2['default'].createElement('br', null),
+                        _react2['default'].createElement('br', null),
+                        _react2['default'].createElement(
                             _srcButtonDropdown2['default'],
                             { open: true },
                             _react2['default'].createElement(
@@ -594,3 +654,4 @@ window.clearNavBar = function () {
 
 exports['default'] = null;
 module.exports = exports['default'];
+/*cheap hack to get this to display correctly - since we added the clean option*/ /*cheap hack to get this to display correctly - since we added the clean option*/

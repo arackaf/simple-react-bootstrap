@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import ButtonDropdown from '../src/ButtonDropdown';
 
 class TestCases extends Component {
-    state = { controlled1Open: false, controlled2Open: false, controlled3Open: false };
+    state = { controlled1Open: false, controlled2Open: false, controlled3Open: false, controlled4Open: false };
     render(){
         return (
             <div style={{ paddingLeft: 30 }}>
@@ -17,6 +17,15 @@ class TestCases extends Component {
                                 <h1>Hello</h1>
                             </div>
                         </ButtonDropdown>
+                        <br /><br />
+                        <div className="btn-group"> {/*cheap hack to get this to display correctly - since we added the clean option*/}
+                            <ButtonDropdown clean={true}>
+                                <button className="btn btn-default">Out of the box + clean</button>
+                                <div>
+                                    <h1>Hello</h1>
+                                </div>
+                            </ButtonDropdown>
+                        </div>
                         <br /><br />
                         <ButtonDropdown data-foo="1" className="blue" style={{ width: '400px', backgroundColor: 'red' }}>
                             <button data-blah="2" className="btn btn-default">Out of the box styling + blue css + data-</button>
@@ -177,6 +186,16 @@ class TestCases extends Component {
                                 <button onClick={() => this.setState({ controlled3Open: false })} className="btn btn-danger">Close</button>
                             </div>
                         </ButtonDropdown>
+                        <br/><br/><br />
+                        <div className="btn-group"> {/*cheap hack to get this to display correctly - since we added the clean option*/}
+                            <ButtonDropdown clean={true} open={this.state.controlled4Open} className="foo">
+                                <button onClick={() => this.setState({ controlled4Open: true })} className="btn btn-default">Toggle button to open, red button to close ONLY + clean + custom css class</button>
+                                <div>
+                                    <button className="btn btn-primary">Nothing</button>
+                                    <button onClick={() => this.setState({ controlled4Open: false })} className="btn btn-danger">Close</button>
+                                </div>
+                            </ButtonDropdown>
+                        </div>
                         <br/><br/><br />
                         <ButtonDropdown open={true}>
                             <button className="btn btn-default">Always open</button>

@@ -27,7 +27,7 @@ class ButtonDropdown extends Component {
 		document.removeEventListener('click', this.documentClick);
 	}
     render(){
-        let { children, className = '', containerElementType = 'div', ignoreContentClick, deferDropdownRendering, onToggle, clean, ...rest } = this.props;
+        let { children, className = '', containerElementType = 'div', ignoreContentClick, deferDropdownRendering, onToggle, open, clean, ...rest } = this.props;
 
         if (!Array.isArray(children)){
             throw 'Error - at least two children should be passed: a toggle, and dropdown menu, at a minimum'
@@ -70,13 +70,14 @@ class ButtonDropdown extends Component {
             });
         }
 
-        let isOpen = typeof this.props.open !== 'undefined' ? this.props.open : this.state.open;
+        let isOpen = typeof this.props.open !== 'undefined' ? this.props.open : this.state.open,
+            classToAdd = [className, rootCssToAdd, (isOpen ? 'open' : null)].filter(s => s).join(' ');
 
         //simple case
         if (children.length === 2) {
             return createElement(
                 containerElementType,
-                {className: className + rootCssToAdd + (isOpen ? 'open' : ''), ...rest},
+                {className: classToAdd, ...rest},
                 toggle,
                 (!this.props.deferDropdownRendering || isOpen) ? content : null
             );
@@ -91,7 +92,7 @@ class ButtonDropdown extends Component {
 
             return createElement(
                 containerElementType,
-                {className: className + rootCssToAdd + (isOpen ? 'open' : ''), ...rest},
+                {className: classToAdd, ...rest},
                 ...childrenToUse
             );
         }
