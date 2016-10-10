@@ -1,6 +1,7 @@
 import NavBar from '../src/NavBar.js';
 import { render } from 'react-dom';
 import React from 'react';
+import ButtonDropdown from 'simple-react-bootstrap-button-dropdown';
 
 const RegularNavBar = () => (
     <NavBar>
@@ -57,11 +58,16 @@ class RegularNavBarWithManualDropDown extends React.Component {
                         <NavBar.Item className="class-on-item">Link 1</NavBar.Item>
                         <NavBar.Item disabled={true}>Link 2</NavBar.Item>
                         <NavBar.Item href="http://www.google.com">Link 3</NavBar.Item>
-                        <NavBar.Dropdown open={this.state.manualOpen} toggleClassName="pointer-cursor" style={{ color: 'red' }} text="Sub menu">
-                            <NavBar.Item>Sub option a</NavBar.Item>
-                            <NavBar.Item href="#foo">Sub option b</NavBar.Item>
-                            <NavBar.Item>Sub option c</NavBar.Item>
-                        </NavBar.Dropdown>
+
+                        <ButtonDropdown containerElementType="li" open={this.state.manualOpen} clean={true} >
+                            <a className='dropdown-toggle pointer-cursor' style={{ color: 'red' }}>Sub menu <span className="caret"></span></a>
+                            <ul className='dropdown-menu'>
+                                <NavBar.Item>Sub option a</NavBar.Item>
+                                <NavBar.Item href="#foo">Sub option b</NavBar.Item>
+                                <NavBar.Item>Sub option c</NavBar.Item>
+                            </ul>
+                        </ButtonDropdown>
+
                         <NavBar.Dropdown disabled={true} text="Sub menu">
                             <NavBar.Item>Sub option a</NavBar.Item>
                             <NavBar.Item>Sub option b</NavBar.Item>
