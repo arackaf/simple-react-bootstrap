@@ -8,7 +8,7 @@ If you're using a tool to manage your npm installs, like WebPack or jspm, then j
 
 If you're just using a script loader, like SystemJS, you'll first need to configure the path to `src/modal.js`, as in 
 
-`"simple-react-bootstrap-modal": "node_modules/simple-react-bootstrap-modal/dist/Modal.js",`
+`"simple-react-bootstrap-modal": "node_modules/simple-react-bootstrap-modal/src/modal.js",`
 
 # Background
 
