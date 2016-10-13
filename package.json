@@ -1,12 +1,14 @@
 {
   "name": "simple-react-bootstrap-button-dropdown",
-  "version": "0.1.0-beta8",
-  "description": "",
+  "version": "0.1.0-beta9",
+  "description": "A simple React component for making a Bootstrap dropdown button",
   "main": "./src/buttonDropdown.js",
-  "scripts": { },
+  "scripts": {
+    "build": "node build.js"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/arackaf/simple-react-bootstrap-button-dropdown.git"
+    "url": "https://github.com/arackaf/simple-react-bootstrap-button-dropdown.git"
   },
   "author": "Adam Rackis (http://github.com/arackaf)",
   "license": "ISC",
@@ -23,6 +25,8 @@
     "gulp-notify": "2.2.0",
     "gulp-plumber": "0.6.6",
     "gulp-print": "1.1.0",
-    "gulp-rename": "1.2.0"
+    "gulp-rename": "1.2.0",
+    "rollup": "^0.36.3",
+    "rollup-plugin-babel": "^2.6.1"
   }
 }

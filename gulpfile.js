@@ -11,7 +11,7 @@ var babelOptions = {
     presets: ['react', 'es2015', 'stage-2']
 };
 
-var paths = ['./src/**/*.es6', './gulpfile.es6'];
+var paths = ['./src/**/*.es6', './gulpfile.es6', './build.es6'];
 
 gulp.task('transpile-all', function () {
     gulp.src(paths, { base: './' }).pipe(babel(babelOptions)).pipe(rename({ extname: ".js" })).pipe(gulp.dest('')).pipe(gprint(function (filePath) {

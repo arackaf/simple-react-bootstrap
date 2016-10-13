@@ -4,3 +4,4 @@ node_modules/
 src/testIt.js
 build.js
 src/ButtonDropdown.js
+dist/
