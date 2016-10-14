@@ -26,7 +26,10 @@
     "gulp-plumber": "0.6.6",
     "gulp-print": "1.1.0",
     "gulp-rename": "1.2.0",
-    "rollup": "^0.36.3",
-    "rollup-plugin-babel": "^2.6.1"
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "rollup": "0.36.3",
+    "rollup-plugin-babel": "2.6.1",
+    "systemjs": "0.19.31"
   }
 }
