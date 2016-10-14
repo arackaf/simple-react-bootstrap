@@ -3,6 +3,12 @@ import React, {Component} from 'react';
 
 import ButtonDropdown from '../src/ButtonDropdown';
 
+class DummyButton extends Component {
+    render(){
+        return <button className={"btn btn-primary" + (' ' + this.props.className)} onClick={this.props.onClick}>Custom Element</button>
+    }
+}
+
 class TestCases extends Component {
     state = { controlled1Open: false, controlled2Open: false, controlled3Open: false, controlled4Open: false };
     render(){
@@ -13,6 +19,13 @@ class TestCases extends Component {
                         <span>UNCONTROLLED</span><br/>
                         <ButtonDropdown>
                             <button className="btn btn-default">Out of the box</button>
+                            <div>
+                                <h1>Hello</h1>
+                            </div>
+                        </ButtonDropdown>
+                        <br /><br />
+                        <ButtonDropdown>
+                            <DummyButton></DummyButton>
                             <div>
                                 <h1>Hello</h1>
                             </div>

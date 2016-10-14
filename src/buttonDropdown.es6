@@ -1,9 +1,19 @@
 import React, { Component, createElement } from 'react';
+import {findDOMNode} from 'react-dom';
 
 class ButtonDropdown extends Component {
 	state = { open: false };
 	documentClick = evt => {
-		if (this.toggleBtn && this.toggleBtn.contains(evt.target)) return;
+        let toggleBtnDomNode;
+        if (this.toggleBtn){
+            if (this.toggleBtn instanceof Component){
+                toggleBtnDomNode = findDOMNode(this.toggleBtn);
+            } else {
+                toggleBtnDomNode = this.toggleBtn;
+            }
+        }
+
+		if (toggleBtnDomNode && toggleBtnDomNode.contains(evt.target)) return;
 
         let isOpen = typeof this.props.open !== 'undefined' ? this.props.open : this.state.open;
 
