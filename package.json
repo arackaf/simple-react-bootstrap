@@ -26,6 +26,7 @@
     "gulp-plumber": "0.6.6",
     "gulp-print": "1.1.0",
     "gulp-rename": "1.2.0",
+    "gulp-uglify": "2.0.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "remove": "0.1.5",
