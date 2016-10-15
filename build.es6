@@ -8,13 +8,14 @@ rollup.rollup({
     entry: 'src/buttonDropdown.es6',
     plugins: [
         babel({
-            presets: ['stage-2', 'react']
+            presets: ['react', ['es2015', { modules: false }], 'stage-2'],
+            plugins: [['external-helpers', { whitelist: ['asyncGenerator'] }]]
         })
     ]
 }).then(bundle =>
     Promise.all([
-        bundle.write({ format: 'cjs', dest: './dist/buttonDropdown_ES6.js' }),
-        bundle.write({ format: 'iife', dest: './dist/buttonDropdown-script-tag_ES6.js', moduleName: 'ButtonDropdown', globals: { react: 'React' } })
+        bundle.write({ format: 'cjs', dest: './dist/buttonDropdown.js' }),
+        bundle.write({ format: 'iife', dest: './dist/buttonDropdown-script-tag.js', moduleName: 'ButtonDropdown', globals: { react: 'React' } })
     ])
 ).catch(err => console.log(err));
 
