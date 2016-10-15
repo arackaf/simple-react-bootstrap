@@ -17,7 +17,7 @@ gulp.task('test-u', function () {
     gulp.src('./junk/**/*.js', { base: './' })
         .pipe(gulpUglify())
         .pipe(gulpRename(path => {
-            path.basename = path.basename + 'min';
+            path.basename = path.basename + '.min';
         }))
         .pipe(gulp.dest(''))
 });
