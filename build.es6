@@ -8,7 +8,16 @@ const nodeResolve = require('rollup-plugin-node-resolve');
 
 try { remove.removeSync('./dist'); } catch (e) { }
 
-rollup.rollup({
+const rollupConfig = {
+    entry: 'src/navBar.es6',
+    plugins: [
+        babel({
+            presets: ['react', ['es2015', { modules: false }], 'stage-2']
+        })
+    ]
+};
+
+const rollupConfigBundleAll = {
     entry: 'src/navBar.es6',
     plugins: [
         babel({
@@ -19,10 +28,16 @@ rollup.rollup({
             skip: ['react', 'react-dom']
         })
     ]
-}).then(bundle =>
+};
+
+Promise.all([
+    rollup.rollup(rollupConfig),
+    rollup.rollup(rollupConfigBundleAll)
+]).then(([bundle, bundleAll]) =>
     Promise.all([
         bundle.write({ format: 'cjs', dest: './dist/navBar.js' }),
-        bundle.write({ format: 'iife', dest: './dist/navBar-script-tag.js', moduleName: 'NavBar', globals: { react: 'React', 'react-dom': 'ReactDom' } })
+        bundleAll.write({ format: 'iife', dest: './dist/navBar-with-button-dropdown-script-tag.js', moduleName: 'NavBar', globals: { react: 'React', 'react-dom': 'ReactDom' } }),
+        bundleAll.write({ format: 'cjs', dest: './dist/navBar-with-button-dropdown.js' })
     ])
 ).then(() => {
     gulp.src('./dist/**/*.js', { base: './' })
