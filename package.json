@@ -20,6 +20,7 @@
     "simple-react-bootstrap-button-dropdown": "*.*.*"
   },
   "devDependencies": {
+    "babel-plugin-external-helpers": "^6.8.0",
     "babel-preset-es2015": "6.16.0",
     "babel-preset-react": "6.16.0",
     "babel-preset-stage-2": "6.17.0",
@@ -35,6 +36,7 @@
     "remove": "0.1.5",
     "rollup": "0.36.3",
     "rollup-plugin-babel": "2.6.1",
+    "rollup-plugin-node-resolve": "2.0.0",
     "systemjs": "0.19.31"
   }
 }

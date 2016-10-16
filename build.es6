@@ -4,6 +4,7 @@ const remove = require('remove');
 const gulp = require('gulp');
 const gulpUglify = require('gulp-uglify');
 const gulpRename = require('gulp-rename');
+const nodeResolve = require('rollup-plugin-node-resolve');
 
 try { remove.removeSync('./dist'); } catch (e) { }
 
@@ -11,13 +12,17 @@ rollup.rollup({
     entry: 'src/navBar.es6',
     plugins: [
         babel({
-            presets: ['react', ['es2015', { modules: false }], 'stage-2']
+            presets: ['react', ['es2015', { modules: false }], 'stage-2'],
+            plugins: ['external-helpers']
+        }),
+        nodeResolve({
+            skip: ['react', 'react-dom']
         })
     ]
 }).then(bundle =>
     Promise.all([
         bundle.write({ format: 'cjs', dest: './dist/navBar.js' }),
-        // bundle.write({ format: 'iife', dest: './dist/navBar-script-tag.js', moduleName: 'NavBar', globals: { react: 'React', 'react-dom': 'ReactDom' } })
+        bundle.write({ format: 'iife', dest: './dist/navBar-script-tag.js', moduleName: 'NavBar', globals: { react: 'React', 'react-dom': 'ReactDom' } })
     ])
 ).then(() => {
     gulp.src('./dist/**/*.js', { base: './' })
