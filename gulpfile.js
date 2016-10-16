@@ -5,9 +5,7 @@ var gulp = require('gulp'),
     plumber = require('gulp-plumber'),
     gprint = require('gulp-print'),
     notify = require('gulp-notify'),
-    babel = require('gulp-babel'),
-    gulpUglify = require('gulp-uglify'),
-    gulpRename = require('gulp-rename');
+    babel = require('gulp-babel');
 
 var babelOptions = {
     presets: ['react', 'es2015', 'stage-2']
@@ -15,11 +13,6 @@ var babelOptions = {
 
 var paths = ['./src/**/*.es6', './test-runner/**/*.es6', './gulpfile.es6', './build.es6'];
 
-gulp.task('test-u', function () {
-    gulp.src('./junk/**/*.js', { base: './' }).pipe(gulpUglify()).pipe(gulpRename(function (path) {
-        path.basename = path.basename + '.min';
-    })).pipe(gulp.dest(''));
-});
 gulp.task('transpile-all', function () {
     gulp.src(paths, { base: './' }).pipe(babel(babelOptions)).pipe(rename({ extname: ".js" })).pipe(gulp.dest('')).pipe(gprint(function (filePath) {
         return "File processed: " + filePath;
