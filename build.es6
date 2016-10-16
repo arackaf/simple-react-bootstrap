@@ -8,7 +8,8 @@ rollup.rollup({
     entry: 'src/buttonDropdown.es6',
     plugins: [
         babel({
-            presets: ['react', ['es2015', { modules: false }], 'stage-2']
+            presets: ['react', ['es2015', { modules: false }], 'stage-2'],
+            plugins: [['external-helpers-2', { whitelist: ['extends'] }]]
         })
     ]
 }).then(bundle =>
