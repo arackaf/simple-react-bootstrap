@@ -1,10 +1,11 @@
 {
   "name": "simple-react-bootstrap-button-dropdown",
-  "version": "0.1.0-beta16",
+  "version": "0.1.0-beta17",
   "description": "A simple React component for making a Bootstrap dropdown button",
-  "main": "./src/buttonDropdown.js",
+  "main": "./dist/buttonDropdown.js",
   "scripts": {
-    "build": "node build.js"
+    "build": "node build.js",
+    "prepublish": "node build.js"
   },
   "repository": {
     "type": "git",
