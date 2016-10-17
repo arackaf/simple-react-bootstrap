@@ -1,6 +1,6 @@
 {
   "name": "simple-react-bootstrap-navbar",
-  "version": "0.0.8-beta11",
+  "version": "0.0.8-beta12",
   "description": "",
   "main": "./dist/navBar.js",
   "scripts": {
