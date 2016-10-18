@@ -126,7 +126,7 @@ class Modal extends React.Component {
             modalHeader = children.find(c => c.type === ModalHeader),
             modalFooter = children.find(c => c.type === ModalFooter);
 
-        let { className, style, ...rest } = this.props;
+        let { className, style, show, onHide, ...rest } = this.props;
 
         return (
             <div ref={el => this.modalRef = el} className={spreadClassNames(className, 'modal ' + (this.state.hasInCssClass ? 'in' : ''))} style={{ ...style, display: this.state.exists ? 'block' : '' }} {...rest} role="dialog">

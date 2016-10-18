@@ -1,6 +1,6 @@
 {
   "name": "simple-react-bootstrap-modal",
-  "version": "0.1.0-beta4",
+  "version": "0.1.0-beta6",
   "description": "",
   "main": "./dist/modal.js",
   "scripts": {
@@ -27,8 +27,8 @@
     "gulp-print": "1.1.0",
     "gulp-rename": "1.2.0",
     "gulp-uglify": "2.0.0",
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2",
+    "react": "*.*.*",
+    "react-dom": "*.*.*",
     "remove": "0.1.5",
     "rollup": "0.36.3",
     "rollup-plugin-babel": "2.6.1",
