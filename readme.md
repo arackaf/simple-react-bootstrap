@@ -7,9 +7,9 @@ If you're using a tool to manage your npm installs, like WebPack or jspm, then j
 
 `import ButtonDropdown from 'simple-react-bootstrap-button-dropdown'`
 
-If you're just using a script loader, like SystemJS, you'll first need to configure the path to `src/buttonDropdown.js`, as in 
+If you're just using a script loader, like SystemJS, you'll first need to configure the path to `dist/buttonDropdown.js`, as in 
 
-`"simple-react-bootstrap-button-dropdown": "node_modules/simple-react-bootstrap-button-dropdown/src/buttonDropdown.js",`
+`"simple-react-bootstrap-button-dropdown": "node_modules/simple-react-bootstrap-button-dropdown/dist/buttonDropdown.js",`
 
 # Examples
 
@@ -35,7 +35,7 @@ will render
 </div>
 ```
 
-The most simple use case passes two children to ButtonDropdown: the first will be rendered as given, but with a `dropdown-toggle` class added; the second will be rendered as given, but with a css class `dropdown-menu` added.  By default, both will be rendered in a div with css class `btn-group` added.  When the `dropdown-toggle` element is clicked, the parent will have an `open` class added, which causes the dropdown content to show, per Bootstrap's css rules.  Any click anywhere causes it to hide again.
+The most simple use case passes two children to ButtonDropdown: the first will be rendered as given, but with a `dropdown-toggle` class added; the second will be rendered as given, but with a  `dropdown-menu` class added.  By default, both will be rendered in a div with the `btn-group` class added.  When the `dropdown-toggle` element is clicked, the parent will have an `open` class added, which causes the dropdown content to show, per Bootstrap's css rules.  Any click anywhere causes it to hide again.
 
 ## Fully customizable
 
@@ -72,7 +72,7 @@ Causes the `btn-group` class to not be added to the root container
 
 ##### containerElementType
 
-Pass an element type to render for the root container, instead of a div.  For example, pass `span` to render a span, etc.
+Pass an element type to render for the root container, instead of a div.  For example, pass the string `span` to render a span, etc.
 
 ##### deferDropdownRendering
 
