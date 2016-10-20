@@ -64,6 +64,41 @@ If you need a more robust dropdown button than can be represented with a toggleB
 </ButtonDropdown>
 ```
 
+## Using a custom component for the toggle button
+
+One caveat to the above, is that if you want to use a custom component for the toggle, such as
+
+```html
+<DropdownButton>
+    <HashBtn className={`btn btn-default`}
+             toMerge={{isSupportTicket: 1}}>Tickets <span className="caret"></span>
+    </HashBtn>
+    <ul>
+        <li className="dropdown-header">Close Requests</li>
+        <li className={searchVm.closeRequests == '' ? 'active' : ''}>
+            <HashA toMerge={{closeRequests: null}}>Any</HashA>
+        </li>
+        <li className={searchVm.closeRequests == '0' ? 'active' : ''}>
+            <HashA toMerge={{closeRequests: 0}}>None</HashA>
+        </li>
+        <li className={searchVm.closeRequests == '1' ? 'active' : ''}>
+            <HashA toMerge={{closeRequests: 1}}>One</HashA>
+        </li>
+        <li className={searchVm.closeRequests == '2' ? 'active' : ''}>
+            <HashA toMerge={{closeRequests: 2}}>Two</HashA>
+        </li>
+        <li className={searchVm.closeRequests == '3' ? 'active' : ''}>
+            <HashA toMerge={{closeRequests: 'Over2'}}>More Than 2</HashA>
+        </li>
+    </ul>
+</DropdownButton>
+```
+
+Then two conditions must be satisfied:
+
+1. The component cannot be a stateless functional component; in other words you need to define it with `class extends React.Component`. The reason boils down to refs, and `ReactDom.findDOMNode` not working with SFAs.
+2. The component must pass through (or merge in) the onClick handler that's passed to it.
+
 ## Misc options
 
 ##### Clean
