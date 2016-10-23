@@ -1,8 +1,9 @@
 {
   "name": "simple-react-bootstrap-modal",
-  "version": "0.1.0-beta6",
+  "version": "0.2.0",
   "description": "",
   "main": "./dist/modal.js",
+  "module": "./src/modal.es6",
   "scripts": {
     "prepublish": "node build.js"
   },
