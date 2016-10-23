@@ -60,8 +60,8 @@ function removeBackdrop(){
 
 class Modal extends React.Component {
     state = { exists: false, hasInCssClass: false };
-    __showingUuid = 0;
-    __bumpUuid = () => this.__showingUuid++;
+    __showingUid = 0;
+    __bumpUid = () => this.__showingUid++;
     componentDidMount(){
         if (this.props.show){
             this._showModal();
@@ -71,12 +71,17 @@ class Modal extends React.Component {
         if (!prevProps.show && this.props.show){
             this._showModal();
         } else if (prevProps.show && !this.props.show){
-            this.__bumpUuid();
+            this.__bumpUid();
+            let correctUid = this.__showingUid;
             let isAnimating = /\bfade\b/.test(this.modalRef.className);
 
             if (isAnimating){
                 this.setState({ hasInCssClass: false });
-                setTimeout(() => !this.dead && this.setState({ exists: false }), 200);
+                setTimeout(() => {
+                    if (this.dead) return;
+                    if (correctUid !== this.__showingUid) return;
+                    this.setState({ exists: false })
+                }, 200);
             } else {
                 this.setState({ hasInCssClass: false, exists: false });
             }
@@ -90,8 +95,8 @@ class Modal extends React.Component {
         }
     }
     _showModal(){
-        this.__bumpUuid();
-        let currentUid = this.__showingUuid;
+        this.__bumpUid();
+        let currentUid = this.__showingUid;
         let div = !currentModals.length ? document.createElement('div') : null,
             isAnimating = /\bfade\b/.test(this.modalRef.className);
 
@@ -112,9 +117,9 @@ class Modal extends React.Component {
             }, 1);
             //provide some small delay before this modal is eligible to be closed.  We don't want a double click to open / show the modal.
             setTimeout(() => {
-                //highly unlikely, but just in case 
+                //highly unlikely, but just in case
                 if (this.dead) return;
-                if (currentUid !== this.__showingUuid) return;
+                if (currentUid !== this.__showingUid) return;
                 currentModals.push(this);
             }, 200);
         } else {
