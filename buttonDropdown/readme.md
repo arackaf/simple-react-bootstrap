@@ -69,7 +69,7 @@ If you need a more robust dropdown button than can be represented with a toggleB
 One caveat to the above, is that if you want to use a custom component for the toggle, such as
 
 ```html
-<DropdownButton>
+<ButtonDropdown>
     <HashBtn className={`btn btn-default`}
              toMerge={{isSupportTicket: 1}}>Tickets <span className="caret"></span>
     </HashBtn>
@@ -91,7 +91,7 @@ One caveat to the above, is that if you want to use a custom component for the t
             <HashA toMerge={{closeRequests: 'Over2'}}>More Than 2</HashA>
         </li>
     </ul>
-</DropdownButton>
+</ButtonDropdown>
 ```
 
 Then two conditions must be satisfied:
@@ -111,7 +111,7 @@ Pass an element type to render for the root container, instead of a div.  For ex
 
 ##### deferDropdownRendering
 
-Pass `true` to defer rendering of the dropdown menu until it's actually open. Use this if you're rendering a lot of dropdownButtons, which all have some sort of expensive component in the dropdown.
+Pass `true` to defer rendering of the dropdown menu until it's actually open. Use this if you're rendering a lot of ButtonDropdowns, which all have some sort of expensive component in the dropdown.
 
 ##### ignoreContentClick
 
