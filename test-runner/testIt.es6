@@ -3,10 +3,22 @@ import { render } from 'react-dom';
 import React from 'react';
 
 class ModalRunner extends React.Component{
-    constructor(){
-        super();
-        this.state = { openAnimate: false, openNoAnimate: false, initialStart: false, openUnmountable1: false, isUnmounted1: false, basicModal: false };
-    }
+    state = { openAnimate: false, openNoAnimate: false, initialStart: false, openUnmountable1: false, isUnmounted1: false, basicModal: false, toggleOpen: false };
+    toggleTest = () =>{
+        let number = +this.toggles.value;
+        let delay = +this.delay.value;
+        let i = 0;
+
+        const toggle = () => {
+            //console.log({ toggleOpen: !this.state.toggleOpen }, i, number, delay);
+            this.setState({ toggleOpen: !this.state.toggleOpen });
+            if (++i < number){
+                setTimeout(toggle, delay);
+            }
+        };
+
+        toggle();
+    };
     render(){
         return (
             <div>
@@ -21,6 +33,10 @@ class ModalRunner extends React.Component{
                 <button onClick={() => this.setState({ openNoAnimate: true })}>Open Modal - no animation</button>
                 <br /><br />
                 <button onClick={() => this.setState({ initialStart: true })}>Open initial start modal </button>
+                <br /><br />
+                <input placeholder="toggles" ref={el => this.toggles = el} />&nbsp;<input placeholder="delay" ref={el => this.delay = el} />
+                <br />
+                <button onClick={this.toggleTest}>Run toggle</button>
 
                 <Modal className="fade" show={ this.state.basicModal } onHide={() => this.setState({ basicModal: false })}>
                     <Modal.Header>
@@ -31,6 +47,19 @@ class ModalRunner extends React.Component{
                     </Modal.Body>
                     <Modal.Footer>
                         <button type="button" className="btn btn-default" onClick={() => this.setState({ basicModal: false })}>Close</button>
+                        <button type="button" className="btn btn-primary">Save changes</button>
+                    </Modal.Footer>
+                </Modal>
+
+                <Modal className="fade" show={ this.state.toggleOpen } onHide={() => this.setState({ toggleOpen: false })}>
+                    <Modal.Header>
+                        <h3>Hello World</h3>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <p>Modal body</p>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <button type="button" className="btn btn-default" onClick={() => this.setState({ toggleOpen: false })}>Close</button>
                         <button type="button" className="btn btn-primary">Save changes</button>
                     </Modal.Footer>
                 </Modal>
