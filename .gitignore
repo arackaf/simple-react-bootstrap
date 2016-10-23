@@ -2,5 +2,10 @@
 node_modules/
 src/testIt.js
 build.js
-src/ButtonDropdown.js
 dist/
+src/modal.js
+src/navBar.js
+src/buttonDropdown.js
+test-runner/testButtonDropdown.js
+test-runner/testModal.js
+test-runner/testNavBar.js
