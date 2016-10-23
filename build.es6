@@ -7,17 +7,28 @@ const gulp = require('gulp');
 
 try { remove.removeSync('./dist'); } catch (e) { }
 
-rollup.rollup({
-    entry: 'src/buttonDropdown.es6',
-    plugins: [
-        babel({
-            presets: ['react', ['es2015', { modules: false }], 'stage-2']
-        })
-    ]
-}).then(bundle =>
+const getRollup = entry =>
+    rollup.rollup({
+        entry,
+        plugins: [
+            babel({
+                presets: ['react', ['es2015', { modules: false }], 'stage-2']
+            })
+        ]
+    });
+
+Promise.all([
+    getRollup('src/library.es6'),
+    getRollup('src/modal.es6'),
+    getRollup('src/navBar.es6'),
+    getRollup('src/buttonDropdown.es6')
+]).then(([library, modal, navBar, buttonDropdown]) =>
     Promise.all([
-        bundle.write({ format: 'cjs', dest: './dist/buttonDropdown.js' }),
-        bundle.write({ format: 'iife', dest: './dist/buttonDropdown-script-tag.js', moduleName: 'ButtonDropdown', globals: { react: 'React', 'react-dom': 'ReactDom' } })
+        library.write({ format: 'cjs', dest: './dist/simple-react-bootstrap.js' }),
+        library.write({ format: 'iife', dest: './dist/simple-react-bootstrap-script-tag.js', moduleName: 'ButtonDropdown', globals: { react: 'React', 'react-dom': 'ReactDom' } }),
+        modal.write({ format: 'cjs', dest: './dist/modal.js' }),
+        navBar.write({ format: 'cjs', dest: './dist/navBar.js' }),
+        buttonDropdown.write({ format: 'cjs', dest: './dist/buttonDropdown.js' })
     ])
 ).then(() => {
     gulp.src('./dist/**/*.js', { base: './' })

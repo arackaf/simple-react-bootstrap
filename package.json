@@ -4,6 +4,7 @@
   "description": "",
   "main": "./dist/simple-react-bootstrap.js",
   "scripts": {
+    "build": "node build.js"
   },
   "repository": {
     "type": "git",
