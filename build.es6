@@ -7,18 +7,19 @@ const gulp = require('gulp');
 
 try { remove.removeSync('./dist'); } catch (e) { }
 
-const getRollup = entry =>
+const getRollup = (entry, extHelpers) =>
     rollup.rollup({
         entry,
         plugins: [
             babel({
-                presets: ['react', ['es2015', { modules: false }], 'stage-2']
+                presets: ['react', ['es2015', { modules: false }], 'stage-2'],
+                plugins: extHelpers ? ['external-helpers'] : []
             })
         ]
     });
 
 Promise.all([
-    getRollup('src/library.es6'),
+    getRollup('src/library.es6', true),
     getRollup('src/modal.es6'),
     getRollup('src/navBar.es6'),
     getRollup('src/buttonDropdown.es6')
