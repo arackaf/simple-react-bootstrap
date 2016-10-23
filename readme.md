@@ -12,9 +12,9 @@ If you're just using a script loader, like SystemJS, you'll first need to config
 
 # Background
 
-This is not a drop-in replacement for react-bootstrap.  The APIs are very similar, but react-bootstrap is far more robust (and large).
+This is not a drop-in replacement for react-bootstrap's modal.  The APIs are very similar, but react-bootstrap is far more robust (and large).
 
-This component actually renders the modal in place, and adds the relevant css classes, and backdrops as needed to simulate normal Bootstrap behavior.  The result is a much smaller utility, but at the 
+This component actually renders the modal in place, and adds the relevant css classes, and backdrops as needed to simulate normal Bootstrap behavior.  The result is a much smaller utility, but at the expense of some edge cases not working properly.  Namely, if you unmount a modal that's currently visible, it'll just vanish, without the normal animation happening.
 
 # Usage
 
@@ -33,4 +33,6 @@ This component actually renders the modal in place, and adds the relevant css cl
 </Modal>
 ```
 
-Add the bootstrap css class `fade` to trigger the normal animation.
+The css class `fade` adds animation behavior, just like with regular Bootstrap.
+
+Everything else should work as expected.  All props passed down to any of these sections should pass through properly.
