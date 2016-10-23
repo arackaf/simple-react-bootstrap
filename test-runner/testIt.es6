@@ -1,4 +1,4 @@
-import NavBar from '../src/NavBar.js';
+import NavBar from '../src/navBar.js';
 import { render } from 'react-dom';
 import React from 'react';
 import ButtonDropdown from 'simple-react-bootstrap-button-dropdown';
