@@ -1,6 +1,6 @@
 {
   "name": "simple-react-bootstrap-button-dropdown",
-  "version": "0.1.0-beta20",
+  "version": "0.2.0",
   "description": "A simple React component for making a Bootstrap dropdown button",
   "main": "./dist/buttonDropdown.js",
   "module": "./src/buttonDropdown.es6",
