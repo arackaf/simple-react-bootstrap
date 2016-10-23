@@ -29,8 +29,20 @@ const ModalBody = props => {
     );
 };
 
-let currentModals = [];
+const currentModals = [];
+const showingModals = [];
+const elementInAnyShowingModal = element => showingModals.some(m => m.modalRef.contains(element));
+
+function removeFromShowingModal(m){
+    let index = showingModals.indexOf(m);
+    if (index >= 0){
+        showingModals.splice(index, 1);
+    }
+}
+
 document.addEventListener('click', function(evt){
+    console.log('currentModals.length', currentModals.length);
+
     if (!currentModals.length) return;
     let modalToCloseMaybe = currentModals[currentModals.length - 1];
 
@@ -38,8 +50,7 @@ document.addEventListener('click', function(evt){
         modalRoot = modalToCloseMaybe.modalRef,
         modalContent = modalRoot.getElementsByClassName('modal-content')[0];
 
-    if (modalContent.contains(element)) return;
-
+    if (modalContent.contains(element) || elementInAnyShowingModal(element)) return;
     currentModals[currentModals.length - 1].props.onHide();
 });
 
@@ -92,6 +103,7 @@ class Modal extends React.Component {
             if (currentModals[currentModals.length - 1] == this){
                 currentModals.pop();
             }
+            removeFromShowingModal(this);
         }
     }
     _showModal(){
@@ -116,11 +128,14 @@ class Modal extends React.Component {
                 this.setState({ hasInCssClass: true });
             }, 1);
             //provide some small delay before this modal is eligible to be closed.  We don't want a double click to open / show the modal.
+
+            showingModals.push(this);
             setTimeout(() => {
                 //highly unlikely, but just in case
                 if (this.dead) return;
                 if (currentUid !== this.__showingUid) return;
                 currentModals.push(this);
+                removeFromShowingModal(this);
             }, 200);
         } else {
             if (div) {
