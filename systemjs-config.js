@@ -6,6 +6,7 @@ System.config({
     },
     map: {
         'react': 'node_modules/react/dist/react.js',
-        'react-dom': 'node_modules/react-dom/dist/react-dom.js'
+        'react-dom': 'node_modules/react-dom/dist/react-dom.js',
+        'simple-react-bootstrap-button-dropdown': 'src/buttonDropdown'
     }
 });
