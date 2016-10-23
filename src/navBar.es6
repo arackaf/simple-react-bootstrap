@@ -24,9 +24,12 @@ const NavBarToggle = props =>
     </button>;
 
 const NavBarHeader = props =>
-    <div className="navbar-header">
-        { props.children }
-    </div>;
+    <div className="navbar-header">{
+        React.Children.map(props.children, child =>
+            child.type === NavBarToggle
+                ? React.cloneElement(child, {onClick: props.onClick, key: 'nav-bar-toggle'})
+                : child)
+    }</div>;
 
 const NavBarItem = props => {
     let { disabled, className, href, children, ...rest } = props;
@@ -36,21 +39,18 @@ const NavBarItem = props => {
     );
 };
 
-class NavBarDropdown extends React.Component {
-    render() {
-        let props = this.props,
-            { toggleClassName, style, disabled, ...rest } = props;
+const NavBarDropdown = props => {
+    let { toggleClassName, style, disabled, text, children, ...rest } = props;
 
-        return (
-            <ButtonDropdown containerElementType="li" clean={true} className={`dropdown ${!!disabled ? 'disabled' : ''}`} disabled={!!disabled}>
-                <a className={spreadClassNames(toggleClassName, 'dropdown-toggle')} style={style || {}} { ...rest }>{props.text} <span className="caret"></span></a>
-                <ul className="dropdown-menu">
-                    {props.children}
-                </ul>
-            </ButtonDropdown>
-        );
-    }
-}
+    return (
+        <ButtonDropdown containerElementType="li" clean={true} className={`dropdown ${!!disabled ? 'disabled' : ''}`} disabled={!!disabled}>
+            <a className={spreadClassNames(toggleClassName, 'dropdown-toggle')} style={style || {}} { ...rest }>{text} <span className="caret"></span></a>
+            <ul className="dropdown-menu">
+                {children}
+            </ul>
+        </ButtonDropdown>
+    );
+};
 
 const Nav = props =>
     <ul { ...props } className="nav navbar-nav">
@@ -106,12 +106,10 @@ class NavBar extends React.Component{
     }
     render(){
         let header = this.props.children.find(c => c.type === NavBarHeader),
-            toggle = header ? header.props.children.find(c => c.type === NavBarToggle) : null,
-            toggleIndex = toggle ? header.props.children.indexOf(toggle) : -1,
             navSubItems = this.props.children.filter(filterValidNavSubItems);
 
-        if (toggleIndex >= 0){
-            header.props.children[toggleIndex] = React.cloneElement(toggle, { onClick: this.toggleMobileCollapse.bind(this), key: 'nav-bar-toggle' });
+        if (header) {
+            header = React.cloneElement(header, {onClick: this.toggleMobileCollapse.bind(this)});
         }
 
         return (
