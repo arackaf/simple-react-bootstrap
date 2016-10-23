@@ -34,7 +34,7 @@ class ModalRunner extends React.Component{
                 <br /><br />
                 <button onClick={() => this.setState({ initialStart: true })}>Open initial start modal </button>
                 <br /><br />
-                <input placeholder="toggles" ref={el => this.toggles = el} />&nbsp;<input placeholder="delay" ref={el => this.delay = el} />
+                <input defaultValue={2} placeholder="toggles" ref={el => this.toggles = el} />&nbsp;<input defaultValue={50} placeholder="delay" ref={el => this.delay = el} />
                 <br />
                 <button onClick={this.toggleTest}>Run toggle</button>
 

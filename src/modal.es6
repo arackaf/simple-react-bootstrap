@@ -46,6 +46,7 @@ document.addEventListener('click', function(evt){
 function removeBackdrop(){
     let backdrop = document.getElementsByClassName('simple-react-modal-backdrop')[0];
     if (!backdrop)return;
+    backdrop.classList.remove('simple-react-modal-backdrop');
 
     let isAnimating = /\bfade\b/.test(backdrop.className);
 
@@ -58,10 +59,9 @@ function removeBackdrop(){
 }
 
 class Modal extends React.Component {
-    constructor(){
-        super();
-        this.state = { exists: false, hasInCssClass: false };
-    }
+    state = { exists: false, hasInCssClass: false };
+    __showingUuid = 0;
+    __bumpUuid = () => this.__showingUuid++;
     componentDidMount(){
         if (this.props.show){
             this._showModal();
@@ -71,6 +71,7 @@ class Modal extends React.Component {
         if (!prevProps.show && this.props.show){
             this._showModal();
         } else if (prevProps.show && !this.props.show){
+            this.__bumpUuid();
             let isAnimating = /\bfade\b/.test(this.modalRef.className);
 
             if (isAnimating){
@@ -80,7 +81,7 @@ class Modal extends React.Component {
                 this.setState({ hasInCssClass: false, exists: false });
             }
 
-            if (currentModals.length === 1) {
+            if (currentModals.length <= 1) { //less than since it may have been closed before modal was activated
                 removeBackdrop();
             }
             if (currentModals[currentModals.length - 1] == this){
@@ -89,6 +90,8 @@ class Modal extends React.Component {
         }
     }
     _showModal(){
+        this.__bumpUuid();
+        let currentUid = this.__showingUuid;
         let div = !currentModals.length ? document.createElement('div') : null,
             isAnimating = /\bfade\b/.test(this.modalRef.className);
 
@@ -108,7 +111,12 @@ class Modal extends React.Component {
                 this.setState({ hasInCssClass: true });
             }, 1);
             //provide some small delay before this modal is eligible to be closed.  We don't want a double click to open / show the modal.
-            setTimeout(() => /* highly unlikely, but just in case --> */ !this.dead && currentModals.push(this), 200);
+            setTimeout(() => {
+                //highly unlikely, but just in case 
+                if (this.dead) return;
+                if (currentUid !== this.__showingUuid) return;
+                currentModals.push(this);
+            }, 200);
         } else {
             if (div) {
                 document.body.appendChild(div);
