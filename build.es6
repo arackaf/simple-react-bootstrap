@@ -26,7 +26,7 @@ Promise.all([
 ]).then(([library, modal, navBar, buttonDropdown]) =>
     Promise.all([
         library.write({ format: 'cjs', dest: './dist/simple-react-bootstrap.js' }),
-        library.write({ format: 'iife', dest: './dist/simple-react-bootstrap-script-tag.js', moduleName: 'ButtonDropdown', globals: { react: 'React', 'react-dom': 'ReactDom' } }),
+        library.write({ format: 'iife', dest: './dist/simple-react-bootstrap-script-tag.js', moduleName: 'SimpleReactBootstrap', globals: { react: 'React', 'react-dom': 'ReactDom' } }),
         modal.write({ format: 'cjs', dest: './dist/modal.js' }),
         navBar.write({ format: 'cjs', dest: './dist/navBar.js' }),
         buttonDropdown.write({ format: 'cjs', dest: './dist/buttonDropdown.js' })
