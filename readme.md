@@ -1,5 +1,7 @@
 ﻿# simple-react-bootstrap
-Dirt simple React components implementing those Bootstrap components which require more than just css classes, namely Modal, ButtonDropdown, and NavBar.  
+Dirt simple React components.
+
+These react components implement the Bootstrap components which require more than just css classes, namely Modal, ButtonDropdown, and NavBar.  
 
 Note: these components used to be separate npm installs, namely `simple-react-bootstrap-modal`, `simple-react-bootstrap-navbar`, and `simple-react-bootstrap-button-dropdown`.  The code is the same, they're just all under one project now, as they probably should have always been.
 
