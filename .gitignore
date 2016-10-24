@@ -10,3 +10,4 @@ test-runner/testButtonDropdown.js
 test-runner/testModal.js
 test-runner/testNavBar.js
 src/library.js
+test-runner/testGlobal.js
