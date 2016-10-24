@@ -1,6 +1,4 @@
-﻿Dirt simple React components.
-
-These React components implement the Bootstrap components which require more than just css classes, namely `Modal`, `ButtonDropdown`, and `NavBar`.  
+﻿These React components implement the Bootstrap components which require more than just css classes, namely `Modal`, `ButtonDropdown`, and `NavBar`.  
 
 Note: these components used to be separate npm installs, namely `simple-react-bootstrap-modal`, `simple-react-bootstrap-navbar`, and `simple-react-bootstrap-button-dropdown`.  The code is the same, they're just all under one project now, as they probably should have always been.
 
@@ -66,7 +64,7 @@ This component actually renders the modal in place, and adds the relevant css cl
 ## Usage
 
 ```html
-<Modal className="fade" show={ this.state.basicModal } onHide={() => this.setState({ basicModal: false })}>
+<Modal className="fade" show={this.state.basicModal} onHide={() => this.setState({ basicModal: false })}>
     <Modal.Header>
         <h3>Hello World</h3>
     </Modal.Header>

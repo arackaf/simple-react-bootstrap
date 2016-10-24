@@ -1,7 +1,7 @@
 {
   "name": "simple-react-bootstrap",
-  "version": "0.0.1-beta8",
-  "description": "",
+  "version": "0.0.1-beta9",
+  "description": "Dirt simple React components.",
   "main": "./src/library.js",
   "scripts": {
     "prepublish": "node build.js",
