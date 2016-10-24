@@ -1,8 +1,0 @@
-jspm_packages/
-.idea/
-node_modules/
-src/NavBar.js
-src/testIt.js
-build.js
-test-runner/testIt.js
-dist/
