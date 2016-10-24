@@ -1,7 +1,6 @@
-﻿# simple-react-bootstrap
-Dirt simple React components.
+﻿Dirt simple React components.
 
-These react components implement the Bootstrap components which require more than just css classes, namely Modal, ButtonDropdown, and NavBar.  
+These React components implement the Bootstrap components which require more than just css classes, namely `Modal`, `ButtonDropdown`, and `NavBar`.  
 
 Note: these components used to be separate npm installs, namely `simple-react-bootstrap-modal`, `simple-react-bootstrap-navbar`, and `simple-react-bootstrap-button-dropdown`.  The code is the same, they're just all under one project now, as they probably should have always been.
 
@@ -17,13 +16,11 @@ If you're just using a script loader, like SystemJS, you'll first need to config
 
 Note that the dist folder this project installs with also has stand-alone builds of just the modal, navBar, and buttonDropdown, if you don't need them all; just be aware that NavBar is bundled with buttonDropdown, since it uses it.
 
-Lastly, if you want to test these components from just a script tag, like in a jsbin, or similar, then you can use the `simple-react-bootstrap-script-tag.js` file, also in the dist folder.  
-
-You can see code using it [here](https://github.com/arackaf/simple-react-bootstrap/blob/master/runGlobal.htm) with the real work being done [here](https://github.com/arackaf/simple-react-bootstrap/blob/master/test-runner/testGlobal.es6)
+Lastly, if you want to test these components from just a script tag, like in a jsbin, or similar, then you can use the `simple-react-bootstrap-script-tag.js` file, also in the dist folder.  You can see code using it [here](https://github.com/arackaf/simple-react-bootstrap/blob/master/runGlobal.htm) with the real work being done [here](https://github.com/arackaf/simple-react-bootstrap/blob/master/test-runner/testGlobal.es6)
 
 # Documentation
 
-The documentation / samples for these components follows, but a quick note on why there's no tabs component. It boils down to the fact that's easier to manually implement tabs components as needed, than to abstract it well.  The markup Bootstrap is expecting is rather straightforward, and it's reasonably easy to write helpers tailored to your app's architecture that listens to the right clicks, and adds the active class where needed.  For example, here's what my MobX helpers look like for rendering Bootstrap tabs.
+The documentation / samples for these components follow, but first a quick note on why there's no `tabs` component. It boils down to the fact that it's easier to manually implement a tabs component as needed, than to abstract it well.  The markup Bootstrap is expecting is rather straightforward, and it's reasonably easy to write helpers tailored to your app's architecture that listens for the right clicks, and adds the `active` class where needed.  For example, here's what my MobX helpers look like for rendering Bootstrap tabs.
 
 ```javascript
 const TabToggle = ({ model, tabProperty }) => observer(props => {
@@ -83,7 +80,7 @@ This component actually renders the modal in place, and adds the relevant css cl
 </Modal>
 ```
 
-The css class `fade` adds animation behavior, just like with regular Bootstrap.
+The css class `fade` adds animation, as with Bootstrap normally.
 
 Everything else should work as expected.  All props passed down to any of these sections should pass through properly.
 
@@ -91,7 +88,7 @@ Everything else should work as expected.  All props passed down to any of these 
 
 # NavBar
 
-The NavBar component is mostly a set of helpers for generating the html Bootstrap expects.  The real value this component adds is in the `NavBar.Dropdown` component, and the `NavBar.Toggle` component, which adds the normal Bootstrap behavior which hides the NavBar's contents and exposes a "hamburger menu" button to slides toggle the content down / up.
+The NavBar component is mostly a set of helpers for generating the html Bootstrap expects.  The real value this component adds is in the `NavBar.Dropdown`, and the `NavBar.Toggle` components; the latter adds the normal Bootstrap behavior which hides the NavBar's contents on small screens, and renders instead a "hamburger menu" button to slides toggle the contents down / up.
 
 ## Usage
 
@@ -193,7 +190,7 @@ The `NavBar.Dropdown` component is implemented internally with the ButtonDropdow
 </ButtonDropdown>
 ```
 
-will render
+which will render
 
 ```html
 <div class="btn-group">
@@ -212,7 +209,7 @@ Any properties you add to the root container, including styles, will be passed t
 
 ## Fully *fully* customizable
 
-If you need a more robust dropdown button than can be represented with a toggleButton and a dropdown div, then pass whatever arbitrary chilren you want; just be sure to manually add the `dropdown-toggle` and `dropdown-menu` classes where needed, so the component will know what's what.
+If you need a more robust dropdown button than can be represented with a toggleButton and a dropdown div, then pass whatever arbitrary children you want; just be sure to manually add the `dropdown-toggle` and `dropdown-menu` classes where needed, so the component will know what's what.
 
 ```html
 <ButtonDropdown>
@@ -265,7 +262,7 @@ One caveat to the above, is that if you want to use a custom component for the t
 
 Then two conditions must be satisfied:
 
-1. The component cannot be a stateless functional component; in other words you need to define it with `class extends React.Component`. The reason boils down to refs, and `ReactDom.findDOMNode` not working with SFAs.
+1. The component cannot be a stateless functional component; in other words you need to define it with `class extends React.Component`. The reason boils down to refs, and `ReactDom.findDOMNode` not working with SFCs.
 2. The component must pass through (or merge in) the onClick handler that's passed to it.
 
 ## Misc options
