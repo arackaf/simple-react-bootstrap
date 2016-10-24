@@ -29,10 +29,12 @@
     "gulp-print": "1.1.0",
     "gulp-rename": "1.2.0",
     "gulp-uglify": "2.0.0",
+    "install": "0.8.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "remove": "0.1.5",
     "rollup": "0.36.3",
+    "rollup-plugin-alias": "1.2.0",
     "rollup-plugin-babel": "2.6.1",
     "rollup-plugin-node-resolve": "2.0.0",
     "systemjs": "0.19.31"

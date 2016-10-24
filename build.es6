@@ -4,22 +4,27 @@ const remove = require('remove');
 const gulpUglify = require('gulp-uglify');
 const gulpRename = require('gulp-rename');
 const gulp = require('gulp');
+const alias = require('rollup-plugin-alias');
 
 try { remove.removeSync('./dist'); } catch (e) { }
 
-const getRollup = (entry, extHelpers) =>
+const getRollup = entry =>
     rollup.rollup({
         entry,
         plugins: [
             babel({
                 presets: ['react', ['es2015', { modules: false }], 'stage-2'],
-                plugins: extHelpers ? ['external-helpers'] : []
+                plugins: ['external-helpers']
+            }),
+            alias({
+                resolve: ['.es6'],
+                'simple-react-bootstrap-button-dropdown': './buttonDropdown'
             })
         ]
     });
 
 Promise.all([
-    getRollup('src/library.es6', true),
+    getRollup('src/library.es6'),
     getRollup('src/modal.es6'),
     getRollup('src/navBar.es6'),
     getRollup('src/buttonDropdown.es6')
