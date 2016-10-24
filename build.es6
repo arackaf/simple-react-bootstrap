@@ -5,8 +5,13 @@ const gulpUglify = require('gulp-uglify');
 const gulpRename = require('gulp-rename');
 const gulp = require('gulp');
 const alias = require('rollup-plugin-alias');
+const path = require('path');
+const fsE = require('fs-extra');
 
 try { remove.removeSync('./dist'); } catch (e) { }
+
+fsE.copySync(path.resolve(__dirname, './src/buttonDropdown.js'), './dist/buttonDropdown.js');
+fsE.copySync(path.resolve(__dirname, './src/modal.js'), './dist/modal.js');
 
 const getRollup = entry =>
     rollup.rollup({
@@ -25,16 +30,12 @@ const getRollup = entry =>
 
 Promise.all([
     getRollup('src/library.es6'),
-    getRollup('src/modal.es6'),
-    getRollup('src/buttonDropdown.es6'),
     getRollup('src/navBar.es6')
-]).then(([library, modal, buttonDropdown, navBar]) =>
+]).then(([library, navBar]) =>
     Promise.all([
         library.write({ format: 'cjs', dest: './dist/simple-react-bootstrap.js' }),
         library.write({ format: 'iife', dest: './dist/simple-react-bootstrap-script-tag.js', moduleName: 'SimpleReactBootstrap', globals: { react: 'React', 'react-dom': 'ReactDOM' } }),
-        modal.write({ format: 'cjs', dest: './dist/modal.js' }),
-        navBar.write({ format: 'cjs', dest: './dist/navBar.js' }),
-        buttonDropdown.write({ format: 'cjs', dest: './dist/buttonDropdown.js' })
+        navBar.write({ format: 'cjs', dest: './dist/navBar.js' })
     ])
 ).then(() => {
     gulp.src('./dist/**/*.js', { base: './' })
