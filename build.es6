@@ -18,7 +18,7 @@ const getRollup = entry =>
             }),
             alias({
                 resolve: ['.es6'],
-                'simple-react-bootstrap-button-dropdown': './buttonDropdown'
+                './buttonDropdown.js': './buttonDropdown'
             })
         ]
     });
@@ -26,9 +26,9 @@ const getRollup = entry =>
 Promise.all([
     getRollup('src/library.es6'),
     getRollup('src/modal.es6'),
-    getRollup('src/navBar.es6'),
-    getRollup('src/buttonDropdown.es6')
-]).then(([library, modal, navBar, buttonDropdown]) =>
+    getRollup('src/buttonDropdown.es6'),
+    getRollup('src/navBar.es6')
+]).then(([library, modal, buttonDropdown, navBar]) =>
     Promise.all([
         library.write({ format: 'cjs', dest: './dist/simple-react-bootstrap.js' }),
         library.write({ format: 'iife', dest: './dist/simple-react-bootstrap-script-tag.js', moduleName: 'SimpleReactBootstrap', globals: { react: 'React', 'react-dom': 'ReactDom' } }),

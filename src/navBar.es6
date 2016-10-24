@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonDropdown from 'simple-react-bootstrap-button-dropdown';
+import ButtonDropdown from './buttonDropdown.js';
 
 const spreadClassNames = (userClassName, baseCssClasses) => `${baseCssClasses || ''} ${userClassName || ''}`;
 
