@@ -41,8 +41,6 @@ function removeFromShowingModal(m){
 }
 
 document.addEventListener('click', function(evt){
-    console.log('currentModals.length', currentModals.length);
-
     if (!currentModals.length) return;
     let modalToCloseMaybe = currentModals[currentModals.length - 1];
 

@@ -1,6 +1,7 @@
-import Modal from '../src/Modal';
 import { render } from 'react-dom';
 import React from 'react';
+
+import Modal from '../src/Modal';
 
 class ModalRunner extends React.Component{
     state = { openAnimate: false, openNoAnimate: false, initialStart: false, openUnmountable1: false, isUnmounted1: false, basicModal: false, toggleOpen: false };
