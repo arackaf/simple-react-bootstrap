@@ -30,27 +30,6 @@ const ModalBody = props => {
 };
 
 const currentModals = [];
-const showingModals = [];
-const elementInAnyShowingModal = element => showingModals.some(m => m.modalRef.contains(element));
-
-function removeFromShowingModal(m){
-    let index = showingModals.indexOf(m);
-    if (index >= 0){
-        showingModals.splice(index, 1);
-    }
-}
-
-document.addEventListener('click', function(evt){
-    if (!currentModals.length) return;
-    let modalToCloseMaybe = currentModals[currentModals.length - 1];
-
-    var element = evt.target,
-        modalRoot = modalToCloseMaybe.modalRef,
-        modalContent = modalRoot.getElementsByClassName('modal-content')[0];
-
-    if (modalContent.contains(element) || elementInAnyShowingModal(element)) return;
-    currentModals[currentModals.length - 1].props.onHide();
-});
 
 function removeBackdrop(){
     let backdrop = document.getElementsByClassName('simple-react-modal-backdrop')[0];
@@ -71,15 +50,18 @@ class Modal extends React.Component {
     state = { exists: false, hasInCssClass: false };
     __showingUid = 0;
     __bumpUid = () => this.__showingUid++;
+    modalClick = evt => {
+        let activeModal = currentModals[currentModals.length - 1];
+        if (activeModal === this && evt.target === evt.currentTarget){
+            this.props.onHide()
+        }
+    };
     componentDidMount(){
         if (this.props.show){
             this._showModal();
         }
     }
     componentDidUpdate(prevProps, prevState){
-        if (!this.state.exists && prevState.exists){
-            removeFromShowingModal(this);
-        }
         if (!prevProps.show && this.props.show){
             this._showModal();
         } else if (prevProps.show && !this.props.show){
@@ -88,7 +70,6 @@ class Modal extends React.Component {
             let isAnimating = /\bfade\b/.test(this.modalRef.className);
 
             if (isAnimating){
-                showingModals.push(this);
                 this.setState({ hasInCssClass: false });
                 setTimeout(() => {
                     if (this.dead) return;
@@ -130,13 +111,11 @@ class Modal extends React.Component {
             }, 1);
             //provide some small delay before this modal is eligible to be closed.  We don't want a double click to open / show the modal.
 
-            showingModals.push(this);
             setTimeout(() => {
                 //highly unlikely, but just in case
                 if (this.dead) return;
                 if (correctUid !== this.__showingUid) return;
                 currentModals.push(this);
-                removeFromShowingModal(this);
             }, 200);
         } else {
             if (div) {
@@ -158,7 +137,7 @@ class Modal extends React.Component {
         let { className, style, show, onHide, ...rest } = this.props;
 
         return (
-            <div ref={el => this.modalRef = el} className={spreadClassNames(className, 'modal ' + (this.state.hasInCssClass ? 'in' : ''))} style={{ ...style, display: this.state.exists ? 'block' : '' }} {...rest} role="dialog">
+            <div ref={el => this.modalRef = el} onClick={this.modalClick} className={spreadClassNames(className, 'modal ' + (this.state.hasInCssClass ? 'in' : ''))} style={{ ...style, display: this.state.exists ? 'block' : '' }} {...rest} role="dialog">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         { modalHeader || null }
