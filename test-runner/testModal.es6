@@ -22,7 +22,7 @@ class ModalRunner extends React.Component{
     };
     render(){
         return (
-            <div>
+            <div className="xxx">
                 <br /><br /><br />
 
                 <button onClick={() => this.setState({ basicModal: true })}>Open Basic Modal 1</button>

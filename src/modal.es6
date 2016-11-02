@@ -76,7 +76,10 @@ class Modal extends React.Component {
             this._showModal();
         }
     }
-    componentDidUpdate(prevProps){
+    componentDidUpdate(prevProps, prevState){
+        if (!this.state.exists && prevState.exists){
+            removeFromShowingModal(this);
+        }
         if (!prevProps.show && this.props.show){
             this._showModal();
         } else if (prevProps.show && !this.props.show){
@@ -85,6 +88,7 @@ class Modal extends React.Component {
             let isAnimating = /\bfade\b/.test(this.modalRef.className);
 
             if (isAnimating){
+                showingModals.push(this);
                 this.setState({ hasInCssClass: false });
                 setTimeout(() => {
                     if (this.dead) return;
@@ -101,12 +105,11 @@ class Modal extends React.Component {
             if (currentModals[currentModals.length - 1] == this){
                 currentModals.pop();
             }
-            removeFromShowingModal(this);
         }
     }
     _showModal(){
         this.__bumpUid();
-        let currentUid = this.__showingUid;
+        let correctUid = this.__showingUid;
         let div = !currentModals.length ? document.createElement('div') : null,
             isAnimating = /\bfade\b/.test(this.modalRef.className);
 
@@ -131,7 +134,7 @@ class Modal extends React.Component {
             setTimeout(() => {
                 //highly unlikely, but just in case
                 if (this.dead) return;
-                if (currentUid !== this.__showingUid) return;
+                if (correctUid !== this.__showingUid) return;
                 currentModals.push(this);
                 removeFromShowingModal(this);
             }, 200);
