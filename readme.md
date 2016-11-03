@@ -59,7 +59,7 @@ Now, on with the documentation
 
 This is not a drop-in replacement for react-bootstrap's modal.  The APIs are very similar, but react-bootstrap is far more robust (and large).
 
-This component actually renders the modal in place, and adds the relevant css classes, and backdrops as needed to simulate normal Bootstrap behavior.  The result is a much smaller utility, but at the expense of some edge cases not working properly.  Namely, if you unmount a modal that's currently visible, it'll just vanish, without the normal animation happening.
+This component actually renders the modal in place, and adds the relevant css classes, and backdrops as needed to simulate normal Bootstrap behavior.  The result is a much smaller utility, but at the expense of some edge cases not working properly.  For example, if you unmount a modal that's currently visible, it'll just vanish, without the normal animation happening.  Also, to get the slide in animation working, I first show the modal, then in a `setTimeout(code, 1)` add the `in` class to start the animation.  This is needed because of how the Bootstrap css transition works, but it means an extremely rapid (within a very narrow range of values) toggling between the modal's open and closed state, likely via code since it's all but impossible to achieve this via user interaction, may occasionally cause an animation to fail, with the modal appearing suddenly.
 
 ## Usage
 
