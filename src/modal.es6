@@ -31,6 +31,17 @@ const ModalBody = props => {
 
 const currentModals = [];
 
+const ESC_KEY = 27;
+$(window).on('keydown', evt => {
+    let key = evt.keyCode || evt.which;
+
+    if (key == ESC_KEY){
+        if (currentModals.length){
+            currentModals[currentModals.length - 1].props.onHide();
+        }
+    }
+});
+
 function removeBackdrop(){
     let backdrop = document.getElementsByClassName('simple-react-modal-backdrop')[0];
     if (!backdrop)return;
