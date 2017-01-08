@@ -92,6 +92,7 @@ class Modal extends React.Component {
             }
 
             if (currentModals.length <= 1) { //less than since it may have been closed before modal was activated
+                document.body.classList.remove('modal-open');
                 removeBackdrop();
             }
             if (currentModals[currentModals.length - 1] == this){
@@ -119,6 +120,7 @@ class Modal extends React.Component {
                     div.classList.add('in');
                 }
                 this.setState({ hasInCssClass: true });
+                document.body.classList.add('modal-open');
             }, 1);
             //provide some small delay before this modal is eligible to be closed.  We don't want a double click to open / show the modal.
 
@@ -134,6 +136,7 @@ class Modal extends React.Component {
             }
             this.setState({ exists: true, hasInCssClass: true });
             currentModals.push(this);
+            document.body.classList.add('modal-open');
         }
     }
     render() {
