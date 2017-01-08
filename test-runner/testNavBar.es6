@@ -15,7 +15,7 @@ const RegularNavBar = () => (
         <NavBar.Nav>
             <NavBar.Item className="class-on-item">Link 1</NavBar.Item>
             <NavBar.Item disabled={true}>Link 2</NavBar.Item>
-            <NavBar.Item href="http://www.google.com">Link 3</NavBar.Item>
+            <NavBar.Item active={true} href="http://www.google.com">Link 3</NavBar.Item>
             <NavBar.Dropdown toggleClassName="pointer-cursor" style={{ color: 'red' }} text="Sub menu">
                 <NavBar.Item>Sub option a</NavBar.Item>
                 <NavBar.Item href="#foo">Sub option b</NavBar.Item>
@@ -64,7 +64,7 @@ class RegularNavBarWithManualDropDown extends React.Component {
                     <NavBar.Nav>
                         <NavBar.Item className="class-on-item">Link 1</NavBar.Item>
                         <NavBar.Item disabled={true}>Link 2</NavBar.Item>
-                        <NavBar.Item href="http://www.google.com">Link 3</NavBar.Item>
+                        <NavBar.Item active={true} href="http://www.google.com">Link 3</NavBar.Item>
 
                         <ButtonDropdown containerElementType="li" open={this.state.manualOpen} clean={true} >
                             <a className='dropdown-toggle pointer-cursor' style={{ color: 'red' }}>Sub menu <span className="caret"></span></a>

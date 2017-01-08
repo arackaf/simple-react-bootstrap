@@ -1,7 +1,7 @@
 import React from 'react';
 import ButtonDropdown from './buttonDropdown.js';
 
-const spreadClassNames = (userClassName, baseCssClasses) => `${baseCssClasses || ''} ${userClassName || ''}`;
+const spreadClassNames = (baseCssClasses = '', ...userClasses) => `${baseCssClasses} ${userClasses.join(' ')}`;
 
 const NavBarForm = props => {
     let { className, style, ...rest } = props;
@@ -32,10 +32,10 @@ const NavBarHeader = props =>
     }</div>;
 
 const NavBarItem = props => {
-    let { disabled, className, href, children, ...rest } = props;
+    let { disabled, className, active, href, children, ...rest } = props;
 
     return (
-        <li disabled={!!disabled} className={spreadClassNames(className, !!disabled ? 'disabled' : '')} { ...rest }><a href={props.href}>{children}</a></li>
+        <li disabled={!!disabled} className={spreadClassNames(className, !!disabled ? 'disabled' : '', active ? 'active' : '')} { ...rest }><a href={href}>{children}</a></li>
     );
 };
 
