@@ -64,7 +64,12 @@ class ButtonDropdown extends Component {
         if (toggleUnadjusted) {
             //when the toggle button is clicked, click THIS method, in addition to any onClick method supplied by the user. Do not call regular toggle method in controlled mode
             let rootToggleClick = this.props.onToggle || (typeof this.props.open === 'undefined' ? this.toggle : ()=>{});
-            let toggleClick = toggleUnadjusted.props.onClick ? evt => { toggleUnadjusted.props.onClick(); rootToggleClick(evt); } : rootToggleClick;
+            let toggleClick = toggleUnadjusted.props.onClick ?
+                evt => {
+                    if (disabled) return;
+                    toggleUnadjusted.props.onClick();
+                    rootToggleClick(evt);
+                } : !disabled ? rootToggleClick : ()=>{};
             toggle = React.cloneElement(toggleUnadjusted, {
                 className: toggleClasses + (toggleUnadjusted.props.className || ''),
                 onClick: toggleClick,
