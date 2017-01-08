@@ -24,6 +24,13 @@ class TestCases extends Component {
                             </div>
                         </ButtonDropdown>
                         <br /><br />
+                        <ButtonDropdown disabled={true}>
+                            <button className="btn btn-default">Disabled</button>
+                            <div>
+                                <h1>Hello</h1>
+                            </div>
+                        </ButtonDropdown>
+                        <br /><br />
                         <ButtonDropdown>
                             <DummyButton></DummyButton>
                             <div>
