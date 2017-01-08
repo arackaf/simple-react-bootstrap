@@ -134,7 +134,7 @@ NavBar.Dropdown = NavBarDropdown;
 NavBar.Form = NavBarForm;
 
 function filterValidNavSubItems(item){
-    return item.type !== NavBarHeader;
+    return item && item.type !== NavBarHeader;
 }
 
 export default NavBar;
