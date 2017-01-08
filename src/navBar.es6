@@ -7,7 +7,7 @@ const NavBarForm = props => {
     let { className, style, ...rest } = props;
 
     return (
-        <form onSubmit={evt => evt.preventDefault()} className={spreadClassNames(className, 'navbar-form')}>
+        <form onSubmit={evt => evt.preventDefault()} className={spreadClassNames(className, 'navbar-form')} style={style} {...rest}>
             {props.children}
         </form>
     );
@@ -106,14 +106,16 @@ class NavBar extends React.Component{
     }
     render(){
         let header = this.props.children.find(c => c.type === NavBarHeader),
-            navSubItems = this.props.children.filter(filterValidNavSubItems);
+            navSubItems = this.props.children.filter(el => el != header);
 
         if (header) {
             header = React.cloneElement(header, {onClick: this.toggleMobileCollapse.bind(this)});
         }
 
+        let {style, ...rest} = this.props;
+
         return (
-            <nav className="navbar navbar-default">
+            <nav className="navbar navbar-default" style={style} {...rest}>
                 <div className="container-fluid">
                     { header || null }
                     <div className={(this.state.collapsing ? ' collapsing ' : ' collapse ') + ' navbar-collapse ' + (this.state.expanded ? ' in ' : '')} style={{ height: this.state.collapseHeight || null }}>
@@ -132,9 +134,5 @@ NavBar.Brand = NavBarBrand;
 NavBar.Toggle = NavBarToggle;
 NavBar.Dropdown = NavBarDropdown;
 NavBar.Form = NavBarForm;
-
-function filterValidNavSubItems(item){
-    return item && item.type !== NavBarHeader;
-}
 
 export default NavBar;

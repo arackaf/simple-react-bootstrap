@@ -27,6 +27,12 @@ const RegularNavBar = () => (
                 <NavBar.Item>Sub option c</NavBar.Item>
             </NavBar.Dropdown>
         </NavBar.Nav>
+        <NavBar.Header>
+            <NavBar.Brand>
+                <a style={{ cursor: 'pointer' }}>Second Header</a>
+            </NavBar.Brand>
+            <NavBar.Toggle />
+        </NavBar.Header>
         <NavBar.Form className="pull-left">
             <div className="form-group">
                 <div className="input-group">
@@ -75,6 +81,12 @@ class RegularNavBarWithManualDropDown extends React.Component {
                             <NavBar.Item>Sub option c</NavBar.Item>
                         </NavBar.Dropdown>
                     </NavBar.Nav>
+                    <NavBar.Header>
+                        <NavBar.Brand>
+                            <a style={{ cursor: 'pointer' }}>Second Header</a>
+                        </NavBar.Brand>
+                        <NavBar.Toggle />
+                    </NavBar.Header>
                     <NavBar.Form className="pull-left">
                         <div className="form-group">
                             <div className="input-group">
