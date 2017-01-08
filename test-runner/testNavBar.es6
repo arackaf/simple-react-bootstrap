@@ -19,6 +19,7 @@ const RegularNavBar = () => (
             <NavBar.Dropdown toggleClassName="pointer-cursor" style={{ color: 'red' }} text="Sub menu">
                 <NavBar.Item>Sub option a</NavBar.Item>
                 <NavBar.Item href="#foo">Sub option b</NavBar.Item>
+                <NavBar.ItemDivider />
                 <NavBar.Item>Sub option c</NavBar.Item>
             </NavBar.Dropdown>
             <NavBar.Dropdown disabled={true} text="Sub menu">
@@ -47,10 +48,7 @@ const RegularNavBar = () => (
 );
 
 class RegularNavBarWithManualDropDown extends React.Component {
-    constructor() {
-        super();
-        this.state = { manualOpen: false };
-    }
+    state = { manualOpen: false }
     render() {
         return (
             <div>
@@ -71,6 +69,7 @@ class RegularNavBarWithManualDropDown extends React.Component {
                             <ul className='dropdown-menu'>
                                 <NavBar.Item>Sub option a</NavBar.Item>
                                 <NavBar.Item href="#foo">Sub option b</NavBar.Item>
+                                <NavBar.ItemDivider />
                                 <NavBar.Item>Sub option c</NavBar.Item>
                             </ul>
                         </ButtonDropdown>

@@ -101,10 +101,11 @@ The NavBar component is mostly a set of helpers for generating the html Bootstra
     <NavBar.Nav>
         <NavBar.Item className="class-on-item">Link 1</NavBar.Item>
         <NavBar.Item disabled={true}>Link 2</NavBar.Item>
-        <NavBar.Item href="http://www.google.com">Link 3</NavBar.Item>
+        <NavBar.Item active={true} href="http://www.google.com">Link 3</NavBar.Item>
         <NavBar.Dropdown toggleClassName="pointer-cursor" style={{ color: 'red' }} text="Sub menu">
             <NavBar.Item>Sub option a</NavBar.Item>
             <NavBar.Item href="#foo">Sub option b</NavBar.Item>
+            <NavBar.ItemDivider />
             <NavBar.Item>Sub option c</NavBar.Item>
         </NavBar.Dropdown>
         <NavBar.Dropdown disabled={true} text="Sub menu">
@@ -113,6 +114,12 @@ The NavBar component is mostly a set of helpers for generating the html Bootstra
             <NavBar.Item>Sub option c</NavBar.Item>
         </NavBar.Dropdown>
     </NavBar.Nav>
+    <NavBar.Header>
+        <NavBar.Brand>
+            <a style={{ cursor: 'pointer' }}>Second Header</a>
+        </NavBar.Brand>
+        <NavBar.Toggle />
+    </NavBar.Header>
     <NavBar.Form className="pull-left">
         <div className="form-group">
             <div className="input-group">
@@ -126,7 +133,7 @@ The NavBar component is mostly a set of helpers for generating the html Bootstra
 </NavBar>
 ```
 
-The `NavBar.Dropdown` component is implemented internally with the ButtonDropdown component (documented below).  As a result, manually controlling the dropdown's "open" state is just a matter of rendering the ButtonDropdown yourself, in controlled mode.  For example
+The `NavBar.Dropdown` component is implemented internally with the ButtonDropdown component (documented below).  `ignoreContentClick` will be passed through as needed; also, manually controlling the dropdown's "open" state is just a matter of rendering the ButtonDropdown yourself, in controlled mode.  For example
 
 ```javascript
 <div>
@@ -140,13 +147,14 @@ The `NavBar.Dropdown` component is implemented internally with the ButtonDropdow
         <NavBar.Nav>
             <NavBar.Item className="class-on-item">Link 1</NavBar.Item>
             <NavBar.Item disabled={true}>Link 2</NavBar.Item>
-            <NavBar.Item href="http://www.google.com">Link 3</NavBar.Item>
+            <NavBar.Item active={true} href="http://www.google.com">Link 3</NavBar.Item>
 
             <ButtonDropdown containerElementType="li" open={this.state.manualOpen} clean={true} >
-                <a className='dropdown-toggle'>Sub menu <span className="caret"></span></a>
+                <a className='dropdown-toggle pointer-cursor' style={{ color: 'red' }}>Sub menu <span className="caret"></span></a>
                 <ul className='dropdown-menu'>
                     <NavBar.Item>Sub option a</NavBar.Item>
                     <NavBar.Item href="#foo">Sub option b</NavBar.Item>
+                    <NavBar.ItemDivider />
                     <NavBar.Item>Sub option c</NavBar.Item>
                 </ul>
             </ButtonDropdown>
@@ -157,6 +165,12 @@ The `NavBar.Dropdown` component is implemented internally with the ButtonDropdow
                 <NavBar.Item>Sub option c</NavBar.Item>
             </NavBar.Dropdown>
         </NavBar.Nav>
+        <NavBar.Header>
+            <NavBar.Brand>
+                <a style={{ cursor: 'pointer' }}>Second Header</a>
+            </NavBar.Brand>
+            <NavBar.Toggle />
+        </NavBar.Header>
         <NavBar.Form className="pull-left">
             <div className="form-group">
                 <div className="input-group">
@@ -265,9 +279,13 @@ Then two conditions must be satisfied:
 
 ## Misc options
 
-##### Clean
+##### clean
 
 Causes the `btn-group` class to not be added to the root container
+
+##### disabled
+
+Disables the button, and prevents any toggling from happening
 
 ##### containerElementType
 
