@@ -39,11 +39,13 @@ const NavBarItem = props => {
     );
 };
 
+const NavBarItemDivider = props => <li role="separator" className="divider"></li>
+
 const NavBarDropdown = props => {
-    let { toggleClassName, style, disabled, text, children, ...rest } = props;
+    let { toggleClassName, style, disabled, text, children, ignoreContentClick = false, ...rest } = props;
 
     return (
-        <ButtonDropdown containerElementType="li" clean={true} className={`dropdown ${!!disabled ? 'disabled' : ''}`} disabled={!!disabled}>
+        <ButtonDropdown containerElementType="li" clean={true} ignoreContentClick={ignoreContentClick} className={`dropdown ${!!disabled ? 'disabled' : ''}`} disabled={!!disabled}>
             <a className={spreadClassNames(toggleClassName, 'dropdown-toggle')} style={style || {}} { ...rest }>{text} <span className="caret"></span></a>
             <ul className="dropdown-menu">
                 {children}
@@ -129,6 +131,7 @@ class NavBar extends React.Component{
 
 NavBar.Nav = Nav;
 NavBar.Item = NavBarItem;
+NavBar.ItemDivider = NavBarItemDivider;
 NavBar.Header = NavBarHeader;
 NavBar.Brand = NavBarBrand;
 NavBar.Toggle = NavBarToggle;
