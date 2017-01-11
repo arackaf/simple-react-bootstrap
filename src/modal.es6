@@ -32,7 +32,8 @@ const ModalBody = props => {
 const currentModals = [];
 
 const ESC_KEY = 27;
-$(window).on('keydown', evt => {
+
+window.addEventListener('keydown', evt => {
     let key = evt.keyCode || evt.which;
 
     if (key == ESC_KEY){
