@@ -1,6 +1,8 @@
 import React from 'react';
 import ButtonDropdown from './buttonDropdown.js';
 
+const COLLAPSE_TIMEOUT = 355;
+
 const spreadClassNames = (baseCssClasses = '', ...userClasses) => `${baseCssClasses} ${userClasses.join(' ')}`;
 
 const NavBarForm = props => {
@@ -74,7 +76,7 @@ class NavBar extends React.Component{
             this._pendingAnimationClear = setTimeout(() => {
                 this.setState({ collapsing: false, collapseHeight: null });
                 this._cachedHeight = null;
-            }, 300);
+            }, COLLAPSE_TIMEOUT);
         } else {
 
             if (!this._cachedHeight) {
@@ -100,7 +102,7 @@ class NavBar extends React.Component{
             this.setState({ collapsing: true, expanding: true });
             setTimeout(() => this.setState({ collapseHeight: this._cachedHeight }), 2);
 
-            this._pendingAnimationClear = setTimeout(() => this.setState({ collapsing: false, expanded: true, expanding: false }), 300);
+            this._pendingAnimationClear = setTimeout(() => this.setState({ collapsing: false, expanded: true, expanding: false }), COLLAPSE_TIMEOUT);
         }
     }
     componentWillUnmount(){
