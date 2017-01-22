@@ -12,6 +12,7 @@ try { remove.removeSync('./dist'); } catch (e) { }
 
 fsE.copySync(path.resolve(__dirname, './src/buttonDropdown.js'), './dist/buttonDropdown.js');
 fsE.copySync(path.resolve(__dirname, './src/modal.js'), './dist/modal.js');
+fsE.copySync(path.resolve(__dirname, './src/navBar.js'), './dist/navBar.js');
 
 const getRollup = entry =>
     rollup.rollup({
@@ -29,13 +30,11 @@ const getRollup = entry =>
     });
 
 Promise.all([
-    getRollup('src/library.es6'),
-    getRollup('src/navBar.es6')
+    getRollup('src/library.es6')
 ]).then(([library, navBar]) =>
     Promise.all([
         library.write({ format: 'cjs', dest: './dist/simple-react-bootstrap.js' }),
-        library.write({ format: 'iife', dest: './dist/simple-react-bootstrap-script-tag.js', moduleName: 'SimpleReactBootstrap', globals: { react: 'React', 'react-dom': 'ReactDOM' } }),
-        navBar.write({ format: 'cjs', dest: './dist/navBar.js' })
+        library.write({ format: 'iife', dest: './dist/simple-react-bootstrap-script-tag.js', moduleName: 'SimpleReactBootstrap', globals: { react: 'React', 'react-dom': 'ReactDOM' } })
     ])
 ).then(() => {
     gulp.src('./dist/**/*.js', { base: './' })

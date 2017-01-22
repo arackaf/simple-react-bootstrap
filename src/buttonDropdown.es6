@@ -16,10 +16,13 @@ class ButtonDropdown extends Component {
 		if (toggleBtnDomNode && toggleBtnDomNode.contains(evt.target)) return;
 
         let isOpen = typeof this.props.open !== 'undefined' ? this.props.open : this.state.open;
+        let {keepOpenIfItemClickedNoLongerInDocument} = this.props;
 
 		if (isOpen){
 			if (this.props.ignoreContentClick){
 				if (this.contentMenu && this.contentMenu.contains(evt.target)) return;
+				//adding for a specific use case that may not even be reproducable depending on circumstance.  Keeping undocumented for now.
+				if (keepOpenIfItemClickedNoLongerInDocument && !document.contains(evt.target)) return;
 			}
 
             if (this.props.onToggle){
@@ -37,7 +40,7 @@ class ButtonDropdown extends Component {
 		document.removeEventListener('click', this.documentClick);
 	}
     render(){
-        let { children, className = '', containerElementType = 'div', disabled = false, ignoreContentClick, deferDropdownRendering, onToggle, open, clean, ...rest } = this.props;
+        let { children, className = '', containerElementType = 'div', disabled = false, ignoreContentClick, deferDropdownRendering, onToggle, open, clean, keepOpenIfItemClickedNoLongerInDocument, ...rest } = this.props;
 
         if (!Array.isArray(children)){
             throw 'Error - at least two children should be passed: a toggle, and dropdown menu, at a minimum'
