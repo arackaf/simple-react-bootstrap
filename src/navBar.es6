@@ -116,10 +116,10 @@ class NavBar extends React.Component{
             header = React.cloneElement(header, {onClick: this.toggleMobileCollapse.bind(this)});
         }
 
-        let {style, ...rest} = this.props;
+        let {style, className = '', ...rest} = this.props;
 
         return (
-            <nav className="navbar navbar-default" style={style} {...rest}>
+            <nav className={'navbar navbar-default ' + className} style={style} {...rest}>
                 <div className="container-fluid">
                     { header || null }
                     <div className={(this.state.collapsing ? ' collapsing ' : ' collapse ') + ' navbar-collapse ' + (this.state.expanded ? ' in ' : '')} style={{ height: this.state.collapseHeight || null }}>

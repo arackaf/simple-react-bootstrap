@@ -52,7 +52,7 @@ class RegularNavBarWithManualDropDown extends React.Component {
     render() {
         return (
             <div>
-                <NavBar>
+                <NavBar className="x y z">
                     <NavBar.Header>
                         <NavBar.Brand>
                             <a style={{ cursor: 'pointer' }}>Header</a>
