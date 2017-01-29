@@ -141,15 +141,17 @@ class Modal extends React.Component {
         }
     }
     render() {
-        let { children, show, onHide, className, style, ...rest } = this.props;
+        let { children, manual, show, onHide, className, style, ...rest } = this.props;
 
         return (
             <div ref={el => this.modalRef = el} onClick={this.modalClick} className={spreadClassNames(className, 'modal ' + (this.state.hasInCssClass ? 'in' : ''))} style={{ ...style, display: this.state.exists ? 'block' : '' }} {...rest} role="dialog">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        {children}
+                {manual ? children :
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            {children}
+                        </div>
                     </div>
-                </div>
+                }
             </div>
         );
     }

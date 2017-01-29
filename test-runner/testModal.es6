@@ -35,6 +35,8 @@ class ModalRunner extends React.Component{
                 <br /><br />
                 <button onClick={() => this.setState({ initialStart: true })}>Open initial start modal </button>
                 <br /><br />
+                <button onClick={() => this.setState({ manualModal1: true })}>Open manual modal </button>
+                <br /><br />
                 <input defaultValue={2} placeholder="toggles" ref={el => this.toggles = el} />&nbsp;<input defaultValue={50} placeholder="delay" ref={el => this.delay = el} />
                 <br />
                 <button onClick={this.toggleTest}>Run toggle</button>
@@ -186,6 +188,23 @@ class ModalRunner extends React.Component{
                             <button type="button" className="btn btn-primary">Save changes</button>
                         </Modal.Footer>
                     </Modal> : null}
+
+                    <Modal manual={true} className="fade" show={ this.state.manualModal1 } onHide={() => this.setState({ manualModal1: false })}>
+                        <div style={{backgroundColor: 'yellow'}} className="modal-dialog">
+                            <div style={{backgroundColor: 'green'}} className="modal-content">
+                                <Modal.Header>
+                                    <h3>Hello World</h3>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <p>Modal body</p>
+                                </Modal.Body>
+                                <Modal.Footer>
+                                    <button type="button" className="btn btn-default" onClick={() => this.setState({ manualModal1: false })}>Close</button>
+                                    <button type="button" className="btn btn-primary">Save changes</button>
+                                </Modal.Footer>
+                            </div>
+                        </div>
+                    </Modal>
 
 
             </div>
