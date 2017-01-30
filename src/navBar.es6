@@ -25,13 +25,20 @@ const NavBarToggle = props =>
         <span className="icon-bar"></span>
     </button>;
 
-const NavBarHeader = props =>
-    <div className="navbar-header">{
-        React.Children.map(props.children, child =>
-            child.type === NavBarToggle
-                ? React.cloneElement(child, {onClick: props.onClick, key: 'nav-bar-toggle'})
-                : child)
-    }</div>;
+class NavBarHeader extends React.Component {
+    render(){
+        let {children, onClick} = this.props;
+        return (
+            <div className="navbar-header" ref={el => this.el = el}>{
+                React.Children.map(children, child =>
+                    child.type === NavBarToggle
+                        ? React.cloneElement(child, {onClick: onClick, key: 'nav-bar-toggle'})
+                        : child)
+            }</div>
+        )
+    }
+}
+
 
 const NavBarItem = props => {
     let { disabled, className, active, href, children, ...rest } = props;
@@ -62,47 +69,45 @@ const Nav = props =>
     </ul>;
 
 class NavBar extends React.Component{
-    constructor(){
-        super();
-        this.state = { collapsed: true, heightExpanded: false, collapseHeight: null };
-    }
-    toggleMobileCollapse(evt){
+    state = { collapsed: true, heightExpanded: false, collapseHeight: null };
+    _clearAnimation = () => {
         if (this._pendingAnimationClear){
             clearTimeout(this._pendingAnimationClear);
             this._pendingAnimationClear = null;
         }
+    };
+    close = () => {
+        this.setState({ collapsing: true, collapseHeight: null, expanding: false, expanded: false });
+        this._pendingAnimationClear = setTimeout(() => {
+            this.setState({ collapsing: false, collapseHeight: null });
+            this._cachedHeight = null;
+        }, COLLAPSE_TIMEOUT);
+    };
+    expand = () => {
+        if (!this._cachedHeight) {
+            let headerNode = this.headerEl.el,
+                collapseContentToToggle = headerNode.nextSibling;
+
+            collapseContentToToggle.style.visibility = 'hidden';
+            collapseContentToToggle.classList.add('in');
+            let offsetHeight = collapseContentToToggle.offsetHeight;
+            collapseContentToToggle.style.visibility = '';
+            collapseContentToToggle.classList.remove('in');
+
+            this._cachedHeight = offsetHeight;
+        }
+
+        this.setState({ collapsing: true, expanding: true });
+        setTimeout(() => this.setState({ collapseHeight: this._cachedHeight }), 2);
+
+        this._pendingAnimationClear = setTimeout(() => this.setState({ collapsing: false, expanded: true, expanding: false }), COLLAPSE_TIMEOUT);
+    };
+    toggleMobileCollapse(){
+        this._clearAnimation();
         if (this.state.expanded || this.state.expanding){
-            this.setState({ collapsing: true, collapseHeight: null, expanding: false, expanded: false });
-            this._pendingAnimationClear = setTimeout(() => {
-                this.setState({ collapsing: false, collapseHeight: null });
-                this._cachedHeight = null;
-            }, COLLAPSE_TIMEOUT);
+            this.close();
         } else {
-
-            if (!this._cachedHeight) {
-                let currentNode = evt.target,
-                    collapseContentToToggle;
-
-                while (currentNode = currentNode.parentNode){
-                    if (currentNode.tagName === 'DIV'){
-                        collapseContentToToggle = currentNode.nextSibling;
-                        break;
-                    }
-                }
-
-                collapseContentToToggle.style.visibility = 'hidden';
-                collapseContentToToggle.classList.add('in');
-                let offsetHeight = collapseContentToToggle.offsetHeight;
-                collapseContentToToggle.style.visibility = '';
-                collapseContentToToggle.classList.remove('in');
-
-                this._cachedHeight = offsetHeight;
-            }
-
-            this.setState({ collapsing: true, expanding: true });
-            setTimeout(() => this.setState({ collapseHeight: this._cachedHeight }), 2);
-
-            this._pendingAnimationClear = setTimeout(() => this.setState({ collapsing: false, expanded: true, expanding: false }), COLLAPSE_TIMEOUT);
+            this.expand();
         }
     }
     componentWillUnmount(){
@@ -113,7 +118,7 @@ class NavBar extends React.Component{
             navSubItems = this.props.children.filter(el => el != header);
 
         if (header) {
-            header = React.cloneElement(header, {onClick: this.toggleMobileCollapse.bind(this)});
+            header = React.cloneElement(header, {onClick: this.toggleMobileCollapse.bind(this), ref: el => this.headerEl = el});
         }
 
         let {style, className = '', ...rest} = this.props;
