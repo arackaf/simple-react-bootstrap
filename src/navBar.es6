@@ -76,6 +76,11 @@ class NavBar extends React.Component{
             this._pendingAnimationClear = null;
         }
     };
+    closeIfOpen = () => {
+        if (this.state.expanding || this.state.expanded){
+            this.close();
+        }
+    };
     close = () => {
         this.setState({ collapsing: true, collapseHeight: null, expanding: false, expanded: false });
         this._pendingAnimationClear = setTimeout(() => {
