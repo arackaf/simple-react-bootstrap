@@ -20,7 +20,16 @@ class ButtonDropdown extends Component {
 
 		if (isOpen){
 			if (this.props.ignoreContentClick){
-				if (this.contentMenu && this.contentMenu.contains(evt.target)) return;
+                let contentMenuNode;
+                if (this.contentMenu){
+                    if (this.contentMenu instanceof Component){
+                        contentMenuNode = findDOMNode(this.contentMenu);
+                    } else {
+                        contentMenuNode = this.contentMenu;
+                    }
+                }
+
+				if (contentMenuNode && contentMenuNode.contains(evt.target)) return;
 				//adding for a specific use case that may not even be reproducable depending on circumstance.  Keeping undocumented for now.
 				if (keepOpenIfItemClickedNoLongerInDocument && !document.contains(evt.target)) return;
 			}

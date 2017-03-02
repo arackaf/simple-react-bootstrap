@@ -5,7 +5,18 @@ import ButtonDropdown from '../src/ButtonDropdown';
 
 class DummyButton extends Component {
     render(){
-        return <button className={"btn btn-primary" + (' ' + this.props.className)} onClick={this.props.onClick}>Custom Element</button>
+        let {text} = this.props;
+        return <button className={"btn btn-primary" + (' ' + this.props.className)} onClick={this.props.onClick}>{text || 'Custom Element'}</button>
+    }
+}
+
+class DummyContent extends Component {
+    render(){
+        return (
+            <div className={this.props.className}>
+                <h1>Hello World - custom component</h1>
+            </div>
+        )
     }
 }
 
@@ -38,6 +49,44 @@ class TestCases extends Component {
                             </div>
                         </ButtonDropdown>
                         <br /><br />
+
+                        <ButtonDropdown>
+                            <button className="btn btn-default">Custom content</button>
+                            <DummyContent />
+                        </ButtonDropdown>
+                        <br /><br />
+
+                        <ButtonDropdown>
+                            <DummyButton text='Custom button and custom content'></DummyButton>
+                            <DummyContent />
+                        </ButtonDropdown>
+                        <br /><br />
+
+                        <ButtonDropdown ignoreContentClick={true}>
+                            <button className="btn btn-default">Custom content + ignore</button>
+                            <DummyContent />
+                        </ButtonDropdown>
+                        <br /><br />
+
+                        <ButtonDropdown ignoreContentClick={true}>
+                            <DummyButton text='Custom button and custom content + ignore'></DummyButton>
+                            <DummyContent />
+                        </ButtonDropdown>
+                        <br /><br />
+
+                        <ButtonDropdown ignoreContentClick={true} deferDropdownRendering={true}>
+                            <button className="btn btn-default">Custom content + defer</button>
+                            <DummyContent />
+                        </ButtonDropdown>
+                        <br /><br />
+
+                        <ButtonDropdown ignoreContentClick={true} deferDropdownRendering={true}>
+                            <DummyButton text='Custom button and custom content + defer'></DummyButton>
+                            <DummyContent />
+                        </ButtonDropdown>
+                        <br /><br />                        
+
+
                         <div className="btn-group"> {/*cheap hack to get this to display correctly - since we added the clean option*/}
                             <ButtonDropdown clean={true}>
                                 <button className="btn btn-default">Out of the box + clean</button>

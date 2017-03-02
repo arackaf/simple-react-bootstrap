@@ -277,6 +277,13 @@ Then two conditions must be satisfied:
 1. The component cannot be a stateless functional component; in other words you need to define it with `class extends React.Component`. The reason boils down to refs, and `ReactDom.findDOMNode` not working with SFCs.
 2. The component must pass through (or merge in) the onClick handler that's passed to it.
 
+## Using a custom component for the dropdown content
+
+To use a custom component for the dropdown content, two conditions must be satisfied
+
+1. The component cannot be a stateless functional component; in other words you need to define it with `class extends React.Component`. The reason boils down to refs, and `ReactDom.findDOMNode` not working with SFCs.
+2. The component must pass through (or merge in) the classNames property, so the right css class makes it in.
+
 ## Misc options
 
 ##### clean
