@@ -63,8 +63,8 @@ const NavBarDropdown = props => {
     );
 };
 
-const Nav = props =>
-    <ul { ...props } className="nav navbar-nav">
+const Nav = ({className = '', ...props}) =>
+    <ul { ...props } className={"nav navbar-nav " + className}>
         {props.children}
     </ul>;
 
