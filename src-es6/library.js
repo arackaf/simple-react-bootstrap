@@ -1,6 +1,6 @@
-﻿import ButtonDropdown  from './buttonDropdown.es6';
-import Modal from './modal.es6';
-import NavBar from './navBar.es6';
+﻿import ButtonDropdown  from './buttonDropdown';
+import Modal from './modal';
+import NavBar from './navBar';
 
 export {ButtonDropdown}
 export {Modal}
