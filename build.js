@@ -21,26 +21,22 @@ const getRollup = entry =>
             babel({
                 presets: ['react', ['es2015', { modules: false }], 'stage-2'],
                 plugins: ['external-helpers']
-            }),
-            alias({
-                resolve: ['.es6'],
-                './buttonDropdown.js': './buttonDropdown'
             })
         ]
     });
 
-Promise.all([
-    getRollup('src/library.es6')
-]).then(([library, navBar]) =>
-    Promise.all([
-        library.write({ format: 'cjs', dest: './dist/simple-react-bootstrap.js' }),
-        library.write({ format: 'iife', dest: './dist/simple-react-bootstrap-script-tag.js', moduleName: 'SimpleReactBootstrap', globals: { react: 'React', 'react-dom': 'ReactDOM' } })
-    ])
-).then(() => {
-    gulp.src('./dist/**/*.js', { base: './' })
-        .pipe(gulpUglify())
-        .pipe(gulpRename(path => { path.basename = path.basename + '.min'; }))
-        .pipe(gulp.dest(''))
-}).catch(err => console.log(err));
+Promise
+    .resolve(getRollup('src-es6/library.js'))
+    .then(library => 
+        Promise.all([
+            library.write({ format: 'cjs', dest: './dist/simple-react-bootstrap.js' }),
+            library.write({ format: 'iife', dest: './dist/simple-react-bootstrap-script-tag.js', moduleName: 'SimpleReactBootstrap', globals: { react: 'React', 'react-dom': 'ReactDOM' } })
+        ])
+    ).then(() => {
+        gulp.src('./dist/**/*.js', { base: './' })
+            .pipe(gulpUglify())
+            .pipe(gulpRename(path => { path.basename = path.basename + '.min'; }))
+            .pipe(gulp.dest(''))
+    }).catch(err => console.log(err));
 
 
