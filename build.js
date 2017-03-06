@@ -10,6 +10,7 @@ const fsE = require('fs-extra');
 
 try { remove.removeSync('./dist'); } catch (e) { }
 
+fsE.copySync(path.resolve(__dirname, './src-es6/library.js'), './src/library-with-imports.js');
 fsE.copySync(path.resolve(__dirname, './src/buttonDropdown.js'), './dist/buttonDropdown.js');
 fsE.copySync(path.resolve(__dirname, './src/modal.js'), './dist/modal.js');
 fsE.copySync(path.resolve(__dirname, './src/navBar.js'), './dist/navBar.js');
