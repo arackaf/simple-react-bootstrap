@@ -1,13 +1,5 @@
 .idea/
 node_modules/
-src/testIt.js
-build.js
+src/
 dist/
-src/modal.js
-src/navBar.js
-src/buttonDropdown.js
-test-runner/testButtonDropdown.js
-test-runner/testModal.js
-test-runner/testNavBar.js
-src/library.js
-test-runner/testGlobal.js
+test-runner/
