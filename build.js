@@ -10,11 +10,6 @@ const fsE = require('fs-extra');
 
 try { remove.removeSync('./dist'); } catch (e) { }
 
-fsE.copySync(path.resolve(__dirname, './src-es6/library.js'), './src/library-with-imports.js');
-fsE.copySync(path.resolve(__dirname, './src/buttonDropdown.js'), './dist/buttonDropdown.js');
-fsE.copySync(path.resolve(__dirname, './src/modal.js'), './dist/modal.js');
-fsE.copySync(path.resolve(__dirname, './src/navBar.js'), './dist/navBar.js');
-
 const getRollup = entry =>
     rollup.rollup({
         entry,
@@ -31,10 +26,11 @@ Promise
     .then(library => 
         Promise.all([
             library.write({ format: 'cjs', dest: './dist/simple-react-bootstrap.js' }),
+            library.write({ format: 'es', dest: './dist/simple-react-bootstrap-module.js' }),
             library.write({ format: 'iife', dest: './dist/simple-react-bootstrap-script-tag.js', moduleName: 'SimpleReactBootstrap', globals: { react: 'React', 'react-dom': 'ReactDOM' } })
         ])
     ).then(() => {
-        gulp.src('./dist/**/*.js', { base: './' })
+        gulp.src(['./dist/**/*.js', '!./dist/simple-react-bootstrap-module.js'], { base: './' })
             .pipe(gulpUglify())
             .pipe(gulpRename(path => { path.basename = path.basename + '.min'; }))
             .pipe(gulp.dest(''))

@@ -18,12 +18,7 @@ gulp.task('transpile-all', function () {
         .pipe(babel(babelOptions))
         .pipe(rename(path => { path.dirname = path.dirname.replace(/src-es6/, 'src').replace(/test-runner-es6/, 'test-runner')} ))
         .pipe(gulp.dest(''))
-        .pipe(gprint(function(filePath){ return "File processed: " + filePath; }));
-
-
-        //.pipe(rename({ extname: ".js" }))
-        //.pipe(gulp.dest(''))
-        //        
+        .pipe(gprint(function(filePath){ return "File processed: " + filePath; })); 
 });
 
 gulp.task('transpile-watch', function() {
