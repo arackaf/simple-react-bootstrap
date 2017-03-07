@@ -1,8 +1,8 @@
 {
   "name": "simple-react-bootstrap",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "Dirt simple React components.",
-  "main": "./src/library-with-imports.js",
+  "main": "./dist/simple-react-bootstrap-module.js",
   "scripts": {
     "prepublish": "node build.js",
     "build": "node build.js"

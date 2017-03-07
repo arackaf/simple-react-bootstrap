@@ -3,7 +3,6 @@ var gulp = require('gulp'),
     plumber = require('gulp-plumber'),
     gprint = require('gulp-print'),
     notify = require('gulp-notify'),
-    filter = require('gulp-filter'),
     babel = require('gulp-babel');
 
 var babelOptions = {
