@@ -42,7 +42,7 @@ gulp.task('transpile-watch', function() {
                     }
                 }))
                 .pipe(babel(babelOptions))
-                .pipe(rename({ extname: ".js" }))
+                .pipe(rename(path => { path.dirname = path.dirname.replace(/src-es6/, 'src').replace(/test-runner-es6/, 'test-runner')} ))
                 .pipe(gulp.dest(''))
                 .pipe(gprint(function(filePath){ return "File processed: " + filePath; }));
         }
