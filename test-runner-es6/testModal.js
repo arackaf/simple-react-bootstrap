@@ -27,6 +27,8 @@ class ModalRunner extends React.Component{
 
                 <button onClick={() => this.setState({ basicModal: true })}>Open Basic Modal 1</button>
                 <br /><br />
+                <button onClick={() => this.setState({ basicModalDynamic: true })}>Open Basic Modal 1 Dynamic</button>
+                <br /><br />                
                 <button onClick={() => this.setState({ openUnmountable1: true })}>Un-mountable Modal 1</button>
                 <br /><br />
                 <button onClick={() => this.setState({ openAnimate: true })}>Open Modal with animation</button>
@@ -53,6 +55,21 @@ class ModalRunner extends React.Component{
                         <button type="button" className="btn btn-primary">Save changes</button>
                     </Modal.Footer>
                 </Modal>
+
+                {this.state.basicModalDynamic ? 
+                    <Modal className="fade" show={ this.state.basicModalDynamic } onHide={() => this.setState({ basicModalDynamic: false })}>
+                        <Modal.Header>
+                            <h3>Hello World</h3>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <p>Modal body</p>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <button type="button" className="btn btn-default" onClick={() => this.setState({ basicModalDynamic: false })}>Close</button>
+                            <button type="button" className="btn btn-primary">Save changes</button>
+                        </Modal.Footer>
+                    </Modal> : null
+                }
 
                 <Modal className="fade" show={ this.state.toggleOpen } onHide={() => this.setState({ toggleOpen: false })}>
                     <Modal.Header>

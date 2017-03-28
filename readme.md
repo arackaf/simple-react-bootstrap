@@ -12,8 +12,6 @@ If you're just using a script loader, like SystemJS, you'll first need to config
 
 `"simple-react-bootstrap": "node_modules/simple-react-bootstrap/dist/simple-react-bootstrap.js"`
 
-Note that the dist folder this project installs with also has stand-alone builds of just the modal, navBar, and buttonDropdown, if you don't need them all; just be aware that NavBar is bundled with buttonDropdown, since it uses it.
-
 Lastly, if you want to test these components from just a script tag, like in a jsbin, or similar, then you can use the `simple-react-bootstrap-script-tag.js` file, also in the dist folder.  You can see code using it [here](https://github.com/arackaf/simple-react-bootstrap/blob/master/runGlobal.htm) with the real work being done [here](https://github.com/arackaf/simple-react-bootstrap/blob/master/test-runner/testGlobal.es6)
 
 # Documentation
@@ -54,12 +52,6 @@ Now, on with the documentation
 ---
 
 # Modal
-
-## Background
-
-This is not a drop-in replacement for react-bootstrap's modal.  The APIs are very similar, but react-bootstrap is far more robust (and large).
-
-This component actually renders the modal in place, and adds the relevant css classes, and backdrops as needed to simulate normal Bootstrap behavior.  The result is a much smaller utility, but at the expense of some edge cases not working properly.  For example, if you unmount a modal that's currently visible, it'll just vanish, without the normal animation happening.  Also, to get the slide in animation working, I first show the modal, then in a `setTimeout(code, 1)` add the `in` class to start the animation.  This is needed because of how the Bootstrap css transition works, but it means an extremely rapid (within a very narrow range of values) toggling between the modal's open and closed state, likely via code since it's all but impossible to achieve this via user interaction, may occasionally cause an animation to fail, with the modal appearing suddenly.
 
 ## Usage
 

@@ -44,7 +44,7 @@ function runRollup(){
                 library.write({ format: 'iife', dest: './dist/simple-react-bootstrap-script-tag.js', moduleName: 'SimpleReactBootstrap', globals: { react: 'React', 'react-dom': 'ReactDOM' } })
             ])
         ).then(() => {
-            gulp.src(['./dist/**/*.js', '!./dist/simple-react-bootstrap-module.js'], { base: './' })
+            gulp.src(['./dist/**/*.js'], { base: './' })
                 .pipe(gulpUglify())
                 .pipe(gulpRename(path => { path.basename = path.basename + '.min'; }))
                 .pipe(gulp.dest(''))

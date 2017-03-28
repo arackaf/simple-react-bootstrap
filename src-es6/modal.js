@@ -1,4 +1,5 @@
 import React from 'react';
+import {render, unmountComponentAtNode} from 'react-dom';
 
 const spreadClassNames = (userClassName, baseCssClasses) => `${baseCssClasses || ''} ${userClassName || ''}`;
 
@@ -58,8 +59,14 @@ function removeBackdrop(){
     }
 }
 
+let uuid = 1;
+
 class Modal extends React.Component {
-    state = { exists: false, hasInCssClass: false };
+    portalState = { exists: false, hasInCssClass: false };
+    mergePortalState = newState => {
+        Object.assign(this.portalState, newState);
+        this.renderModal();
+    }
     __showingUid = 0;
     __bumpUid = () => this.__showingUid++;
     modalClick = evt => {
@@ -69,36 +76,26 @@ class Modal extends React.Component {
         }
     };
     componentDidMount(){
-        if (this.props.show){
-            this._showModal();
+        this.__div = document.createElement('div');
+        this.__div.id = '__simple-react-bootstrap-modal' + (uuid++);
+        document.body.appendChild(this.__div);
+        this.renderModal();
+    }
+    initialMount = el => {
+        if (el){
+            this.modalRef = el;
+            if (this.props.show){
+                this._showModal();
+            }
         }
     }
     componentDidUpdate(prevProps, prevState){
         if (!prevProps.show && this.props.show){
             this._showModal();
         } else if (prevProps.show && !this.props.show){
-            this.__bumpUid();
-            let correctUid = this.__showingUid;
-            let isAnimating = /\bfade\b/.test(this.modalRef.className);
-
-            if (isAnimating){
-                this.setState({ hasInCssClass: false });
-                setTimeout(() => {
-                    if (this.dead) return;
-                    if (correctUid !== this.__showingUid) return;
-                    this.setState({ exists: false })
-                }, 200);
-            } else {
-                this.setState({ hasInCssClass: false, exists: false });
-            }
-
-            if (currentModals.length <= 1) { //less than since it may have been closed before modal was activated
-                document.body.classList.remove('modal-open');
-                removeBackdrop();
-            }
-            if (currentModals[currentModals.length - 1] == this){
-                currentModals.pop();
-            }
+            this._hideModal();
+        } else {
+            this.renderModal();
         }
     }
     _showModal(){
@@ -115,19 +112,17 @@ class Modal extends React.Component {
             if (div) {
                 document.body.appendChild(div);
             }
-            this.setState({ exists: true });
+            this.mergePortalState({ exists: true });
             setTimeout(() => {
                 if (div) {
                     div.classList.add('in');
                 }
-                this.setState({ hasInCssClass: true });
+                this.mergePortalState({ hasInCssClass: true });
                 document.body.classList.add('modal-open');
             }, 1);
             //provide some small delay before this modal is eligible to be closed.  We don't want a double click to open / show the modal.
 
             setTimeout(() => {
-                //highly unlikely, but just in case
-                if (this.dead) return;
                 if (correctUid !== this.__showingUid) return;
                 currentModals.push(this);
             }, 200);
@@ -135,16 +130,42 @@ class Modal extends React.Component {
             if (div) {
                 document.body.appendChild(div);
             }
-            this.setState({ exists: true, hasInCssClass: true });
+            this.mergePortalState({ exists: true, hasInCssClass: true });
             currentModals.push(this);
             document.body.classList.add('modal-open');
         }
     }
-    render() {
+    _hideModal = () => {
+        this.__bumpUid();
+        let correctUid = this.__showingUid;
+        let isAnimating = /\bfade\b/.test(this.modalRef.className);
+
+        if (isAnimating){
+            this.mergePortalState({ hasInCssClass: false });
+            setTimeout(() => {
+                if (correctUid !== this.__showingUid) return;
+                this.mergePortalState({ exists: false })
+            }, 200);
+        } else {
+            this.mergePortalState({ hasInCssClass: false, exists: false });
+        }
+
+        if (currentModals.length <= 1) { //less than since it may have been closed before modal was activated
+            document.body.classList.remove('modal-open');
+            removeBackdrop();
+        }
+        if (currentModals[currentModals.length - 1] == this){
+            currentModals.pop();
+        }
+    }
+    render(){
+        return <div></div>;
+    }
+    renderModal() {
         let { children, manual, show, onHide, className, style, ...rest } = this.props;
 
-        return (
-            <div ref={el => this.modalRef = el} onClick={this.modalClick} className={spreadClassNames(className, 'modal ' + (this.state.hasInCssClass ? 'in' : ''))} style={{ ...style, display: this.state.exists ? 'block' : '' }} {...rest} role="dialog">
+        render (
+            <div ref={this.initialMount} onClick={this.modalClick} className={spreadClassNames(className, 'modal ' + (this.portalState.hasInCssClass ? 'in' : ''))} style={{ ...style, display: this.portalState.exists ? 'block' : '' }} {...rest} role="dialog">
                 {manual ? children :
                     <div className="modal-dialog">
                         <div className="modal-content">
@@ -152,18 +173,24 @@ class Modal extends React.Component {
                         </div>
                     </div>
                 }
-            </div>
+            </div>, this.__div
         );
     }
     componentWillUnmount(){
         let index = currentModals.indexOf(this);
+        if (this.props.show){
+            this._hideModal();
+        }
         if (index >= 0){
             currentModals.splice(index, 1);
             if (!currentModals.length){
                 removeBackdrop();
             }
         }
-        this.dead = true;
+        setTimeout(() => {
+            unmountComponentAtNode(this.__div);
+            setTimeout(() => document.body.removeChild(this.__div), 100);
+        }, 1000);
     }
 }
 
