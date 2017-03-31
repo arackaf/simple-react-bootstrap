@@ -63,9 +63,9 @@ let uuid = 1;
 
 class Modal extends React.Component {
     portalState = { exists: false, hasInCssClass: false };
-    mergePortalState = newState => {
+    mergePortalState = (newState, cb) => {
         Object.assign(this.portalState, newState);
-        this.renderModal();
+        this.renderModal(cb);
     }
     __showingUid = 0;
     __bumpUid = () => this.__showingUid++;
@@ -112,12 +112,11 @@ class Modal extends React.Component {
             if (div) {
                 document.body.appendChild(div);
             }
-            this.mergePortalState({ exists: true });
+            this.mergePortalState({ exists: true }, () => setTimeout(() => this.mergePortalState({ hasInCssClass: true }), 1));
             setTimeout(() => {
                 if (div) {
                     div.classList.add('in');
                 }
-                this.mergePortalState({ hasInCssClass: true });
                 document.body.classList.add('modal-open');
             }, 1);
             //provide some small delay before this modal is eligible to be closed.  We don't want a double click to open / show the modal.
@@ -161,7 +160,7 @@ class Modal extends React.Component {
     render(){
         return <div></div>;
     }
-    renderModal() {
+    renderModal(cb) {
         let { children, manual, show, onHide, className, style, ...rest } = this.props;
 
         render (
@@ -173,7 +172,7 @@ class Modal extends React.Component {
                         </div>
                     </div>
                 }
-            </div>, this.__div
+            </div>, this.__div, cb
         );
     }
     componentWillUnmount(){
