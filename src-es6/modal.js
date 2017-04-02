@@ -112,13 +112,15 @@ class Modal extends React.Component {
             if (div) {
                 document.body.appendChild(div);
             }
-            this.mergePortalState({ exists: true }, () => setTimeout(() => this.mergePortalState({ hasInCssClass: true }), 1));
-            setTimeout(() => {
+            const onNext = cb => window.requestAnimationFrame ? requestAnimationFrame(cb) : setTimeout(cb, 2);
+
+            this.mergePortalState({ exists: true }, () => onNext(() => this.mergePortalState({ hasInCssClass: true })) );
+            onNext(() => {
                 if (div) {
                     div.classList.add('in');
                 }
                 document.body.classList.add('modal-open');
-            }, 1);
+            });
             //provide some small delay before this modal is eligible to be closed.  We don't want a double click to open / show the modal.
 
             setTimeout(() => {
