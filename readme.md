@@ -12,7 +12,7 @@ If you're just using a script loader, like SystemJS, you'll first need to config
 
 `"simple-react-bootstrap": "node_modules/simple-react-bootstrap/dist/simple-react-bootstrap.js"`
 
-Lastly, if you want to test these components from just a script tag, like in a jsbin, or similar, then you can use the `simple-react-bootstrap-script-tag.js` file, also in the dist folder.  You can see code using it [here](https://github.com/arackaf/simple-react-bootstrap/blob/master/runGlobal.htm) with the real work being done [here](https://github.com/arackaf/simple-react-bootstrap/blob/master/test-runner/testGlobal.es6)
+Lastly, if you want to test these components from just a script tag, like in a jsbin, or similar, then you can use the `simple-react-bootstrap-script-tag.js` file, also in the dist folder.  You can see code using it [here](https://github.com/arackaf/simple-react-bootstrap/blob/master/runGlobal.htm) with the real work being done [here](https://github.com/arackaf/simple-react-bootstrap/blob/master/test-runner-es6/testGlobal.js)
 
 # Documentation
 
