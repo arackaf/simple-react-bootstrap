@@ -1,4 +1,4 @@
-import React, {Component, Children} from 'react';
+import React, {Component, Children, cloneElement} from 'react';
 import { render } from 'react-dom';
 
 import Tabs from '../src/tabs';
@@ -17,11 +17,44 @@ export class Tab extends Component {
     }
 }
 
-export class TabHeader extends Component {
+class TabHeader extends Component {
     render() {
         return (
+            <li>
+                <a>{this.props.caption}</a>
+            </li>
+        );
+    }
+}
+
+export class TabsHeader extends Component {
+    render() {
+        let {children} = this.props;
+        return (
+            <ul>
+                {Children.map(children, item => cloneElement(item, {tabSelect: this.props.tabSelect}))}
+            </ul>
+        );
+    }
+}
+
+export class TabsContent extends Component {
+    render() {
+        let {children, active} = this.props;
+        return (
             <div>
-                
+                {Children.map(children, item => <div className={(item.props.className || '') + (active ? ' active' : '')}></div>)}
+            </div>
+        );
+    }
+}
+
+class Tab extends Component {
+    render() {
+        let {active, className = ''} = this.props;
+        return (
+            <div className={className + (active ? '' : ' active')}>
+                {children}
             </div>
         );
     }
@@ -29,16 +62,21 @@ export class TabHeader extends Component {
 
 export default class Tabs extends Component {
     state = {currentTab: ''};
-    tabClick = name => this.setState({currentTab: name});
+    tabSelect = name => this.setState({currentTab: name});
 
     render() {
-        let tabs = Children.toArray(this.props.children);
-        
+        let children = Children.toArray(this.props.children),
+            header = children.find(c => c.type == TabsHeader),
+            content = children.find(c => c.type == TabsContent),
+            tabs = content ? content.props.children : children.filter(c => c.type == Tab);
+
         return (
             <div>
-                <ul>
-                    {tabs.map(t => <li>{t.renderHeader()}</li>)}
-                </ul>                
+                {header ? cloneElement(header, {tabSelect: this.tabSelect}) : <TabHeader tabSelect={tabSelect} />}
+                {content 
+                    ? cloneElement(content, {currentTab: this.state.currentTab}) 
+                    : <TabsContent currentTab={this.state.currentTab}>{tabs}</TabsContent>
+                }
             </div>
         );
     }
