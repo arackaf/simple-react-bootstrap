@@ -18,10 +18,13 @@ export class Tab extends Component {
 }
 
 class TabHeader extends Component {
+    tabClick => {
+        this.props.tabSelect(this.props.name);
+    }
     render() {
         return (
             <li>
-                <a>{this.props.caption}</a>
+                <a onClick={this.tabClick}>{this.props.caption}</a>
             </li>
         );
     }
@@ -61,7 +64,7 @@ class Tab extends Component {
 }
 
 export default class Tabs extends Component {
-    state = {currentTab: ''};
+    state = {currentTab: this.props.defaultTab};
     tabSelect = name => this.setState({currentTab: name});
 
     render() {
@@ -72,8 +75,11 @@ export default class Tabs extends Component {
 
         return (
             <div>
-                {header ? cloneElement(header, {tabSelect: this.tabSelect}) : <TabHeader tabSelect={tabSelect} />}
-                {content 
+                {header 
+                    ? cloneElement(header, {currentTab: this.state.currentTab, tabSelect: this.tabSelect}) 
+                    : <TabHeader currentTab={this.state.currentTab} tabSelect={tabSelect} />
+                }
+                {content
                     ? cloneElement(content, {currentTab: this.state.currentTab}) 
                     : <TabsContent currentTab={this.state.currentTab}>{tabs}</TabsContent>
                 }
