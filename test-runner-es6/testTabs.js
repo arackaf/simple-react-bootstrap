@@ -10,8 +10,22 @@ class TestTabs extends Component {
         return (
             <div style={{margin: '30px'}}>
                 <Tabs>
+                    <Tab name='a' caption='A'>
+                        This is content a
+                    </Tab>
+                    <Tab name='b' caption='B'>
+                        This is content b
+                    </Tab>
+                    <Tab name='c' caption='C'>
+                        This is content c
+                    </Tab>
+                </Tabs>
+
+                <br /><br /><br />
+
+                <Tabs>
                     <TabsHeader>
-                        <TabHeader caption='A' name='a' />
+                        <TabHeader name='a'><span style={{color: 'blue'}}>Custom</span></TabHeader>
                         <TabHeader caption='B' name='b' />
                         <TabHeader caption='C' name='c' />
                     </TabsHeader>

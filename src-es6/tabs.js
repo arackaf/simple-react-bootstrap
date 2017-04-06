@@ -1,14 +1,17 @@
 import React, {Component, Children, cloneElement} from 'react';
 
 export class TabHeader extends Component {
-    tabClick = () => {
+    tabSelect = () => {
         this.props.tabSelect(this.props.name);
     }
     render() {
-        let {active, className = ''} = this.props;
+        let {active, className = '', tabSelect, children} = this.props;
         return (
             <li className={className + ' ' + (active ? ' active ' : '')}>
-                <a onClick={this.tabClick}>{this.props.caption}</a>
+                {this.props.caption 
+                    ? <a onClick={this.tabSelect}>{this.props.caption}</a>
+                    : Children.map(children, c => cloneElement(c, {tabSelect: this.tabSelect}))
+                }
             </li>
         );
     }
@@ -62,15 +65,15 @@ export default class Tabs extends Component {
                 {header 
                     ? cloneElement(header, {tabSelect: this.tabSelect}, 
                         React.Children.map(header.props.children, t => cloneElement(t, {active: this.state.currentTab == t.props.name}))) 
-                    : <TabsHeader currentTab={this.state.currentTab} tabSelect={tabSelect}>
-                          {tabs.map(t => <TabHeader active={this.state.currentTab == t.name} caption={t.caption} name={t.name} />)}
+                    : <TabsHeader tabSelect={this.tabSelect}>
+                          {tabs.map(t => <TabHeader active={this.state.currentTab == t.props.name} caption={t.props.caption} name={t.props.name} />)}
                       </TabsHeader>
                 }
                 {content
                     ? cloneElement(content, {currentTab: this.state.currentTab},
                         React.Children.map(content.props.children, t => cloneElement(t, {active: this.state.currentTab == t.props.name})))
                     : <TabsContent currentTab={this.state.currentTab}>
-                        {tabs.map(t => cloneElement(t, {active: this.state.currentTab == t.name}))}
+                        {tabs.map(t => cloneElement(t, {active: this.state.currentTab == t.props.name}))}
                       </TabsContent>
                 }
             </div>
