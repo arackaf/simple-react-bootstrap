@@ -5,8 +5,9 @@ export class TabHeader extends Component {
         this.props.tabSelect(this.props.name);
     }
     render() {
+        let {active, className = ''} = this.props;
         return (
-            <li>
+            <li className={className + ' ' + (active ? ' active ' : '')}>
                 <a onClick={this.tabClick}>{this.props.caption}</a>
             </li>
         );
@@ -29,7 +30,7 @@ export class TabsContent extends Component {
         let {children, active} = this.props;
         return (
             <div className='tab-content'>
-                {Children.map(children, item => <div className={(item.props.className || 'tab-pane') + (active ? ' active' : '')}></div>)}
+                {children}
             </div>
         );
     }
@@ -37,9 +38,9 @@ export class TabsContent extends Component {
 
 export class Tab extends Component {
     render() {
-        let {active, className = ''} = this.props;
+        let {active, className = '', children} = this.props;
         return (
-            <div className={className + (active ? '' : ' active')}>
+            <div className={'tab-pane ' + className + (active ? ' active in ' : '')}>
                 {children}
             </div>
         );
@@ -59,14 +60,18 @@ export default class Tabs extends Component {
         return (
             <div>
                 {header 
-                    ? cloneElement(header, {currentTab: this.state.currentTab, tabSelect: this.tabSelect}) 
-                    : <TabHeader currentTab={this.state.currentTab} tabSelect={tabSelect}>
-                          {tabs.map(t => <TabHeader caption={t.caption} name={t.name} />)}
-                      </TabHeader>
+                    ? cloneElement(header, {tabSelect: this.tabSelect}, 
+                        React.Children.map(header.props.children, t => cloneElement(t, {active: this.state.currentTab == t.props.name}))) 
+                    : <TabsHeader currentTab={this.state.currentTab} tabSelect={tabSelect}>
+                          {tabs.map(t => <TabHeader active={this.state.currentTab == t.name} caption={t.caption} name={t.name} />)}
+                      </TabsHeader>
                 }
                 {content
-                    ? cloneElement(content, {currentTab: this.state.currentTab}) 
-                    : <TabsContent currentTab={this.state.currentTab}>{tabs}</TabsContent>
+                    ? cloneElement(content, {currentTab: this.state.currentTab},
+                        React.Children.map(content.props.children, t => cloneElement(t, {active: this.state.currentTab == t.props.name})))
+                    : <TabsContent currentTab={this.state.currentTab}>
+                        {tabs.map(t => cloneElement(t, {active: this.state.currentTab == t.name}))}
+                      </TabsContent>
                 }
             </div>
         );
