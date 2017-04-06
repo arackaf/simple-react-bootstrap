@@ -5,6 +5,14 @@ import Tabs, {TabsHeader, TabHeader, TabsContent, Tab} from '../src/tabs';
 
 console.log(typeof Tabs, typeof TabsHeader, typeof TabHeader, typeof TabsContent, typeof Tab)
 
+class CustomHeadB extends Component {
+    render() {
+        return (
+            <span style={{color: 'red'}} onClick={this.props.tabSelect}>Custom B</span>
+        );
+    }
+}
+
 class TestTabs extends Component {
     render() {
         return (
@@ -23,10 +31,24 @@ class TestTabs extends Component {
 
                 <br /><br /><br />
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <Tabs>
                     <TabsHeader>
                         <TabHeader name='a'><span style={{color: 'blue'}}>Custom</span></TabHeader>
-                        <TabHeader caption='B' name='b' />
+                        <TabHeader name='b'><CustomHeadB /></TabHeader>
                         <TabHeader caption='C' name='c' />
                     </TabsHeader>
                     <TabsContent>
