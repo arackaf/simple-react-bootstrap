@@ -17,6 +17,10 @@ class TestTabs extends Component {
     render() {
         return (
             <div style={{margin: '30px'}}>
+
+                <div>Hello <span>{() => <b>World</b>}</span></div>
+
+                <br /><br /><br />
                 <Tabs>
                     <Tab name='a' caption='A'>
                         This is content a
@@ -29,25 +33,11 @@ class TestTabs extends Component {
                     </Tab>
                 </Tabs>
 
-                <br /><br /><br />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                <br /><br />
 
                 <Tabs>
                     <TabsHeader>
-                        <TabHeader name='a'><span style={{color: 'blue'}}>Custom</span></TabHeader>
+                        <TabHeader name='a' render={({tabSelect}) => <span onClick={() => tabSelect('a')} style={{color: 'blue'}}>Custom RC</span>} />
                         <TabHeader name='b'><CustomHeadB /></TabHeader>
                         <TabHeader caption='C' name='c' />
                     </TabsHeader>

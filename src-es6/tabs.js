@@ -1,16 +1,19 @@
 import React, {Component, Children, cloneElement} from 'react';
+import {render} from 'react-dom'
 
 export class TabHeader extends Component {
     tabSelect = () => {
         this.props.tabSelect(this.props.name);
     }
     render() {
-        let {active, className = '', tabSelect, children} = this.props;
+        let {active, className = '', tabSelect, children, ...rest} = this.props;
         return (
             <li className={className + ' ' + (active ? ' active ' : '')}>
-                {this.props.caption 
-                    ? <a onClick={this.tabSelect}>{this.props.caption}</a>
-                    : Children.map(children, c => cloneElement(c, {tabSelect: this.tabSelect}))
+                {this.props.render
+                    ? this.props.render({tabSelect: this.props.tabSelect})
+                    : this.props.caption 
+                        ? <a onClick={this.tabSelect}>{this.props.caption}</a>
+                        : Children.map(children, c => cloneElement(c, {tabSelect: this.tabSelect}))
                 }
             </li>
         );
