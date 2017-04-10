@@ -7,11 +7,8 @@
     <link href="bootstrap.css" type="text/css" rel="stylesheet">
     <script src="static/jquery.js"></script>
     <script src="static/bootstrap.min.js"></script>
-    <script src="node_modules/systemjs/dist/system.js"></script>
-    <script src="systemjs-config.js"></script>
 
     <script type="text/javascript">
-        System.import('./test-runner/testModal.js');
 
         window.openVanillaModal = function(){
             $('#modal-test').modal();
@@ -83,45 +80,13 @@
 
     <script type="text/javascript">
         var currentModal = null;
-
-//        document.addEventListener('click', function(evt){
-//            if (!currentModal) return;
-//
-//            var element = evt.target,
-//                modalContent = currentModal.getElementsByClassName('modal-content')[0];
-//
-//            if (modalContent.contains(element)) return;
-//
-//            var currentModalCopy = currentModal;
-//            currentModal = null;
-//
-//            var backdrop = document.getElementsByClassName('simple-react-modal-backdrop')[0];
-//
-//            currentModalCopy.classList.remove('in');
-//            backdrop && backdrop.classList.remove('in');
-//            setTimeout(function() {
-//                currentModalCopy.style.display = 'none';
-//                backdrop && backdrop.parentNode.removeChild(backdrop);
-//            }, 200);
-//
-//        });
-
-//        document.getElementById('btn').onclick = function () {
-//            document.getElementById('modal-test').style.display = 'block';
-//            var div = document.createElement('div');
-//            div.classList.add('modal-backdrop', 'simple-react-modal-backdrop', 'fade');
-//            document.body.appendChild(div);
-//
-//            setTimeout(function(){ div.classList.add('in'); }, 1);
-//            setTimeout(function(){ document.getElementById('modal-test').classList.add('fade', 'in'); }, 1);
-//
-//            setTimeout(function(){ currentModal = document.getElementById('modal-test'); }, 100)
-//        };
     </script>
 
     <div id="home">
 
     </div>
+
+    <script src="dist/testModal-bundle.js"></script>
 
 </body>
 </html>

@@ -15,13 +15,6 @@ var babelOptions = {
     presets: ['react', ['es2015', {modules: false}], 'stage-2']
 };
 
-gulp.src('./src-es6/**/*.js', { base: './' })
-    .pipe(gulpBabel(babelOptions))
-    .pipe(rename(path => { path.dirname = path.dirname.replace(/src-es6/, 'src-dist')} ))
-    .pipe(gulp.dest(''))
-    .pipe(gprint(function(filePath){ return "File processed: " + filePath; }))
-    .on('end', runRollup);
-
 try { remove.removeSync('./dist'); } catch (e) { }
 
 const getRollup = entry =>
@@ -35,9 +28,10 @@ const getRollup = entry =>
         ]
     });
 
+runRollup();
 function runRollup(){
     Promise
-        .resolve(getRollup('src-es6/library.js'))
+        .resolve(getRollup('src/library.js'))
         .then(library => 
             Promise.all([
                 library.write({ format: 'cjs', dest: './dist/simple-react-bootstrap.js' }),
@@ -48,5 +42,14 @@ function runRollup(){
                 .pipe(gulpUglify())
                 .pipe(gulpRename(path => { path.basename = path.basename + '.min'; }))
                 .pipe(gulp.dest(''))
+                .on('end', transpileSource)
         }).catch(err => console.log(err));
+}
+
+function transpileSource(){
+    gulp.src('./src/**/*.js', { base: './' })
+        .pipe(gulpBabel(babelOptions))
+        .pipe(rename(path => { path.dirname = path.dirname.replace(/src/, 'lib')} ))
+        .pipe(gulp.dest(''))
+        .pipe(gprint(function(filePath){ return "File transpiled: " + filePath; }));
 }
