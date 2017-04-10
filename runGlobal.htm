@@ -7,15 +7,10 @@
     <link href="bootstrap.css" type="text/css" rel="stylesheet">
     <script src="static/jquery.js"></script>
     <script src="static/bootstrap.min.js"></script>
-    <script src="node_modules/systemjs/dist/system.js"></script>
     <script src="node_modules/react/dist/react.js"></script>
     <script src="node_modules/react-dom/dist/react-dom.js"></script>
     <script src="dist/simple-react-bootstrap-script-tag.js"></script>
-    <script src="systemjs-config.js"></script>
 
-    <script type="text/javascript">
-        System.import('./test-runner/testGlobal.js');
-    </script>
 
 </head>
 <body>
@@ -23,6 +18,8 @@
     <div id="home">
 
     </div>
+
+    <script src="dist/testGlobal-bundle.js"></script>
 
 </body>
 </html>
