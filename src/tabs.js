@@ -1,5 +1,9 @@
 import React, {Component, Children, cloneElement} from 'react';
-import {render} from 'react-dom'
+import {render} from 'react-dom';
+
+import TabsRR from 'react-raw-tabs';
+
+alert(typeof TabsRR);
 
 export class TabHeader extends Component {
     tabSelect = () => {

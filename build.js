@@ -24,6 +24,9 @@ const getRollup = entry =>
             babel({
                 presets: ['react', ['es2015', { modules: false }], 'stage-2'],
                 plugins: ['external-helpers']
+            }),
+            alias({
+                'react-raw-tabs': 'node_modules/react-raw-tabs/lib/tabs.js'
             })
         ]
     });
@@ -35,7 +38,7 @@ function runRollup(){
         .then(library => 
             Promise.all([
                 library.write({ format: 'cjs', dest: './dist/simple-react-bootstrap.js' }),
-                library.write({ format: 'iife', dest: './dist/simple-react-bootstrap-script-tag.js', moduleName: 'SimpleReactBootstrap', globals: { react: 'React', 'react-dom': 'ReactDOM' } })
+                library.write({ format: 'iife', dest: './dist/simple-react-bootstrap-script-tag.js', moduleName: 'SimpleReactBootstrap', globals: { react: 'React', 'react-dom': 'ReactDOM', 'react-raw-tabs':'ReactRawTabs' } })
             ])
         ).then(() => {
             gulp.src(['./dist/**/*.js'], { base: './' })

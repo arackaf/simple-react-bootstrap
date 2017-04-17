@@ -3,7 +3,6 @@ import {render} from 'react-dom';
 
 import Tabs, {TabsHeader, TabHeader, TabsContent, Tab} from '../src/tabs';
 
-console.log(typeof Tabs, typeof TabsHeader, typeof TabHeader, typeof TabsContent, typeof Tab)
 
 class CustomHeadB extends Component {
     render() {

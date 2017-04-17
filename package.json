@@ -4,6 +4,7 @@
   "description": "Dirt simple React components.",
   "main": "./lib/library.js",
   "scripts": {
+    "start": "webpack-dev-server",
     "prepublish": "node build.js",
     "build": "node build.js"
   },
@@ -40,10 +41,13 @@
     "react-dom": "15.3.2",
     "remove": "0.1.5",
     "rollup": "0.41.6",
-    "rollup-plugin-alias": "1.2.0",
+    "rollup-plugin-alias": "^1.2.0",
     "rollup-plugin-babel": "2.7.1",
     "rollup-plugin-node-resolve": "2.0.0",
     "webpack": "2.3.3",
     "webpack-dev-server": "2.3.0"
+  },
+  "dependencies": {
+    "react-raw-tabs": "0.0.1-beta5"
   }
 }
