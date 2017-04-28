@@ -16,38 +16,75 @@ Lastly, if you want to test these components from just a script tag, like in a j
 
 # Documentation
 
-The documentation / samples for these components follow, but first a quick note on why there's no `tabs` component. It boils down to the fact that it's easier to manually implement a tabs component as needed, than to abstract it well.  The markup Bootstrap is expecting is rather straightforward, and it's reasonably easy to write helpers tailored to your app's architecture that listens for the right clicks, and adds the `active` class where needed.  For example, here's what my MobX helpers look like for rendering Bootstrap tabs.
+# Tabs
 
-```javascript
-const TabToggle = ({ model, tabProperty }) => observer(props => {
-    let { tab, className = '', children, ...rest } = props;
+## Usage
 
-    return <li onClick={model[`setTab_${tab}`]} className={className + (model[tabProperty] == tab ? ' active' : '')} {...rest}>{children}</li>
-});
-
-const TabPane = ({ model, tabProperty }) => observer(props => {
-    let { tab, className = '', children, ...rest } = props;
-
-    return <div className={'tab-pane ' + className + (model[tabProperty] == tab ? ' active' : '')} {...rest}>{children}</div>
-});
-
-export const tabHelperMixin = (target, options) => {
-    let property = options.property;
-
-    extendObservable(target, { [property]: options.defaultTab || '' });
-
-    (options.tabValues || []).forEach(val => {
-        target[`setTab_${val}`] = action(() => target[property] = val);
-    });
-
-    target['TabToggle' || options.toggleComponentName] = TabToggle({ model: target, tabProperty: property });
-    target['TabPane' || options.paneComponentName] = TabPane({ model: target, tabProperty: property });
-};
+```html
+<Tabs>
+    <Tab caption='A'>
+        This is content a
+    </Tab>
+    <Tab caption='B'>
+        This is content b
+    </Tab>
+    <Tab caption='C'>
+        This is content c
+    </Tab>
+</Tabs>
 ```
 
-Obviously that would look different if you were using Redux, or vanilla React, but the basic idea would be the same.
+Which renders uncontrolled tabs with the first tab selected by default.  To select a different tab by default, pass `defaultTab` to tabs, and pass the 
+zero-based index (either string or number will work fine) you would like selected by default.
 
-Now, on with the documentation
+```html
+<Tabs defaultTab='1'>
+    <Tab caption='A'>
+        This is content a
+    </Tab>
+    <Tab caption='B'>
+        This is content b
+    </Tab>
+    <Tab caption='C'>
+        This is content c
+    </Tab>
+</Tabs> 
+```
+
+or you can give your tabs custom names if you'd like
+
+```html
+<Tabs defaultTab='b'>
+    <Tab name='a' caption='A'>
+        This is content a
+    </Tab>
+    <Tab name='b' caption='B'>
+        This is content b
+    </Tab>
+    <Tab name='c' caption='C'>
+        This is content c
+    </Tab>
+</Tabs>
+```
+
+## Controlled
+
+Exactly the same as above, except pass in a `tab` property representing the current tab, and an `onChangeTab` method which will be invoke when
+a tab is selected, and passed the clicked tabs name.  By default that will be the zero-based index, unless you override it with your own names as above.
+
+```html
+<Tabs tab={this.state.controlledB} onChangeTab={this.setB}>
+    <Tab caption='A'>
+        This is content a
+    </Tab>
+    <Tab caption='B'>
+        This is content b
+    </Tab>
+    <Tab caption='C'>
+        This is content c
+    </Tab>
+</Tabs>
+```
 
 ---
 
