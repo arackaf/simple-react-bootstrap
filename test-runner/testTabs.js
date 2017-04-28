@@ -17,22 +17,99 @@ class TestTabs extends Component {
         return (
             <div style={{margin: '30px'}}>
 
-                <div>Hello <span>{() => <b>World</b>}</span></div>
+                <div className="row">
+                    <div className="col-xs-3">
+                        Names no default - nothing selected
+                        <Tabs>
+                            <Tab name='a' caption='A'>
+                                This is content a
+                            </Tab>
+                            <Tab name='b' caption='B'>
+                                This is content b
+                            </Tab>
+                            <Tab name='c' caption='C'>
+                                This is content c
+                            </Tab>
+                        </Tabs>
+                    </div>
+                    
+                    <div className="col-xs-3">
+                        Default to b
+                        <Tabs defaultTab='b'>
+                            <Tab name='a' caption='A'>
+                                This is content a
+                            </Tab>
+                            <Tab name='b' caption='B'>
+                                This is content b
+                            </Tab>
+                            <Tab name='c' caption='C'>
+                                This is content c
+                            </Tab>
+                        </Tabs>
+                    </div>
 
-                <br /><br /><br />
-                <Tabs>
-                    <Tab name='a' caption='A'>
-                        This is content a
-                    </Tab>
-                    <Tab name='b' caption='B'>
-                        This is content b
-                    </Tab>
-                    <Tab name='c' caption='C'>
-                        This is content c
-                    </Tab>
-                </Tabs>
+                    <div className="col-xs-3">
+                        No names
+                        <Tabs>
+                            <Tab caption='A'>
+                                This is content a
+                            </Tab>
+                            <Tab caption='B'>
+                                This is content b
+                            </Tab>
+                            <Tab caption='C'>
+                                This is content c
+                            </Tab>
+                        </Tabs>
+                    </div>
 
-                <br /><br />
+                    <div className="col-xs-3">
+                        No names Default to b
+                        <Tabs defaultTab='1'>
+                            <Tab caption='A'>
+                                This is content a
+                            </Tab>
+                            <Tab caption='B'>
+                                This is content b
+                            </Tab>
+                            <Tab caption='C'>
+                                This is content c
+                            </Tab>
+                        </Tabs>
+                    </div>
+
+                    <div className="col-xs-12">
+                        <br />
+                        <br />
+                    </div>
+                    <div className="col-xs-3">
+                        No names Default to b - numeric
+                        <Tabs defaultTab={1}>
+                            <Tab caption='A'>
+                                This is content a
+                            </Tab>
+                            <Tab caption='B'>
+                                This is content b
+                            </Tab>
+                            <Tab caption='C'>
+                                This is content c
+                            </Tab>
+                        </Tabs>
+                    </div>
+                    
+                    <div className="col-xs-3">
+
+                    </div>
+
+                    <div className="col-xs-3">
+
+                    </div>
+
+                    <div className="col-xs-3">
+
+                    </div>
+                </div>
+
             </div>
         );
     }
