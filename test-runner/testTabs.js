@@ -1,7 +1,7 @@
 import React, {Component, Children, cloneElement} from 'react';
 import {render} from 'react-dom';
 
-import Tabs, {TabsHeader, TabHeader, TabsContent, Tab} from '../src/tabs';
+import Tabs, {Tab} from '../src/tabs';
 
 
 class CustomHeadB extends Component {
@@ -33,25 +33,6 @@ class TestTabs extends Component {
                 </Tabs>
 
                 <br /><br />
-
-                <Tabs>
-                    <TabsHeader>
-                        <TabHeader name='a' render={({tabSelect}) => <span onClick={() => tabSelect('a')} style={{color: 'blue'}}>Custom RC</span>} />
-                        <TabHeader name='b'><CustomHeadB /></TabHeader>
-                        <TabHeader caption='C' name='c' />
-                    </TabsHeader>
-                    <TabsContent>
-                        <Tab name='a'>
-                            This is content a
-                        </Tab>
-                        <Tab name='b'>
-                            This is content b
-                        </Tab>
-                        <Tab name='c'>
-                            This is content c
-                        </Tab>
-                    </TabsContent>
-                </Tabs>
             </div>
         );
     }
