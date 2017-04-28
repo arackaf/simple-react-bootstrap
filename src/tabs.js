@@ -28,7 +28,7 @@ export default class Tabs extends Component {
             tabs = children.filter(c => c.type == Tab);
 
         return (            
-            <RawTabs defaultTab={this.state.defaultTab}>
+            <RawTabs tab={this.props.tab} onChangeTab={this.props.onChangeTab} defaultTab={this.state.defaultTab}>
                 {({TabLink, TabHeader, TabPane}) => (
                     <div>
                         <ul className='nav nav-tabs'>

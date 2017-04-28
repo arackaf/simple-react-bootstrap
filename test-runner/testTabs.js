@@ -4,15 +4,14 @@ import {render} from 'react-dom';
 import Tabs, {Tab} from '../src/tabs';
 
 
-class CustomHeadB extends Component {
-    render() {
-        return (
-            <span style={{color: 'red'}} onClick={this.props.tabSelect}>Custom B</span>
-        );
-    }
-}
 
 class TestTabs extends Component {
+    state = { controlledA: 'a', controlledB: 'b', controlledC: '1', controlledD: 1 }
+    setA = val => this.setState({controlledA: val});
+    setB = val => this.setState({controlledB: val});
+    setC = val => this.setState({controlledC: val});
+    setD = val => this.setState({controlledD: val});
+
     render() {
         return (
             <div style={{margin: '30px'}}>
@@ -98,15 +97,113 @@ class TestTabs extends Component {
                     </div>
                     
                     <div className="col-xs-3">
-
+                        Controlled - never change
+                        <Tabs tab={this.state.controlledA}>
+                            <Tab caption='A'>
+                                This is content a
+                            </Tab>
+                            <Tab caption='B'>
+                                This is content b
+                            </Tab>
+                            <Tab caption='C'>
+                                This is content c
+                            </Tab>
+                        </Tabs>
                     </div>
 
                     <div className="col-xs-3">
-
+                        Controlled - does change
+                        <Tabs tab={this.state.controlledB} onChangeTab={this.setB}>
+                            <Tab caption='A'>
+                                This is content a
+                            </Tab>
+                            <Tab caption='B'>
+                                This is content b
+                            </Tab>
+                            <Tab caption='C'>
+                                This is content c
+                            </Tab>
+                        </Tabs>
                     </div>
 
                     <div className="col-xs-3">
+                        Controlled - mirrors prior - does change - NO default
+                        <Tabs tab={this.state.controlledB} onChangeTab={this.setB} defaultTab='0'>
+                            <Tab caption='A'>
+                                This is content a
+                            </Tab>
+                            <Tab caption='B'>
+                                This is content b
+                            </Tab>
+                            <Tab caption='C'>
+                                This is content c
+                            </Tab>
+                        </Tabs>
+                    </div>
 
+                    <div className="col-xs-12">
+                        <br />
+                        <br />
+                    </div>
+
+                    <div className="col-xs-3">
+                        Controlled - default to b
+                        <Tabs tab={this.state.controlledC} onChangeTab={this.setC}>
+                            <Tab caption='A'>
+                                This is content a
+                            </Tab>
+                            <Tab caption='B'>
+                                This is content b
+                            </Tab>
+                            <Tab caption='C'>
+                                This is content c
+                            </Tab>
+                        </Tabs>
+                    </div>
+
+                    <div className="col-xs-3">
+                        Controlled - mirror prior - default to b
+                        <Tabs tab={this.state.controlledC} onChangeTab={this.setC} defaultTab='2'>
+                            <Tab caption='A'>
+                                This is content a
+                            </Tab>
+                            <Tab caption='B'>
+                                This is content b
+                            </Tab>
+                            <Tab caption='C'>
+                                This is content c
+                            </Tab>
+                        </Tabs>
+                    </div>
+
+                    <div className="col-xs-3">
+                        Controlled - default to b
+                        <Tabs tab={this.state.controlledD} onChangeTab={this.setD}>
+                            <Tab caption='A'>
+                                This is content a
+                            </Tab>
+                            <Tab caption='B'>
+                                This is content b
+                            </Tab>
+                            <Tab caption='C'>
+                                This is content c
+                            </Tab>
+                        </Tabs>
+                    </div>
+
+                    <div className="col-xs-3">
+                        Controlled - mirror prior - default to b
+                        <Tabs tab={this.state.controlledD} onChangeTab={this.setD} defaultTab={2}>
+                            <Tab caption='A'>
+                                This is content a
+                            </Tab>
+                            <Tab caption='B'>
+                                This is content b
+                            </Tab>
+                            <Tab caption='C'>
+                                This is content c
+                            </Tab>
+                        </Tabs>
                     </div>
                 </div>
 
