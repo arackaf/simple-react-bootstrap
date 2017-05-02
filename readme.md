@@ -1,4 +1,4 @@
-﻿These React components implement the Bootstrap components which require more than just css classes, namely `Modal`, `ButtonDropdown`, `NavBar` and `Tabs`.
+﻿These React components implement the Bootstrap widgets which require more than just css classes, namely `Modal`, `ButtonDropdown`, `NavBar` and `Tabs`.
 
 # Installing
 
@@ -14,11 +14,11 @@ import {
 } from 'simple-react-bootstrap'
 ```
 
-If you're just using a script loader like SystemJS, configure your path to `dist/simple-react-bootstrap.js`, as in 
+If you're using a script loader like SystemJS, configure your path to `dist/simple-react-bootstrap.js`, as in 
 
 `"simple-react-bootstrap": "node_modules/simple-react-bootstrap/dist/simple-react-bootstrap.js"`
 
-Lastly, if you want to test these components from just a script tag, like in a jsbin, or similar, then you can use the `simple-react-bootstrap-script-tag.js` file, also in the dist folder.  You can see code using it [here](https://github.com/arackaf/simple-react-bootstrap/blob/master/runGlobal.htm) with the real work being done [here](https://github.com/arackaf/simple-react-bootstrap/blob/master/test-runner-es6/testGlobal.js)
+Lastly, if you want to test these components from a script tag, like in a jsbin, or similar, then you can use the `simple-react-bootstrap-script-tag.js` file, also in the dist folder.  You can see code using it [here](https://github.com/arackaf/simple-react-bootstrap/blob/master/runGlobal.htm) with the real work being done [here](https://github.com/arackaf/simple-react-bootstrap/blob/master/test-runner-es6/testGlobal.js)
 
 # Documentation
 
@@ -40,7 +40,7 @@ Lastly, if you want to test these components from just a script tag, like in a j
 </Tabs>
 ```
 
-Which renders uncontrolled tabs with the first tab selected by default.  To select a different tab by default, pass `defaultTab` to tabs, with 
+This renders uncontrolled tabs with the first tab selected by default.  To select a different tab by default, pass `defaultTab`, with 
 the zero-based index (either string or number will work fine) of the relevant tab.
 
 ```javascript
