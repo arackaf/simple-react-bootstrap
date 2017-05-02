@@ -11,8 +11,11 @@ const gulpBabel = require('gulp-babel');
 const rename = require('gulp-rename');
 const gprint = require('gulp-print');
 
-var babelOptions = {
+var babelOptionsWithImport = {
     presets: ['react', ['es2015', {modules: false}], 'stage-2']
+};
+var babelOptionsWithoutImport = {
+    presets: ['react', 'es2015', 'stage-2']
 };
 
 try { remove.removeSync('./dist'); } catch (e) { }
@@ -51,8 +54,15 @@ function runRollup(){
 
 function transpileSource(){
     gulp.src('./src/**/*.js', { base: './' })
-        .pipe(gulpBabel(babelOptions))
+        .pipe(gulpBabel(babelOptionsWithImport))
         .pipe(rename(path => { path.dirname = path.dirname.replace(/src/, 'lib')} ))
         .pipe(gulp.dest(''))
-        .pipe(gprint(function(filePath){ return "File transpiled: " + filePath; }));
+        .pipe(gprint(function(filePath){ return "File transpiled: " + filePath; }))
+        .on('end', function() {
+            gulp.src('./src/**/*.js', { base: './' })
+                .pipe(gulpBabel(babelOptionsWithoutImport))
+                .pipe(rename(path => { path.dirname = path.dirname.replace(/src/, 'lib-es5')} ))
+                .pipe(gulp.dest(''))
+                .pipe(gprint(function(filePath){ return "File transpiled again: " + filePath; }))
+        })
 }

@@ -1,10 +1,8 @@
-﻿These React components implement the Bootstrap components which require more than just css classes, namely `Modal`, `ButtonDropdown`, and `NavBar`.  
-
-Note: these components used to be separate npm installs, namely `simple-react-bootstrap-modal`, `simple-react-bootstrap-navbar`, and `simple-react-bootstrap-button-dropdown`.  The code is the same, they're just all under one project now, as they probably should have always been.
+﻿These React components implement the Bootstrap components which require more than just css classes, namely `Modal`, `ButtonDropdown`, `NavBar` and `Tabs`.
 
 # Installing
 
-If you're using a tool to manage your npm installs, like WebPack or jspm, then just import it with 
+import with webpack via 
 
 ```javasctipt
 import {
@@ -16,7 +14,7 @@ import {
 } from 'simple-react-bootstrap'
 ```
 
-If you're just using a script loader, like SystemJS, you'll first need to configure the path to `dist/simple-react-bootstrap.js`, as in 
+If you're just using a script loader like SystemJS, configure your path to `dist/simple-react-bootstrap.js`, as in 
 
 `"simple-react-bootstrap": "node_modules/simple-react-bootstrap/dist/simple-react-bootstrap.js"`
 
