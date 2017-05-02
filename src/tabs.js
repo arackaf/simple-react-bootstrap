@@ -25,29 +25,39 @@ export default class Tabs extends Component {
 
     render() {
         let children = Children.toArray(this.props.children),
-            tabs = children.filter(c => c.type == Tab);
+            tabs = children.filter(c => c.type == Tab),
+            {headerClassname = '', headerStyle = {}} = this.props;
 
         return (            
             <RawTabs tab={this.props.tab} onChangeTab={this.props.onChangeTab} defaultTab={this.state.defaultTab}>
                 {({TabLink, TabHeader, TabPane}) => (
                     <div>
-                        <ul className='nav nav-tabs'>
-                            {tabs.map((tab, i) => 
-                                <TabHeader tab={tab.props.name || i} render={({isActive}) => 
-                                    <li className={(tab.props.className || '') + ' ' + (isActive ? ' active ' : '')}>
-                                        <TabLink tab={tab.props.name || i}>{tab.props.caption}</TabLink>
-                                    </li>
-                                } />
-                            )}
+                        <ul className={'nav nav-tabs ' + headerClassname} style={headerStyle}>
+                            {tabs.map((tab, i) => { 
+                                let {name, className = '', paneProps, caption, ...rest} = tab.props,
+                                    id = name || i;
+                                return (
+                                    <TabHeader {...rest} key={id} tab={id} render={({isActive}) => 
+                                        <li {...rest} className={(className || '') + ' ' + (isActive ? ' active ' : '')}>
+                                            <TabLink tab={tab.props.name || i}>{caption}</TabLink>
+                                        </li>
+                                    } />
+                                )
+                            })}
                         </ul>
                         <div className='tab-content'>
-                            {tabs.map((tab, i) => 
-                                <TabPane tab={tab.props.name || i} render={({isActive}) => (
-                                    <div className={'tab-pane ' + (isActive ? ' active in ' : '')}>
-                                        {tab.props.children}
-                                    </div>
-                                )} />
-                            )}
+                            {tabs.map((tab, i) => {
+                                let {name, className = '', paneProps = {}, ...rest} = tab.props,
+                                    {classNamePane = '', ...restPane} = paneProps,
+                                    id = name || i;
+                                return (
+                                    <TabPane key={id} tab={id} render={({isActive}) => (
+                                        <div {...restPane} className={classNamePane + ' tab-pane ' + (isActive ? ' active in ' : '')}>
+                                            {tab.props.children}
+                                        </div>
+                                    )} />
+                                );
+                            })}
                         </div>
                     </div>
                 )}
