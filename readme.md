@@ -6,7 +6,15 @@ Note: these components used to be separate npm installs, namely `simple-react-bo
 
 If you're using a tool to manage your npm installs, like WebPack or jspm, then just import it with 
 
-`import {Modal, NavBar, ButtonDropdown} from 'simple-react-bootstrap'`
+```javasctipt
+import {
+    Modal, 
+    NavBar, 
+    ButtonDropdown, 
+    Tabs, 
+    Tab
+} from 'simple-react-bootstrap'
+```
 
 If you're just using a script loader, like SystemJS, you'll first need to configure the path to `dist/simple-react-bootstrap.js`, as in 
 
@@ -20,7 +28,7 @@ Lastly, if you want to test these components from just a script tag, like in a j
 
 ## Usage
 
-```html
+```javascript
 <Tabs>
     <Tab caption='A'>
         This is content a
@@ -34,16 +42,16 @@ Lastly, if you want to test these components from just a script tag, like in a j
 </Tabs>
 ```
 
-Which renders uncontrolled tabs with the first tab selected by default.  To select a different tab by default, pass `defaultTab` to tabs, and pass the 
-zero-based index (either string or number will work fine) you would like selected by default.
+Which renders uncontrolled tabs with the first tab selected by default.  To select a different tab by default, pass `defaultTab` to tabs, with 
+the zero-based index (either string or number will work fine) of the relevant tab.
 
-```html
+```javascript
 <Tabs defaultTab='1'>
     <Tab caption='A'>
         This is content a
     </Tab>
     <Tab caption='B'>
-        This is content b
+        Selected by default
     </Tab>
     <Tab caption='C'>
         This is content c
@@ -51,9 +59,9 @@ zero-based index (either string or number will work fine) you would like selecte
 </Tabs> 
 ```
 
-or you can give your tabs custom names if you'd like
+or you can give your tabs custom names
 
-```html
+```javascript
 <Tabs defaultTab='b'>
     <Tab name='a' caption='A'>
         This is content a
@@ -69,10 +77,10 @@ or you can give your tabs custom names if you'd like
 
 ## Controlled
 
-Exactly the same as above, except pass in a `tab` property representing the current tab, and an `onChangeTab` method which will be invoke when
-a tab is selected, and passed the clicked tabs name.  By default that will be the zero-based index, unless you override it with your own names as above.
+Exactly the same as above, except pass in a `tab` property representing the current tab, and an `onChangeTab` method which will be invoked when
+a tab is selected, and passed the clicked tab's name.  By default that will be the zero-based index, unless you override it with your own name, as shown above.
 
-```html
+```jsx
 <Tabs tab={this.state.controlledB} onChangeTab={this.setB}>
     <Tab caption='A'>
         This is content a
@@ -86,13 +94,11 @@ a tab is selected, and passed the clicked tabs name.  By default that will be th
 </Tabs>
 ```
 
----
-
 ## Additional options
 
-Any other props you pass to `<Tab />` will be passed along to the corresponding tab header `<li>`.
+Any other props you pass to `<Tab />` will be passed along to the corresponding tab header's `<li>`.
 
-```html
+```jsx
 <Tabs>
     <Tab caption='A' className='red' style={{backgroundColor: 'red'}}>
         This is content a
@@ -106,9 +112,9 @@ Any other props you pass to `<Tab />` will be passed along to the corresponding 
 </Tabs>
 ```
 
-If you'd like to also pass props down to the corresponding tab pane div, you can pass them all in a single `paneProps` prop
+If you'd like to pass props down to the corresponding tab-pane div, you can pass them all in a single `paneProps` prop
 
-```html
+```jsx
 <Tabs>
     <Tab caption='A' paneProps={{className: 'red', style: {backgroundColor: 'red'} }}>
         This is content a
@@ -122,11 +128,13 @@ If you'd like to also pass props down to the corresponding tab pane div, you can
 </Tabs>
 ```
 
+Coming soon: tabs with dropdown headers, as shown here: http://getbootstrap.com/javascript/#tabs 
+
 # Modal
 
 ## Usage
 
-```html
+```jsx
 <Modal className="fade" show={this.state.basicModal} onHide={() => this.setState({ basicModal: false })}>
     <Modal.Header>
         <h3>Hello World</h3>
@@ -153,7 +161,7 @@ The NavBar component is mostly a set of helpers for generating the html Bootstra
 
 ## Usage
 
-```javascript
+```jsx
 <NavBar>
     <NavBar.Header>
         <NavBar.Brand>
@@ -198,7 +206,7 @@ The NavBar component is mostly a set of helpers for generating the html Bootstra
 
 The `NavBar.Dropdown` component is implemented internally with the ButtonDropdown component (documented below).  `ignoreContentClick` will be passed through as needed; also, manually controlling the dropdown's "open" state is just a matter of rendering the ButtonDropdown yourself, in controlled mode.  For example
 
-```javascript
+```jsx
 <div>
     <NavBar>
         <NavBar.Header>
@@ -256,7 +264,7 @@ The `NavBar.Dropdown` component is implemented internally with the ButtonDropdow
 
 ## Basic dropdown-button
 
-```html
+```jsx
 <ButtonDropdown>
     <button className="btn btn-default">Out of the box</button>
     <div>
@@ -267,7 +275,7 @@ The `NavBar.Dropdown` component is implemented internally with the ButtonDropdow
 
 which will render
 
-```html
+```jsx
 <div class="btn-group">
     <button class="dropdown-toggle btn btn-default">Out of the box</button>
     <div class="dropdown-menu">
@@ -286,7 +294,7 @@ Any properties you add to the root container, including styles, will be passed t
 
 If you need a more robust dropdown button than can be represented with a toggleButton and a dropdown div, then pass whatever arbitrary children you want; just be sure to manually add the `dropdown-toggle` and `dropdown-menu` classes where needed, so the component will know what's what.
 
-```html
+```jsx
 <ButtonDropdown>
     <i className="fa fa-tag"></i>
     <span>Arbitrary children + with null</span>
@@ -309,7 +317,7 @@ If you need a more robust dropdown button than can be represented with a toggleB
 
 One caveat to the above, is that if you want to use a custom component for the toggle, such as
 
-```html
+```jsx
 <ButtonDropdown>
     <HashBtn className={`btn btn-default`}
              toMerge={{isSupportTicket: 1}}>Tickets <span className="caret"></span>
@@ -375,7 +383,7 @@ If you'd like to manually control the dropdown state, you can pass a value for `
 
 All the normal options are still respected.  For example, this would essentially re-create the default dropdown behavior, while ignoring any clicks in the dropdown menu.
 
-```html
+```jsx
 <ButtonDropdown 
     ignoreContentClick={true} 
     onToggle={() => this.setState({ controlled1Open: !this.state.controlled1Open })} 
@@ -391,7 +399,7 @@ All the normal options are still respected.  For example, this would essentially
 
 A more flexible (if contrived) example follows.  This causes the dropdown to only open if the toggle button is clicked, and once open, will only close if the close button in the dropdown menu is clicked.
 
-```html
+```jsx
 <ButtonDropdown open={this.state.controlled3Open}>
     <button onClick={() => this.setState({ controlled3Open: true })} 
             className="btn btn-default">Toggle button to open, red button to close. ONLY
