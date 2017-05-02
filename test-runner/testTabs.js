@@ -244,32 +244,52 @@ class TestTabs extends Component {
                     <div className="col-xs-3">
                         Tab A head red, B head blue
                         <Tabs>
-                            <Tab name='a' caption='A' className='red' style={{backgroundColor: 'red'}}>
+                            <Tab caption='A' className='red' style={{backgroundColor: 'red'}}>
                                 This is content a
                             </Tab>
-                            <Tab name='b' caption='B' className='blue' style={{backgroundColor: 'blue'}}>
+                            <Tab caption='B' className='blue' style={{backgroundColor: 'blue'}}>
                                 This is content b
                             </Tab>
-                            <Tab name='c' caption='C'>
+                            <Tab caption='C'>
                                 This is content c
                             </Tab>
                         </Tabs>
                     </div>
 
                     <div className="col-xs-3">
-                        Tab A red, B blue - both head AND body
+                        Tab A red, B blue - body
                         <Tabs>
-                            <Tab name='a' caption='A' className='red' style={{backgroundColor: 'red'}} paneProps={{className: 'red', style: {backgroundColor: 'red'} }}>
+                            <Tab caption='A' paneProps={{className: 'red', style: {backgroundColor: 'red'} }}>
                                 This is content a
                             </Tab>
-                            <Tab name='b' caption='B' className='blue' style={{backgroundColor: 'blue'}} paneProps={{className: 'blue', style: {backgroundColor: 'blue'} }}>
+                            <Tab caption='B' paneProps={{className: 'blue', style: {backgroundColor: 'blue'} }}>
                                 This is content b
                             </Tab>
-                            <Tab name='c' caption='C'>
+                            <Tab caption='C'>
                                 This is content c
                             </Tab>
                         </Tabs>
-                    </div>                    
+                    </div>
+
+                    <div className="col-xs-12">
+                        <br />
+                        <br />
+                    </div>
+
+                    <div className="col-xs-3">
+                        Tab A red body, blue head; B red head, blue body
+                        <Tabs>
+                            <Tab caption='A' className='blue' style={{backgroundColor: 'blue'}} paneProps={{className: 'red', style: {backgroundColor: 'red'} }}>
+                                This is content a
+                            </Tab>
+                            <Tab caption='B' className='red' style={{backgroundColor: 'red'}} paneProps={{className: 'blue', style: {backgroundColor: 'blue'} }}>
+                                This is content b
+                            </Tab>
+                            <Tab caption='C'>
+                                This is content c
+                            </Tab>
+                        </Tabs>
+                    </div>
 
                 </div>
 

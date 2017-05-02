@@ -88,6 +88,40 @@ a tab is selected, and passed the clicked tabs name.  By default that will be th
 
 ---
 
+## Additional options
+
+Any other props you pass to `<Tab />` will be passed along to the corresponding tab header `<li>`.
+
+```html
+<Tabs>
+    <Tab caption='A' className='red' style={{backgroundColor: 'red'}}>
+        This is content a
+    </Tab>
+    <Tab caption='B' className='blue' style={{backgroundColor: 'blue'}}>
+        This is content b
+    </Tab>
+    <Tab caption='C'>
+        This is content c
+    </Tab>
+</Tabs>
+```
+
+If you'd like to also pass props down to the corresponding tab pane div, you can pass them all in a single `paneProps` prop
+
+```html
+<Tabs>
+    <Tab caption='A' paneProps={{className: 'red', style: {backgroundColor: 'red'} }}>
+        This is content a
+    </Tab>
+    <Tab caption='B' paneProps={{className: 'blue', style: {backgroundColor: 'blue'} }}>
+        This is content b
+    </Tab>
+    <Tab caption='C'>
+        This is content c
+    </Tab>
+</Tabs>
+```
+
 # Modal
 
 ## Usage
