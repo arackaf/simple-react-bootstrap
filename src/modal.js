@@ -112,7 +112,8 @@ class Modal extends React.Component {
             if (div) {
                 document.body.appendChild(div);
             }
-            const onNext = cb => window.requestAnimationFrame ? requestAnimationFrame(cb) : setTimeout(cb, 2);
+            //raf not seeming to get the job done - disabling for now
+            const onNext = cb => window.__requestAnimationFrame ? requestAnimationFrame(cb) : setTimeout(cb, 2);
 
             this.mergePortalState({ exists: true }, () => onNext(() => this.mergePortalState({ hasInCssClass: true })) );
             onNext(() => {
