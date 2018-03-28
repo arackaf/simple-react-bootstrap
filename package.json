@@ -1,6 +1,6 @@
 {
   "name": "simple-react-bootstrap",
-  "version": "0.2.6",
+  "version": "0.3.0-beta1",
   "description": "Dirt simple React components.",
   "main": "./lib/library.js",
   "scripts": {
@@ -36,6 +36,7 @@
     "gulp-print": "1.1.0",
     "gulp-rename": "1.2.0",
     "gulp-uglify": "2.0.0",
+    "gulp-uglify-es": "^1.0.1",
     "install": "0.8.1",
     "react": "15.3.2",
     "react-dom": "15.3.2",
