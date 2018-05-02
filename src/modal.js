@@ -73,7 +73,9 @@ export default class Modal extends React.Component {
     if (!prevProps.show && this.props.show) {
       this.renderModal();
     } else if (prevProps.show && !this.props.show) {
-      currentModals.remove(this);
+      currentModals.length = 0;
+      refreshModal();
+      //currentModals.remove(this);
     }
   }
   renderModal() {
@@ -90,11 +92,11 @@ export default class Modal extends React.Component {
 
 class ModalRaw extends React.Component {
   render() {
-    let { className, style, manual, children, ...rest } = this.props;
+    let { className, style = {}, manual, children, ...rest } = this.props;
     return (
       <div
         onClick={handleModalWindowClick}
-        className={spreadClassNames(className, "modal ")}
+        className={spreadClassNames(className, "modal animate")}
         style={{ ...style, display: "block" }}
         {...rest}
         role="dialog"
@@ -119,7 +121,7 @@ class ModalCollection extends Component {
   render() {
     return (
       <div>
-        <CSSTransitionGroup transitionName="modal" transitionEnterTimeout={300} transitionLeaveTimeout={300}>
+        <CSSTransitionGroup transitionName="modal" transitionEnterTimeout={30000} transitionLeaveTimeout={30000}>
           {currentModals.map((modal, i) => {
             let { children, ...rest } = modal.props;
 
@@ -141,6 +143,8 @@ class ModalCollection extends Component {
 const modalRoot = document.createElement("div");
 modalRoot.id = "__simple-react-bootstrap-modal-container";
 document.body.appendChild(modalRoot);
+
+refreshModal();
 function refreshModal() {
   render(<ModalCollection />, modalRoot);
 }

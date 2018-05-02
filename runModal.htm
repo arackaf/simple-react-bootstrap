@@ -23,6 +23,68 @@
         .red { background-color: red; }
         .blue { background-color: blue; }
         .green { background-color: green; }
+
+
+.modal-enter.modal.animate {
+    opacity: 0;
+}
+
+.modal-enter.modal-enter-active.modal.animate {
+    opacity: 1;
+    -webkit-transition: opacity 0.15s linear;
+    -o-transition: opacity 0.15s linear;
+    transition: opacity 0.15s linear;
+}
+
+.modal-enter.modal.animate .modal-dialog {
+    -webkit-transform: translate(0, -25%);
+        -ms-transform: translate(0, -25%);
+         -o-transform: translate(0, -25%);
+            transform: translate(0, -25%);
+
+}
+
+.modal-enter.modal-enter-active.modal.animate .modal-dialog {
+    -webkit-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+         -o-transform: translate(0, 0);
+            transform: translate(0, 0);
+   -webkit-transition: -webkit-transform 300ms ease-out;
+        -o-transition:      -o-transform 300ms ease-out;
+           transition:         transform 300ms ease-out;
+   }
+
+.modal-leave.modal.animate .modal-dialog {
+    -webkit-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+         -o-transform: translate(0, 0);
+            transform: translate(0, 0);
+  }
+
+.modal-leave.modal-leave-active.modal.animate .modal-dialog {
+    -webkit-transition: -webkit-transform 300ms ease-out;
+         -o-transition:      -o-transform 300ms ease-out;
+            transition:         transform 300ms ease-out;
+
+    -webkit-transform: translate(0, 25%);
+        -ms-transform: translate(0, 25%);
+         -o-transform: translate(0, 25%);
+            transform: translate(0, 25%);
+}
+
+
+.modal-leave.modal.animate {
+    opacity: 0;
+    
+    -webkit-transition: opacity 0.15s linear;
+         -o-transition: opacity 0.15s linear;
+            transition: opacity 0.15s linear;
+}
+
+.modal-leave.modal:not(.animate) {
+    opacity: 0;
+}
+
     </style>
 </head>
 <body>
