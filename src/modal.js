@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { render, unmountComponentAtNode } from "react-dom";
-import CSSTransitionGroup from "react-addons-css-transition-group";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 const spreadClassNames = (userClassName, baseCssClasses) => `${baseCssClasses || ""} ${userClassName || ""}`;
 
@@ -93,6 +93,7 @@ export default class Modal extends React.Component {
 class ModalRaw extends React.Component {
   render() {
     let { className, style = {}, manual, children, ...rest } = this.props;
+    className = className.replace(/\bfade\b/, "");
     return (
       <div
         onClick={handleModalWindowClick}
@@ -121,17 +122,18 @@ class ModalCollection extends Component {
   render() {
     return (
       <div>
-        <CSSTransitionGroup transitionName="modal" transitionEnterTimeout={30000} transitionLeaveTimeout={30000}>
+        <TransitionGroup>
           {currentModals.map((modal, i) => {
             let { children, ...rest } = modal.props;
 
             return (
-              <ModalRaw {...rest} key={`modal-key-${modal.uuid}`}>
-                {children}
-              </ModalRaw>
+              <CSSTransition key={`modal-key-${modal.uuid}`} timeout={300} classNames="modal">
+                <ModalRaw {...rest}>{children}</ModalRaw>
+              </CSSTransition>
             );
           })}
-        </CSSTransitionGroup>
+        </TransitionGroup>
+
         {currentModals.length ? (
           <div key="modal-backdrop" onClick={closeTopModal} className="modal-backdrop simple-react-modal-backdrop fade in" />
         ) : null}
