@@ -38,8 +38,8 @@
     "gulp-uglify": "2.0.0",
     "gulp-uglify-es": "^1.0.1",
     "install": "0.8.1",
-    "react": "15.3.2",
-    "react-dom": "15.3.2",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
     "remove": "0.1.5",
     "rollup": "0.41.6",
     "rollup-plugin-alias": "^1.2.0",
@@ -49,7 +49,7 @@
     "webpack-dev-server": "2.3.0"
   },
   "dependencies": {
-    "react-raw-tabs": "0.0.1",
-    "react-transition-group": "^2.3.1"
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-raw-tabs": "0.0.1"
   }
 }

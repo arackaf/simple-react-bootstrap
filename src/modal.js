@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { render, unmountComponentAtNode } from "react-dom";
-import { CSSTransitionGroup } from "react-transition-group";
+import CSSTransitionGroup from "react-addons-css-transition-group";
 
 const spreadClassNames = (userClassName, baseCssClasses) => `${baseCssClasses || ""} ${userClassName || ""}`;
 
@@ -47,6 +47,13 @@ window.addEventListener("keydown", evt => {
 
 let __uuid = 1;
 
+function closeTopModal() {
+  let modal = currentModals[currentModals.length - 1];
+  if (modal && modal.props.onHide) {
+    modal.props.onHide();
+  }
+}
+
 function handleModalWindowClick(evt) {
   if (evt.target == evt.currentTarget || $(evt.target.parentElement).attr("aria-label") === "Close") {
     evt.preventDefault();
@@ -83,6 +90,7 @@ export default class Modal extends React.Component {
 
 class ModalRaw extends React.Component {
   render() {
+    let { className, style, manual, children, ...rest } = this.props;
     return (
       <div
         onClick={handleModalWindowClick}
