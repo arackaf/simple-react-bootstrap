@@ -49,6 +49,7 @@
     "webpack-dev-server": "2.3.0"
   },
   "dependencies": {
-    "react-raw-tabs": "0.0.1"
+    "react-raw-tabs": "0.0.1",
+    "react-transition-group": "^2.3.1"
   }
 }
