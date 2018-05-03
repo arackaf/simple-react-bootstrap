@@ -33,7 +33,7 @@ const ModalBody = props => {
 
 const ESC_KEY = 27;
 
-const currentModals = [];
+let currentModals = [];
 
 window.addEventListener("keydown", evt => {
   let key = evt.keyCode || evt.which;
@@ -73,17 +73,17 @@ export default class Modal extends React.Component {
     if (!prevProps.show && this.props.show) {
       this.renderModal();
     } else if (prevProps.show && !this.props.show) {
-      currentModals.length = 0;
-      refreshModal();
-      //currentModals.remove(this);
+      currentModals = currentModals.filter(m => m !== this);
+      refreshModals();
     }
   }
   renderModal() {
     currentModals.push(this);
-    refreshModal();
+    refreshModals();
   }
   componentWillUnmount() {
-    currentModals.remove(this);
+    currentModals = currentModals.filter(m => m !== this);
+    refreshModals();
   }
   render() {
     return null;
@@ -146,7 +146,7 @@ const modalRoot = document.createElement("div");
 modalRoot.id = "__simple-react-bootstrap-modal-container";
 document.body.appendChild(modalRoot);
 
-refreshModal();
-function refreshModal() {
+refreshModals();
+function refreshModals() {
   render(<ModalCollection />, modalRoot);
 }
