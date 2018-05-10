@@ -92,7 +92,7 @@ export default class Modal extends React.Component {
 
 class ModalRaw extends React.Component {
   render() {
-    let { className, style = {}, manual, children, ...rest } = this.props;
+    let { className, style = {}, manual, children, onHide, show, ...rest } = this.props;
     className = className.replace(/\bfade\b/, "");
     return (
       <div
