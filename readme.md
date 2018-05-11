@@ -122,9 +122,9 @@ Coming soon: tabs with dropdown headers, as shown here: http://getbootstrap.com/
 <link>
 ```
 
-or of course you can use your favorite webpack loader.
+or of course you can use your favorite webpack loader. There's currently no way to turn animations off, but that may be added in a future release.
 
-There's currently no way to turn animations off, but that may be added in a future release.
+Special thanks to [Brian Curley](https://twitter.com/ChasingTheB) for help with the css transitions.
 
 ## Usage
 
