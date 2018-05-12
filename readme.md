@@ -119,7 +119,7 @@ Coming soon: tabs with dropdown headers, as shown here: http://getbootstrap.com/
 **NOTE** As of version 0.4, the Modal component uses css transitions to handle the animation. This greatly simplifies and reduces the library code, but does mean that you now need to load the stylesheet `simple-react-bootstrap-styles.css` into your application. This file is located at the root of this project, and loading it can be as simple as
 
 ```html
-<link>
+<link rel="stylesheet" href="node_modules/simple-react-bootstrap/simple-react-bootstrap-styles.css">
 ```
 
 or of course you can use your favorite webpack loader. There's currently no way to turn animations off, but that may be added in a future release.
