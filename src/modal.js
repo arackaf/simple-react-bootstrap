@@ -1,5 +1,6 @@
-import React from "react";
+import React, { Component } from "react";
 import { render, unmountComponentAtNode } from "react-dom";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 const spreadClassNames = (userClassName, baseCssClasses) => `${baseCssClasses || ""} ${userClassName || ""}`;
 
@@ -30,9 +31,9 @@ const ModalBody = props => {
   );
 };
 
-const currentModals = [];
-
 const ESC_KEY = 27;
+
+let currentModals = [];
 
 window.addEventListener("keydown", evt => {
   let key = evt.keyCode || evt.which;
@@ -44,135 +45,60 @@ window.addEventListener("keydown", evt => {
   }
 });
 
-function removeBackdrop() {
-  let backdrop = document.getElementsByClassName("simple-react-modal-backdrop")[0];
-  if (!backdrop) return;
-  backdrop.classList.remove("simple-react-modal-backdrop");
+let __uuid = 1;
 
-  let isAnimating = /\bfade\b/.test(backdrop.className);
-
-  if (!isAnimating) {
-    backdrop.parentNode.removeChild(backdrop);
-  } else {
-    backdrop.classList.remove("in");
-    setTimeout(() => backdrop.parentNode.removeChild(backdrop), 200);
+function closeTopModal() {
+  let modal = currentModals[currentModals.length - 1];
+  if (modal && modal.props.onHide) {
+    modal.props.onHide();
   }
 }
 
-let uuid = 1;
-
-class Modal extends React.Component {
-  portalState = { exists: false, hasInCssClass: false };
-  mergePortalState = (newState, cb) => {
-    Object.assign(this.portalState, newState);
-    this.renderModal(cb);
-  };
-  __showingUid = 0;
-  __bumpUid = () => this.__showingUid++;
-  modalClick = evt => {
-    let activeModal = currentModals[currentModals.length - 1];
-    if (activeModal === this && evt.target === evt.currentTarget) {
-      this.props.onHide();
-    }
-  };
-  componentDidMount() {
-    this.__div = document.createElement("div");
-    this.__div.id = "__simple-react-bootstrap-modal" + uuid++;
-    document.body.appendChild(this.__div);
-    this.renderModal();
+function handleModalWindowClick(evt) {
+  if (evt.target == evt.currentTarget || $(evt.target.parentElement).attr("aria-label") === "Close") {
+    evt.preventDefault();
+    evt.stopPropagation();
+    closeTopModal();
   }
-  initialMount = el => {
-    if (el) {
-      this.modalRef = el;
-      if (this.props.show) {
-        this._showModal();
-      }
-    }
-  };
-  componentDidUpdate(prevProps, prevState) {
-    if (!prevProps.show && this.props.show) {
-      this._showModal();
-    } else if (prevProps.show && !this.props.show) {
-      this._hideModal();
-    } else {
+}
+
+export default class Modal extends React.Component {
+  uuid = __uuid++;
+  componentDidMount() {
+    if (this.props.show) {
       this.renderModal();
     }
   }
-  _showModal() {
-    this.__bumpUid();
-    let correctUid = this.__showingUid;
-    let div = !currentModals.length ? document.createElement("div") : null,
-      isAnimating = /\bfade\b/.test(this.modalRef.className);
-
-    if (div) {
-      div.classList.add(...["modal-backdrop", "simple-react-modal-backdrop", isAnimating ? "fade" : "in"]);
-    }
-
-    if (isAnimating) {
-      if (div) {
-        document.body.appendChild(div);
-      }
-      //raf not seeming to get the job done - disabling for now
-      const onNext = cb => (window.__requestAnimationFrame ? requestAnimationFrame(cb) : setTimeout(cb, 2));
-
-      this.mergePortalState({ exists: true }, () => onNext(() => this.mergePortalState({ hasInCssClass: true })));
-      onNext(() => {
-        if (div) {
-          div.classList.add("in");
-        }
-        document.body.classList.add("modal-open");
-      });
-      //provide some small delay before this modal is eligible to be closed.  We don't want a double click to open / show the modal.
-
-      setTimeout(() => {
-        if (correctUid !== this.__showingUid) return;
-        currentModals.push(this);
-      }, 200);
-    } else {
-      if (div) {
-        document.body.appendChild(div);
-      }
-      this.mergePortalState({ exists: true, hasInCssClass: true });
-      currentModals.push(this);
-      document.body.classList.add("modal-open");
+  componentDidUpdate(prevProps, prevState) {
+    if (!prevProps.show && this.props.show) {
+      this.renderModal();
+    } else if (prevProps.show && !this.props.show) {
+      currentModals = currentModals.filter(m => m !== this);
+      refreshModals();
     }
   }
-  _hideModal = () => {
-    this.__bumpUid();
-    let correctUid = this.__showingUid;
-    let isAnimating = /\bfade\b/.test(this.modalRef.className);
-
-    if (isAnimating) {
-      this.mergePortalState({ hasInCssClass: false });
-      setTimeout(() => {
-        if (correctUid !== this.__showingUid) return;
-        this.mergePortalState({ exists: false });
-      }, 200);
-    } else {
-      this.mergePortalState({ hasInCssClass: false, exists: false });
-    }
-
-    if (currentModals.length <= 1) {
-      //less than since it may have been closed before modal was activated
-      document.body.classList.remove("modal-open");
-      removeBackdrop();
-    }
-    if (currentModals[currentModals.length - 1] == this) {
-      currentModals.pop();
-    }
-  };
+  renderModal() {
+    currentModals.push(this);
+    refreshModals();
+  }
+  componentWillUnmount() {
+    currentModals = currentModals.filter(m => m !== this);
+    refreshModals();
+  }
   render() {
-    return <div />;
+    return null;
   }
-  renderModal(cb) {
-    let { children, manual, show, onHide, className, style, ...rest } = this.props;
+}
 
-    render(
+class ModalRaw extends React.Component {
+  render() {
+    let { className = "", style = {}, manual, children, onHide, show, ...rest } = this.props;
+    className = className.replace(/\bfade\b/, "");
+    return (
       <div
-        ref={this.initialMount}
-        onClick={this.modalClick}
-        className={spreadClassNames(className, "modal " + (this.portalState.hasInCssClass ? "in" : ""))}
-        style={{ ...style, display: this.portalState.exists ? "block" : "" }}
+        onClick={handleModalWindowClick}
+        className={spreadClassNames(className, "modal animate")}
+        style={{ ...style, display: "block" }}
         {...rest}
         role="dialog"
       >
@@ -183,26 +109,8 @@ class Modal extends React.Component {
             <div className="modal-content">{children}</div>
           </div>
         )}
-      </div>,
-      this.__div,
-      cb
+      </div>
     );
-  }
-  componentWillUnmount() {
-    let index = currentModals.indexOf(this);
-    if (this.props.show) {
-      this._hideModal();
-    }
-    if (index >= 0) {
-      currentModals.splice(index, 1);
-      if (!currentModals.length) {
-        removeBackdrop();
-      }
-    }
-    setTimeout(() => {
-      unmountComponentAtNode(this.__div);
-      setTimeout(() => document.body.removeChild(this.__div), 100);
-    }, 1000);
   }
 }
 
@@ -210,4 +118,35 @@ Modal.Body = ModalBody;
 Modal.Header = ModalHeader;
 Modal.Footer = ModalFooter;
 
-export default Modal;
+class ModalCollection extends Component {
+  render() {
+    return (
+      <div>
+        <TransitionGroup>
+          {currentModals.map((modal, i) => {
+            let { children, ...rest } = modal.props;
+
+            return (
+              <CSSTransition key={`modal-key-${modal.uuid}`} timeout={300} classNames="modal">
+                <ModalRaw {...rest}>{children}</ModalRaw>
+              </CSSTransition>
+            );
+          })}
+        </TransitionGroup>
+
+        {currentModals.length ? (
+          <div key="modal-backdrop" onClick={closeTopModal} className="modal-backdrop simple-react-modal-backdrop fade in" />
+        ) : null}
+      </div>
+    );
+  }
+}
+
+const modalRoot = document.createElement("div");
+modalRoot.id = "__simple-react-bootstrap-modal-container";
+document.body.appendChild(modalRoot);
+
+refreshModals();
+function refreshModals() {
+  render(<ModalCollection />, modalRoot);
+}
