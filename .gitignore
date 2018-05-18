@@ -4,3 +4,4 @@ lib/
 dist/
 src-dist/
 lib-es5/
+dist-es5/
