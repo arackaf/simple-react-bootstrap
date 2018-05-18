@@ -55,7 +55,7 @@ function closeTopModal() {
 }
 
 function handleModalWindowClick(evt) {
-  if (evt.target == evt.currentTarget || $(evt.target.parentElement).attr("aria-label") === "Close") {
+  if (evt.target == evt.currentTarget) {
     evt.preventDefault();
     evt.stopPropagation();
     closeTopModal();
